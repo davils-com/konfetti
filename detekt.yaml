@@ -88,6 +88,20 @@ libraries:
     active: false
   ForbiddenPublicDataClass:
     active: true
+  # A public class may not be a data class (ForbiddenPublicDataClass), so the public values of konfetti write equals,
+  # hashCode and toString by hand, which this rule takes for classes without functionality.
+  UseDataClass:
+    active: true
+    excludes:
+      - '**/core/TopicKey.kt'
+      - '**/consume/ConsumerState.kt'
+      - '**/lifecycle/CloseReport.kt'
+      - '**/lifecycle/DrainResult.kt'
+      - '**/observe/BusObservation.kt'
+      - '**/observe/SequencedObservation.kt'
+      - '**/publish/Attribution.kt'
+      - '**/publish/Publication.kt'
+      - '**/publish/PublishResult.kt'
   # The compiler rejects an explicit Unit return type as redundant under warnings as errors.
   LibraryCodeMustSpecifyReturnType:
     active: true
@@ -128,6 +142,20 @@ style:
   # Explicit API mode requires the modifier, which this rule would report as redundant.
   RedundantVisibilityModifier:
     active: false
+  # A public class may not be a data class (ForbiddenPublicDataClass), so the public values of konfetti write equals,
+  # hashCode and toString by hand, which this rule takes for classes without functionality.
+  UseDataClass:
+    active: true
+    excludes:
+      - '**/core/TopicKey.kt'
+      - '**/consume/ConsumerState.kt'
+      - '**/lifecycle/CloseReport.kt'
+      - '**/lifecycle/DrainResult.kt'
+      - '**/observe/BusObservation.kt'
+      - '**/observe/SequencedObservation.kt'
+      - '**/publish/Attribution.kt'
+      - '**/publish/Publication.kt'
+      - '**/publish/PublishResult.kt'
   # The compiler rejects an explicit Unit return type as redundant under warnings as errors.
   OptionalUnit:
     active: false
