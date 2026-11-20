@@ -1,0 +1,101 @@
+#
+# Copyright 2026 Davils
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+
+# What the pipeline of konfetti does. Every key overrides a default of
+# actions/plan/defaults.yml in davils-com/kotlin-workflow; a key that is not there stops the run.
+version: 1
+gradle:
+  args: ["--stacktrace"]
+
+check:
+  tasks: [check]
+  reproducible:
+    clean-tasks: [":konfetti-core:clean", ":konfetti-testing:clean"]
+    tasks: [":konfetti-core:jvmJar", ":konfetti-testing:jvmJar"]
+    artifacts: ["konfetti-core/build/libs/*.jar", "konfetti-testing/build/libs/*.jar"]
+
+policy:
+  # Scheduling, timers and line breaks differ on Windows, and konfetti's race and stress tests run real threads, so
+  # develop, main and a tag run there too.
+  push-develop:
+    stages: [check, snapshot]
+    os: [ubuntu-latest, windows-latest]
+    overrides:
+      check:
+        reproducible: { enabled: true }
+  push-main:
+    os: [ubuntu-latest, windows-latest]
+    overrides:
+      check:
+        reproducible: { enabled: true }
+  tag:
+    os: [ubuntu-latest, windows-latest]
+
+security:
+  gradle:
+    tasks: ["kreateAssurance"]
+  dependency-submission:
+    enabled: false
+
+publish:
+  build-tasks: [assemble]
+  tasks:
+    - ":konfetti-core:publishAllPublicationsToDavilsRepository"
+    - ":konfetti-testing:publishAllPublicationsToDavilsRepository"
+
+snapshot:
+  # konfetti's own build makes every build without a release tag a snapshot.
+  kreate-snapshot: false
+
+release:
+  publications:
+    discovery: explicit
+    # In upload order: the publication of every target before the multiplatform publication that names them.
+    list:
+      - path: com/davils/konfetti-core-jvm
+        artifact: konfetti-core-jvm
+        task: ":konfetti-core:publishJvmPublicationToDavilsRepository"
+      - path: com/davils/konfetti-core-wasm-js
+        artifact: konfetti-core-wasm-js
+        task: ":konfetti-core:publishWasmJsPublicationToDavilsRepository"
+      - path: com/davils/konfetti-core
+        artifact: konfetti-core
+        task: ":konfetti-core:publishKotlinMultiplatformPublicationToDavilsRepository"
+      - path: com/davils/konfetti-testing-jvm
+        artifact: konfetti-testing-jvm
+        task: ":konfetti-testing:publishJvmPublicationToDavilsRepository"
+      - path: com/davils/konfetti-testing-wasm-js
+        artifact: konfetti-testing-wasm-js
+        task: ":konfetti-testing:publishWasmJsPublicationToDavilsRepository"
+      - path: com/davils/konfetti-testing
+        artifact: konfetti-testing
+        task: ":konfetti-testing:publishKotlinMultiplatformPublicationToDavilsRepository"
+  attest:
+    subjects:
+      - "konfetti-core/build/libs/*.jar"
+      - "konfetti-core/build/libs/*.klib"
+      - "konfetti-testing/build/libs/*.jar"
+      - "konfetti-testing/build/libs/*.klib"
+  github-release:
+    enabled: false
+
+# How a pull request of Dependabot repairs itself, see CONTRIBUTING.md, "Changing a Dependency".
+dependencies:
+  lock:
+    invocations:
+      - ["kreateResolveAndLockAll", "--write-locks", "--no-configuration-cache"]
+  verification:
+    tasks: [check]
