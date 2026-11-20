@@ -122,13 +122,30 @@ internal class Publisher<T : Event>(private val runtime: TopicRuntime<T>) {
     ): Preparation<T> {
         val enriched = enrich(event, headers, context)
         val key = orderingKeyOf(event) ?: return Preparation.Refused(Rejection.InvalidOrderingKey)
-        if (enriched.exceeds(environment.limits)) return Preparation.Refused(Rejection.OversizedHeaders)
+        val isOversized = enriched.exceeds(environment.limits)
+        val oversized = Preparation.Refused<T>(Rejection.OversizedHeaders).takeIf { isOversized }
+        return oversized ?: ready(
+            event = event,
+            headers = enriched,
+            key = key.value,
+            cause = cause,
+            principal = principal,
+        )
+    }
+
+    private fun ready(
+        event: T,
+        headers: EventHeaders,
+        key: OrderingKey?,
+        cause: Envelope<Event>?,
+        principal: Principal?,
+    ): Preparation<T> {
         val id = environment.identifiers.next()
         val envelope = Envelope(
             id = id,
-            route = EnvelopeRoute(topic = runtime.name, orderingKey = key.value),
+            route = EnvelopeRoute(topic = runtime.name, orderingKey = key),
             lineage = lineage(id, cause),
-            headers = enriched,
+            headers = headers,
             payload = event,
             principal = principal,
         )

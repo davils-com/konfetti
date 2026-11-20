@@ -20,7 +20,7 @@ import com.davils.kore.testing.isSafeToShow
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
 
-internal fun <T : Any> checkValue(value: T, equal: T, vararg different: T) {
+internal fun <T : Any> checkValue(value: T, equal: T, different: List<T>) {
     value shouldBe equal
     value.hashCode() shouldBe equal.hashCode()
     different.forEach { other -> value shouldNotBe other }

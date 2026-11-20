@@ -32,6 +32,9 @@ import kotlinx.coroutines.launch
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.seconds
 
+private const val FIRST: String = "first"
+private const val SECOND: String = "second"
+
 private fun recordingMailbox(
     overflow: OverflowPolicy,
     lost: MutableList<DropReason>,
@@ -80,8 +83,8 @@ class MailboxTest : FunSpec({
         test("counts a put that was waiting for room exactly once") {
             val lost = mutableListOf<DropReason>()
             val mailbox = recordingMailbox(OverflowPolicy.Backpressure, lost)
-            mailbox.put(audit("first"))
-            val waiting = backgroundScope.launch(start = CoroutineStart.UNDISPATCHED) { mailbox.put(audit("second")) }
+            mailbox.put(audit(FIRST))
+            val waiting = backgroundScope.launch(start = CoroutineStart.UNDISPATCHED) { mailbox.put(audit(SECOND)) }
 
             waiting.cancelAndJoin()
             mailbox.cancel()
@@ -117,9 +120,9 @@ class MailboxTest : FunSpec({
         test("drops the new envelope under DropLatest") {
             val lost = mutableListOf<DropReason>()
             val mailbox = recordingMailbox(OverflowPolicy.DropLatest, lost)
-            mailbox.put(audit("first"))
+            mailbox.put(audit(FIRST))
 
-            mailbox.put(audit("second"))
+            mailbox.put(audit(SECOND))
 
             lost shouldBe listOf(DropReason.Overflow)
         }
@@ -127,8 +130,8 @@ class MailboxTest : FunSpec({
         test("drops the oldest envelope under DropOldest") {
             val lost = mutableListOf<DropReason>()
             val mailbox = recordingMailbox(OverflowPolicy.DropOldest, lost)
-            mailbox.put(audit("first"))
-            val second = audit("second")
+            mailbox.put(audit(FIRST))
+            val second = audit(SECOND)
 
             mailbox.put(second)
             mailbox.close()
@@ -142,8 +145,8 @@ class MailboxTest : FunSpec({
         test("drops an envelope as stalled once the longest stall passed under Backpressure") {
             val lost = mutableListOf<DropReason>()
             val mailbox = recordingMailbox(OverflowPolicy.Backpressure, lost, stall = 5.seconds)
-            mailbox.put(audit("first"))
-            val waiting = backgroundScope.launch { mailbox.put(audit("second")) }
+            mailbox.put(audit(FIRST))
+            val waiting = backgroundScope.launch { mailbox.put(audit(SECOND)) }
 
             testScheduler.advanceTimeBy(4.seconds)
             testScheduler.runCurrent()
@@ -158,9 +161,9 @@ class MailboxTest : FunSpec({
         test("hands an envelope on that found room before the longest stall passed") {
             val lost = mutableListOf<DropReason>()
             val mailbox = recordingMailbox(OverflowPolicy.Backpressure, lost, stall = 5.seconds)
-            mailbox.put(audit("first"))
+            mailbox.put(audit(FIRST))
             val handled = mutableListOf<Envelope<AuditEvent>>()
-            val waiting = backgroundScope.launch { mailbox.put(audit("second")) }
+            val waiting = backgroundScope.launch { mailbox.put(audit(SECOND)) }
             testScheduler.advanceTimeBy(1.seconds)
             testScheduler.runCurrent()
 
@@ -168,7 +171,7 @@ class MailboxTest : FunSpec({
             testScheduler.runCurrent()
 
             waiting.isCompleted shouldBe true
-            handled.map { envelope -> envelope.payload.text } shouldBe listOf("first", "second")
+            handled.map { envelope -> envelope.payload.text } shouldBe listOf(FIRST, SECOND)
             lost shouldBe emptyList()
         }
     }

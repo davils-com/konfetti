@@ -17,6 +17,7 @@
 package com.davils.konfetti.core.header
 
 import com.davils.konfetti.core.limit.BusLimits
+import com.davils.konfetti.core.limit.busLimits
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.collections.shouldContainExactly
@@ -24,14 +25,27 @@ import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.shouldContain
 import io.kotest.matchers.string.shouldEndWith
 
-private val failing = HeaderKey(HeaderName("failing"), object : HeaderCodec<String> {
-    override fun encode(value: String): String = value
+private const val ABSENT: String = "absent"
+private const val RIGHT: String = "right"
+private const val TOKEN: String = "token"
+private const val ANYTHING: String = "anything"
+private const val MANY: Int = 100
+private const val SHOWN: Int = 32
+private const val OMITTED: Int = 8
+private const val SHORTER_THAN_LONGEST: Int = 5
 
-    override fun decode(text: String): String = error("cannot decode")
-})
+private val failing = HeaderKey(
+    HeaderName("failing"),
+    object : HeaderCodec<String> {
+        override fun encode(value: String): String = value
 
-private fun many(count: Int): EventHeaders =
-    (0 until count).fold(EventHeaders.EMPTY) { headers, index -> headers.with(HeaderKey.long("h$index")(index.toLong())) }
+        override fun decode(text: String): String = error("cannot decode")
+    },
+)
+
+private fun many(count: Int): EventHeaders = (0 until count).fold(
+    EventHeaders.EMPTY,
+) { headers, index -> headers.with(HeaderKey.long("h$index")(index.toLong())) }
 
 class HeaderBoundsTest : FunSpec({
     context("headers") {
@@ -54,58 +68,58 @@ class HeaderBoundsTest : FunSpec({
         }
 
         test("find every entry of many, in sorted order") {
-            val headers = many(100)
+            val headers = many(MANY)
 
-            (0 until 100).forEach { index -> headers[HeaderKey.long("h$index")] shouldBe index.toLong() }
+            for (index in 0 until MANY) headers[HeaderKey.long("h$index")] shouldBe index.toLong()
             headers.names shouldBe headers.names.sorted()
             headers.textOf(HeaderName("h7")) shouldBe "7"
-            headers.textOf(HeaderName("absent")) shouldBe null
+            headers.textOf(HeaderName(ABSENT)) shouldBe null
         }
 
         test("contain a codec that fails") {
-            val headers = headersOf(failing("anything"))
+            val headers = headersOf(failing(ANYTHING))
 
             headers[failing] shouldBe null
-            headers.textOf(HeaderName("failing")) shouldBe "anything"
+            headers.textOf(HeaderName("failing")) shouldBe ANYTHING
         }
 
         test("merge and replace sensitivity from the right") {
-            val plain = HeaderKey.text("token")
-            val secret = HeaderKey.text("token", sensitive = true)
+            val plain = HeaderKey.text(TOKEN)
+            val secret = HeaderKey.text(TOKEN, sensitive = true)
             val left = headersOf(plain("a"), HeaderKey.text("left")("l"))
-            val right = headersOf(secret("b"), HeaderKey.text("right")("r"))
+            val right = headersOf(secret("b"), HeaderKey.text(RIGHT)("r"))
 
             val merged = left + right
 
-            merged.names.map(HeaderName::value) shouldContainExactly listOf("left", "right", "token")
-            merged.isSensitive(HeaderName("token")) shouldBe true
+            merged.names.map(HeaderName::value) shouldContainExactly listOf("left", RIGHT, TOKEN)
+            merged.isSensitive(HeaderName(TOKEN)) shouldBe true
             merged[plain] shouldBe "b"
-            (EventHeaders.EMPTY + right) shouldBe right
-            (left + EventHeaders.EMPTY) shouldBe left
-            merged.isSensitive(HeaderName("absent")) shouldBe false
-            merged.without(HeaderKey.text("absent")) shouldBe merged
-            merged.without(plain).names.map(HeaderName::value) shouldContainExactly listOf("left", "right")
+            EventHeaders.EMPTY + right shouldBe right
+            left + EventHeaders.EMPTY shouldBe left
+            merged.isSensitive(HeaderName(ABSENT)) shouldBe false
+            merged.without(HeaderKey.text(ABSENT)) shouldBe merged
+            merged.without(plain).names.map(HeaderName::value) shouldContainExactly listOf("left", RIGHT)
         }
 
         test("cut their text off after the first entries") {
-            val text = many(40).toString()
+            val text = many(SHOWN + OMITTED).toString()
 
-            text shouldEndWith "… 8 more}"
+            text shouldEndWith "… $OMITTED more}"
             EventHeaders.EMPTY.toString() shouldBe "{}"
         }
 
         test("compare and hash by names, values and sensitivity") {
-            val key = HeaderKey.text("token")
+            val key = HeaderKey.text(TOKEN)
 
             headersOf(key("a")) shouldBe headersOf(key("a"))
             headersOf(key("a")).hashCode() shouldBe headersOf(key("a")).hashCode()
-            (headersOf(key("a")) == headersOf(HeaderKey.text("token", sensitive = true)("a"))) shouldBe false
+            (headersOf(key("a")) == headersOf(HeaderKey.text(TOKEN, sensitive = true)("a"))) shouldBe false
             (headersOf(key("a")) == headersOf(key("b"))) shouldBe false
             EventHeaders.EMPTY.equals("headers") shouldBe false
             (headersOf(key("a")) == headersOf(HeaderKey.text("other")("a"))) shouldBe false
             val varied = headersOf(key("a"), HeaderKey.text("longer")("abcdef"), HeaderKey.text("mid")("abc"))
             varied.exceeds(BusLimits.Default) shouldBe false
-            varied.exceeds(com.davils.konfetti.core.limit.busLimits { maximumHeaderValueLength = 5 }) shouldBe true
+            varied.exceeds(busLimits { maximumHeaderValueLength = SHORTER_THAN_LONGEST }) shouldBe true
         }
     }
 

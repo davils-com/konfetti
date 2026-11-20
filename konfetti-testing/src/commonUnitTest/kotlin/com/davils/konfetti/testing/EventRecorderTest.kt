@@ -26,30 +26,34 @@ import io.kotest.matchers.string.shouldContain
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.async
 
+private const val FIRST: String = "first"
+private const val SECOND: String = "second"
+private const val RECORDED: Int = 5
+
 @OptIn(ExperimentalCoroutinesApi::class)
 class EventRecorderTest : FunSpec({
     context("a recorder").config(coroutineTestScope = true) {
         test("keeps envelopes and payloads in the order they arrived") {
             val recorder = EventRecorder<Note>()
-            val first = testEnvelope(Note("first"))
-            val second = testEnvelope(Note("second"))
+            val first = testEnvelope(Note(FIRST))
+            val second = testEnvelope(Note(SECOND))
 
             recorder.record(first)
             recorder.record(second)
 
             recorder.envelopes shouldBe listOf(first, second)
-            recorder.payloads shouldBe listOf(Note("first"), Note("second"))
+            recorder.payloads shouldBe listOf(Note(FIRST), Note(SECOND))
             recorder.awaitCount(2) shouldBe listOf(first, second)
         }
 
         test("waits until enough envelopes arrived") {
             val recorder = EventRecorder<Note>()
             val waiting = backgroundScope.async { recorder.awaitCount(2) }
-            recorder.record(testEnvelope(Note("first")))
+            recorder.record(testEnvelope(Note(FIRST)))
             testScheduler.runCurrent()
 
             waiting.isCompleted shouldBe false
-            recorder.record(testEnvelope(Note("second")))
+            recorder.record(testEnvelope(Note(SECOND)))
 
             waiting.await().size shouldBe 2
         }
@@ -57,10 +61,10 @@ class EventRecorderTest : FunSpec({
         test("keeps at most its capacity and counts the rest") {
             val recorder = EventRecorder<Note>(capacity = 2)
 
-            repeat(5) { index -> recorder.record(testEnvelope(Note("n$index"))) }
+            repeat(RECORDED) { index -> recorder.record(testEnvelope(Note("n$index"))) }
 
             recorder.payloads shouldBe listOf(Note("n0"), Note("n1"))
-            recorder.overflow shouldBe 3
+            recorder.overflow shouldBe RECORDED - 2L
             recorder.toString() shouldContain "recorded=2, overflow=3"
         }
 

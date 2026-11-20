@@ -38,6 +38,10 @@ import io.kotest.property.arbitrary.list
 import io.kotest.property.arbitrary.map
 import io.kotest.property.checkAll
 
+private const val LISTED: Int = 16
+private const val OMITTED: Int = 24
+private const val SECRET: String = "hunter2"
+
 private val hostile: Arb<String> =
     Arb.list(Arb.element(HostileFragments.all), 1..32).map { fragments -> fragments.joinToString("") }
 
@@ -60,38 +64,39 @@ class InjectionTest : FunSpec({
 
         test("is escaped in the messages of invalid names") {
             checkAll(hostile) { text ->
-                val topicFailure = runCatching { TopicName(text) }.exceptionOrNull()?.message.orEmpty()
-                val consumerFailure = runCatching { ConsumerName(text) }.exceptionOrNull()?.message.orEmpty()
+                val topicFailure = runCatching { TopicName(text) }.exceptionOrNull()
+                val consumerFailure = runCatching { ConsumerName(text) }.exceptionOrNull()
 
-                isSafeToShow(topicFailure) shouldBe true
-                isSafeToShow(consumerFailure) shouldBe true
+                isSafeToShow(topicFailure?.message.orEmpty()) shouldBe true
+                isSafeToShow(consumerFailure?.message.orEmpty()) shouldBe true
             }
         }
 
         test("never shows a sensitive value") {
             val secret = HeaderKey.text("api-token", sensitive = true)
-            val headers = headersOf(secret("hunter2"))
+            val headers = headersOf(secret(SECRET))
 
-            headers.toString() shouldNotContain "hunter2"
-            secret("hunter2").toString() shouldNotContain "hunter2"
-            testEnvelope(AuditEvent("x")) { this.headers = headers }.toString() shouldNotContain "hunter2"
+            headers.toString() shouldNotContain SECRET
+            secret(SECRET).toString() shouldNotContain SECRET
+            testEnvelope(AuditEvent("x")) { this.headers = headers }.toString() shouldNotContain SECRET
         }
 
         test("is escaped in an explicit attribution") {
             checkAll(hostile) { text ->
-                val principal = runCatching { Principal(text) }.getOrNull() ?: return@checkAll
-                isSafeToShow(Attribution.forPrincipal(principal).toString()) shouldBe true
+                val principal = runCatching { Principal(text) }.getOrNull()
+                val shown = principal?.let { valid -> Attribution.forPrincipal(valid).toString() }.orEmpty()
+                isSafeToShow(shown) shouldBe true
             }
         }
     }
 
     context("the message of an undeclared topic") {
         test("lists a bounded number of topics") {
-            val declared = (0 until 40).map { index -> TopicName("topic.t$index") }.toSet()
+            val declared = (0 until LISTED + OMITTED).map { index -> TopicName("topic.t$index") }.toSet()
 
             val message = TopicNotDeclaredException(TopicName("missing.topic"), declared).message.orEmpty()
 
-            message shouldContain "… 24 more"
+            message shouldContain "… $OMITTED more"
             TopicNotDeclaredException(TopicName("missing.topic"), emptySet()).message.orEmpty() shouldContain
                 "no topics"
         }

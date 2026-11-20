@@ -35,6 +35,11 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.yield
 import kotlin.time.Duration.Companion.hours
 
+private const val ITERATIONS: Int = 40
+private const val MAXIMUM_PARTITIONS: Int = 4
+private const val MAXIMUM_MAILBOX: Int = 4
+private const val MAXIMUM_PUBLICATIONS: Int = 60
+
 private val accounted: TopicKey<DeviceEvent> = TopicKey("inventory.accounted")
 
 @OptIn(ExperimentalCoroutinesApi::class, ExperimentalKotest::class)
@@ -42,12 +47,12 @@ class AccountingTest : FunSpec({
     context("every accepted envelope").config(coroutineTestScope = true) {
         test("is settled exactly once by every consumer, whatever the policies") {
             checkAll(
-                PropTestConfig(iterations = 40),
-                Arb.int(1..4),
-                Arb.int(1..4),
-                Arb.enum<OverflowPolicy>(),
-                Arb.int(1..60),
-                Arb.boolean(),
+                config = PropTestConfig(iterations = ITERATIONS),
+                genA = Arb.int(1..MAXIMUM_PARTITIONS),
+                genB = Arb.int(1..MAXIMUM_MAILBOX),
+                genC = Arb.enum<OverflowPolicy>(),
+                genD = Arb.int(1..MAXIMUM_PUBLICATIONS),
+                genE = Arb.boolean(),
             ) { partitions, mailbox, overflow, publications, closeEarly ->
                 val bus = bus {
                     topic(accounted) {
@@ -58,7 +63,7 @@ class AccountingTest : FunSpec({
                 }
                 val topic = bus[accounted]
                 val consumers = listOf("inventory.fast", "inventory.flaky").map { name ->
-                    topic.consume(name) {
+                    val consumption = topic.consume(name) {
                         concurrency = partitions
                         mailboxCapacity = mailbox
                         this.overflow = overflow
@@ -67,7 +72,8 @@ class AccountingTest : FunSpec({
                             yield()
                             if (name.endsWith("flaky") && envelope.payload.id.length % 2 == 0) error("flaky")
                         }
-                    }.getOrThrow()
+                    }
+                    consumption.getOrThrow()
                 }
 
                 repeat(publications) { index -> topic.tryPublish(DeviceEvent.Registered("d$index")) }

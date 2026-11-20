@@ -19,13 +19,10 @@ package com.davils.konfetti.core.consume
 import com.davils.konfetti.core.Envelope
 import com.davils.konfetti.core.Event
 import com.davils.konfetti.core.bus.Entropy
-import com.davils.konfetti.core.fixture.AuditEvent
-import com.davils.konfetti.core.lifecycle.BusState
-import kotlinx.coroutines.CompletableDeferred
-import kotlinx.coroutines.awaitCancellation
 import com.davils.konfetti.core.failure.FailurePolicy
 import com.davils.konfetti.core.failure.exponential
 import com.davils.konfetti.core.failure.retry
+import com.davils.konfetti.core.fixture.AuditEvent
 import com.davils.konfetti.core.fixture.DeviceEvent
 import com.davils.konfetti.core.fixture.INDEXER
 import com.davils.konfetti.core.fixture.Topics
@@ -33,6 +30,7 @@ import com.davils.konfetti.core.fixture.attach
 import com.davils.konfetti.core.fixture.devices
 import com.davils.konfetti.core.fixture.send
 import com.davils.konfetti.core.fixture.settle
+import com.davils.konfetti.core.lifecycle.BusState
 import com.davils.konfetti.core.observe.BusObservation
 import com.davils.konfetti.core.observe.BusObserver
 import com.davils.konfetti.core.observe.DropReason
@@ -40,8 +38,14 @@ import com.davils.konfetti.testing.RecordingObserver
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.shouldContain
-import io.kotest.matchers.types.shouldBeInstanceOf
+import kotlinx.coroutines.CompletableDeferred
+import kotlinx.coroutines.awaitCancellation
 import kotlin.time.Duration.Companion.seconds
+
+private const val STALLED_PUBLICATIONS: Int = 4
+private const val STALLED_DROPS: Long = 2
+private const val FAILING_PUBLICATIONS: Int = 80
+private val stallTime = 5.seconds
 
 private val throwingObserver = object : BusObserver {
     override val isObserving: Boolean get() = error("broken")
@@ -73,7 +77,8 @@ class IsolationTest : FunSpec({
 
             handled shouldBe 1
             consumer.metrics.skipped shouldBe 1
-            observer.only<BusObservation.Failed>().single().cause.message shouldContain "more than once"
+            val failed = observer.only<BusObservation.Failed>().single()
+            failed.cause.message shouldContain "more than once"
         }
     }
 
@@ -113,19 +118,19 @@ class IsolationTest : FunSpec({
             val topic = bus[Topics.devices]
             val stuck = topic.attach("inventory.stuck") {
                 mailboxCapacity = 1
-                maximumStall = 5.seconds
+                maximumStall = stallTime
                 handle { awaitCancellation() }
             }
             val healthy = mutableListOf<Envelope<Event>>()
             topic.attach(INDEXER) { handle { envelope -> healthy += envelope } }
 
-            repeat(4) { index -> topic.send(DeviceEvent.Registered("r$index")) }
+            repeat(STALLED_PUBLICATIONS) { index -> topic.send(DeviceEvent.Registered("r$index")) }
             settle()
 
-            healthy.size shouldBe 4
-            stuck.metrics.dropped shouldBe 2
-            observer.only<BusObservation.Dropped>().map { dropped -> dropped.reason }.toSet() shouldBe
-                setOf(DropReason.Stalled)
+            val reasons = observer.only<BusObservation.Dropped>().map { dropped -> dropped.reason }
+            healthy.size shouldBe STALLED_PUBLICATIONS
+            stuck.metrics.dropped shouldBe STALLED_DROPS
+            reasons.toSet() shouldBe setOf(DropReason.Stalled)
         }
     }
 
@@ -139,14 +144,14 @@ class IsolationTest : FunSpec({
             }
             val failing = bus[Topics.devices].attach(INDEXER) { handle { error("fails") } }
 
-            repeat(80) { index -> bus[Topics.devices].send(DeviceEvent.Registered("r$index")) }
+            repeat(FAILING_PUBLICATIONS) { index -> bus[Topics.devices].send(DeviceEvent.Registered("r$index")) }
             settle()
 
             val metrics = failing.metrics
-            metrics.received shouldBe 80
-            metrics.settled shouldBe 80
+            metrics.received shouldBe FAILING_PUBLICATIONS.toLong()
+            metrics.settled shouldBe FAILING_PUBLICATIONS.toLong()
             (metrics.dropped > 0) shouldBe true
-            metrics.deadLettered + metrics.dropped shouldBe 80
+            metrics.deadLettered + metrics.dropped shouldBe FAILING_PUBLICATIONS.toLong()
         }
     }
 

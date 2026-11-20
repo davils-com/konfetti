@@ -24,11 +24,13 @@ import com.davils.konfetti.core.fixture.INDEXER
 import com.davils.konfetti.core.fixture.Topics
 import com.davils.konfetti.core.fixture.attach
 import com.davils.konfetti.core.fixture.bus
+import com.davils.konfetti.core.fixture.codes
 import com.davils.konfetti.core.fixture.devices
 import com.davils.konfetti.core.fixture.send
 import com.davils.konfetti.core.fixture.settle
 import com.davils.konfetti.core.limit.BusLimits
 import com.davils.konfetti.core.limit.busLimits
+import com.davils.konfetti.core.observe.BusObservation
 import com.davils.konfetti.core.observe.DropReason
 import com.davils.konfetti.core.observe.ObservationStream
 import com.davils.konfetti.core.topic.Declaration
@@ -40,19 +42,26 @@ import io.kotest.matchers.collections.shouldContainExactly
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.shouldContain
 import io.kotest.matchers.types.shouldBeInstanceOf
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.awaitCancellation
+import kotlinx.coroutines.launch
 import kotlin.time.Duration.Companion.days
 import kotlin.time.Duration.Companion.seconds
+
+private const val OVERFLOWING_ATTEMPTS: Int = 4
+private const val HELD_ENVELOPES: Int = 4
+private const val TOPIC_SETTINGS: Int = 3
+private val handlingTime = 5.seconds
 
 class EdgeCasesTest : FunSpec({
     context("handling").config(coroutineTestScope = true) {
         test("finishes within its timeout") {
-            val consumer = devices()[Topics.devices].let { topic ->
-                topic.attach(INDEXER) {
-                    handlingTimeout = 5.seconds
-                    handle { }
-                }.also { topic.send(DeviceEvent.Registered("r1")) }
+            val topic = devices()[Topics.devices]
+            val consumer = topic.attach(INDEXER) {
+                handlingTimeout = handlingTime
+                handle { }
             }
+            topic.send(DeviceEvent.Registered("r1"))
             settle()
 
             consumer.metrics.delivered shouldBe 1
@@ -70,22 +79,48 @@ class EdgeCasesTest : FunSpec({
 
             consumer.metrics.dropped shouldBe 1
             consumer.metrics.inFlight shouldBe 0
-            observer.only<com.davils.konfetti.core.observe.BusObservation.Dropped>().single().reason shouldBe
-                DropReason.Detached
+            val dropped = observer.only<BusObservation.Dropped>()
+            dropped.single().reason shouldBe DropReason.Detached
         }
 
         test("backs off no longer than the cap when the growth overflows") {
             val topic = devices()[Topics.devices]
             val consumer = topic.attach(INDEXER) {
-                onFailure = retry(attempts = 3, backoff = exponential(1.seconds, 2.seconds, factor = Double.MAX_VALUE))
+                onFailure = retry(
+                    attempts = OVERFLOWING_ATTEMPTS,
+                    backoff = exponential(initial = 1.seconds, max = 2.seconds, factor = Double.MAX_VALUE),
+                )
                 handle { error("fails") }
             }
 
             topic.send(DeviceEvent.Registered("r1"))
             settle()
 
-            consumer.metrics.retried shouldBe 2
+            consumer.metrics.retried shouldBe OVERFLOWING_ATTEMPTS - 1L
             consumer.metrics.deadLettered shouldBe 1
+        }
+    }
+
+    context("publishing").config(coroutineTestScope = true) {
+        test("leaves no trace of a publisher cancelled while it waits for room") {
+            val topic = bus { topic(Topics.devices) { bufferCapacity = 1 } }[Topics.devices]
+            topic.attach(INDEXER) {
+                mailboxCapacity = 1
+                handle { awaitCancellation() }
+            }
+            repeat(HELD_ENVELOPES) { index -> topic.send(DeviceEvent.Registered("r$index")) }
+            settle()
+            val waiting = CoroutineScope(coroutineContext).launch {
+                topic.publish(DeviceEvent.Registered("waiting"))
+            }
+            settle()
+
+            waiting.cancel()
+            settle()
+
+            topic.metrics.published shouldBe HELD_ENVELOPES.toLong()
+            topic.metrics.rejected shouldBe 0
+            waiting.isCancelled shouldBe true
         }
     }
 
@@ -102,9 +137,9 @@ class EdgeCasesTest : FunSpec({
                 handle { }
             }
 
-            none.shouldBeInstanceOf<Consumption.Invalid>().report.errors.map { violation -> violation.code } shouldContainExactly
+            none.codes shouldContainExactly
                 listOf(EventViolationCodes.INVALID_RETRY)
-            tooMany.shouldBeInstanceOf<Consumption.Invalid>().report.errors.size shouldBe 1
+            tooMany.codes.size shouldBe 1
             none.toString() shouldContain "errors=1"
         }
 
@@ -112,7 +147,11 @@ class EdgeCasesTest : FunSpec({
             val failure = shouldThrow<ValidationException> {
                 bus {
                     deadLetterRetention = 0
-                    limits = busLimits { maximumPartitions = 2 }
+                    limits = busLimits {
+                        maximumPartitions = 2
+                        maximumBufferCapacity = 4
+                        maximumRetain = 4
+                    }
                     topic(Topics.devices) {
                         partitions = BusLimits.HARD_PARTITIONS + 1
                         bufferCapacity = BusLimits.HARD_BUFFER_CAPACITY + 1
@@ -121,12 +160,12 @@ class EdgeCasesTest : FunSpec({
                 }
             }
 
-            failure.report.errors.size shouldBe 3
+            failure.report.errors.size shouldBe TOPIC_SETTINGS
         }
 
         test("refuses a handling timeout beyond the hard ceiling of the bus") {
             val consumption = devices()[Topics.devices].consume(INDEXER) {
-                handlingTimeout = 30.days
+                handlingTimeout = BusLimits.HARD_HANDLING_TIMEOUT + 1.days
                 handle { }
             }
 
@@ -144,7 +183,8 @@ class EdgeCasesTest : FunSpec({
             bus[Topics.devices].attach("zeta.reader") { handle { } }
             bus[Topics.devices].attach("alpha.reader") { handle { } }
 
-            val consumers = bus.snapshot().topics.first().consumers.keys.map { name -> name.value }
+            val topic = bus.snapshot().topics.first()
+            val consumers = topic.consumers.keys.map { name -> name.value }
 
             consumers shouldContainExactly listOf("alpha.reader", "zeta.reader")
             bus.limits shouldBe BusLimits.Default

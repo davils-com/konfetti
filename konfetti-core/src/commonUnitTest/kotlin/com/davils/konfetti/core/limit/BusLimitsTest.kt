@@ -28,21 +28,32 @@ import kotlin.time.Duration
 import kotlin.time.Duration.Companion.days
 import kotlin.time.Duration.Companion.hours
 
+private const val DEFAULT_TOPICS: Int = 1_024
+private const val DEFAULT_CONSUMERS: Int = 256
+private const val DEFAULT_ATTEMPTS: Int = 100
+private const val DEFAULT_HEADERS: Int = 64
+private const val DEFAULT_HEADER_VALUE_LENGTH: Int = 4_096
+private const val DEFAULT_KEY_LENGTH: Int = 1_024
+private const val BASE_HEADERS: Int = 8
+private const val CHANGED_TOPICS: Int = 16
+private const val LIMITS: Int = 12
+private const val NOT_POSITIVE_LIMITS: Int = 4
+
 class BusLimitsTest : FunSpec({
     context("the default limits") {
         test("bound every structure of a bus") {
             val limits = BusLimits.Default
 
-            limits.maximumTopics shouldBe 1_024
-            limits.maximumConsumers shouldBe 256
+            limits.maximumTopics shouldBe DEFAULT_TOPICS
+            limits.maximumConsumers shouldBe DEFAULT_CONSUMERS
             limits.maximumPartitions shouldBe BusLimits.HARD_PARTITIONS
             limits.maximumBufferCapacity shouldBe BusLimits.HARD_BUFFER_CAPACITY
             limits.maximumMailboxCapacity shouldBe BusLimits.HARD_MAILBOX_CAPACITY
             limits.maximumRetain shouldBe BusLimits.HARD_RETAIN
-            limits.maximumAttempts shouldBe 100
-            limits.maximumHeaders shouldBe 64
-            limits.maximumHeaderValueLength shouldBe 4_096
-            limits.maximumOrderingKeyLength shouldBe 1_024
+            limits.maximumAttempts shouldBe DEFAULT_ATTEMPTS
+            limits.maximumHeaders shouldBe DEFAULT_HEADERS
+            limits.maximumHeaderValueLength shouldBe DEFAULT_HEADER_VALUE_LENGTH
+            limits.maximumOrderingKeyLength shouldBe DEFAULT_KEY_LENGTH
             limits.maximumHandlingTimeout shouldBe 1.days
             limits.maximumRetryDelay shouldBe 1.hours
         }
@@ -62,12 +73,12 @@ class BusLimitsTest : FunSpec({
 
     context("built limits") {
         test("start from their base and change what the block sets") {
-            val base = busLimits { maximumHeaders = 8 }
+            val base = busLimits { maximumHeaders = BASE_HEADERS }
 
-            val limits = busLimits(base) { maximumTopics = 16 }
+            val limits = busLimits(base) { maximumTopics = CHANGED_TOPICS }
 
-            limits.maximumHeaders shouldBe 8
-            limits.maximumTopics shouldBe 16
+            limits.maximumHeaders shouldBe BASE_HEADERS
+            limits.maximumTopics shouldBe CHANGED_TOPICS
         }
 
         test("accept every limit at its hard ceiling") {
@@ -103,9 +114,9 @@ class BusLimitsTest : FunSpec({
                 }
             }
 
-            failure.report.errors.map { violation -> violation.code }.toSet() shouldContainExactly
-                setOf(EventViolationCodes.ABOVE_HARD_LIMIT)
-            failure.report.errors.size shouldBe 12
+            val codes = failure.report.errors.map { violation -> violation.code }
+            codes.toSet() shouldContainExactly setOf(EventViolationCodes.ABOVE_HARD_LIMIT)
+            codes.size shouldBe LIMITS
         }
 
         test("refuse a count below one and a duration that is not positive") {
@@ -118,9 +129,9 @@ class BusLimitsTest : FunSpec({
                 }
             }
 
-            failure.report.errors.map { violation -> violation.code }.toSet() shouldContainExactly
-                setOf(EventViolationCodes.NOT_POSITIVE)
-            failure.report.errors.size shouldBe 4
+            val codes = failure.report.errors.map { violation -> violation.code }
+            codes.toSet() shouldContainExactly setOf(EventViolationCodes.NOT_POSITIVE)
+            codes.size shouldBe NOT_POSITIVE_LIMITS
         }
 
         test("cannot be changed once they were built") {

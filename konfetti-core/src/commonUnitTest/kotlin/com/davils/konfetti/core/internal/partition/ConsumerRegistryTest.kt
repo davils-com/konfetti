@@ -39,7 +39,10 @@ class ConsumerRegistryTest : FunSpec({
 
             listOf("a", "b", "c").forEachIndexed { index, text -> retention.add(index, testEnvelope(AuditEvent(text))) }
 
-            retention.snapshot().map { retained -> retained.envelope.payload.text } shouldContainExactly listOf("b", "c")
+            retention.snapshot().map { retained -> retained.envelope.payload.text } shouldContainExactly listOf(
+                "b",
+                "c",
+            )
             retention.size shouldBe 2
         }
 

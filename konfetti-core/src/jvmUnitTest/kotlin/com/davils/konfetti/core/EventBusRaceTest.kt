@@ -126,10 +126,11 @@ class EventBusRaceTest : FunSpec({
                 repeat(ROUNDS) {
                     val scope = CoroutineScope(SupervisorJob() + dispatcher)
                     val bus = eventBus(scope) { topic(Readings.topic) { bufferCapacity = 1 } }
-                    val consumer = bus[Readings.topic].consume(INDEXER) {
+                    val consumption = bus[Readings.topic].consume(INDEXER) {
                         mailboxCapacity = 1
                         handle { yield() }
-                    }.getOrThrow()
+                    }
+                    val consumer = consumption.getOrThrow()
                     val accepted = LongAdder()
 
                     coroutineScope {

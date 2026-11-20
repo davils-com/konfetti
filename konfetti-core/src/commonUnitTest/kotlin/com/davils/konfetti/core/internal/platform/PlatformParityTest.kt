@@ -19,15 +19,18 @@ package com.davils.konfetti.core.internal.platform
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
 
+private const val INCREMENTS: Int = 5
+private const val ANSWER: Int = 42
+
 class PlatformParityTest : FunSpec({
     context("a striped counter") {
         test("counts up and down from zero on every platform") {
             val counter = stripedCounter()
 
-            repeat(5) { counter.increment() }
+            repeat(INCREMENTS) { counter.increment() }
             counter.decrement()
 
-            counter.sum shouldBe 4
+            counter.sum shouldBe INCREMENTS - 1L
         }
     }
 
@@ -35,7 +38,7 @@ class PlatformParityTest : FunSpec({
         test("returns what its block returns and may be entered again by its holder") {
             val guard = guard()
 
-            guard.locked { guard.locked { 42 } } shouldBe 42
+            guard.locked { guard.locked { ANSWER } } shouldBe ANSWER
         }
 
         test("releases itself when its block throws") {

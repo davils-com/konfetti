@@ -55,13 +55,18 @@ import io.kotest.matchers.string.shouldNotContain
 import kotlin.coroutines.EmptyCoroutineContext
 import kotlin.time.Duration.Companion.seconds
 
+private const val SEQUENCE: Long = 3
+private const val ATTEMPTS: Int = 2
+private const val DEVICE: String = "r1"
+private const val AUDITS: String = "audit.entries"
+
 private val sequence = SequentialUuidV7Generator()
 private val first = testEnvelope(AuditEvent("first")) { identifiers = sequence }
 private val second = testEnvelope(AuditEvent("second")) { identifiers = sequence }
 private val alpha = ConsumerName("alpha")
 private val beta = ConsumerName("beta")
 private val devices = TopicName("inventory.devices")
-private val audits = TopicName("audit.entries")
+private val audits = TopicName(AUDITS)
 private val failure = Broken("secret detail")
 private val other = Broken("other")
 
@@ -100,133 +105,208 @@ class ValueSemanticsTest : FunSpec({
     context("observations") {
         test("compare by every field and never show a payload or a message") {
             checkValue(
-                BusObservation.StateChanged(BusState.Running),
-                BusObservation.StateChanged(BusState.Running),
-                BusObservation.StateChanged(BusState.Closed),
+                value = BusObservation.StateChanged(BusState.Running),
+                equal = BusObservation.StateChanged(BusState.Running),
+                different = listOf(BusObservation.StateChanged(BusState.Closed)),
             )
             checkValue(
-                BusObservation.TopicDeclared(devices),
-                BusObservation.TopicDeclared(devices),
-                BusObservation.TopicDeclared(audits),
-            )
-            checkValue(BusObservation.Published(first), BusObservation.Published(first), BusObservation.Published(second))
-            checkValue(
-                BusObservation.Rejected(devices, Rejection.Closed),
-                BusObservation.Rejected(devices, Rejection.Closed),
-                BusObservation.Rejected(audits, Rejection.Closed),
-                BusObservation.Rejected(devices, Rejection.Overflow),
+                value = BusObservation.TopicDeclared(devices),
+                equal = BusObservation.TopicDeclared(devices),
+                different = listOf(BusObservation.TopicDeclared(audits)),
             )
             checkValue(
-                BusObservation.Delivered(first, alpha, 1, 1.seconds),
-                BusObservation.Delivered(first, alpha, 1, 1.seconds),
-                BusObservation.Delivered(second, alpha, 1, 1.seconds),
-                BusObservation.Delivered(first, alpha, 2, 1.seconds),
+                value = BusObservation.Published(first),
+                equal = BusObservation.Published(first),
+                different = listOf(BusObservation.Published(second)),
             )
             checkValue(
-                BusObservation.Filtered(first, alpha),
-                BusObservation.Filtered(first, alpha),
-                BusObservation.Filtered(second, alpha),
-                BusObservation.Filtered(first, beta),
+                value = BusObservation.Rejected(devices, Rejection.Closed),
+                equal = BusObservation.Rejected(devices, Rejection.Closed),
+                different = listOf(
+                    BusObservation.Rejected(audits, Rejection.Closed),
+                    BusObservation.Rejected(devices, Rejection.Overflow),
+                ),
             )
             checkValue(
-                BusObservation.Failed(first, alpha, 1, failure),
-                BusObservation.Failed(first, alpha, 1, failure),
-                BusObservation.Failed(first, alpha, 1, other),
+                value = BusObservation.Delivered(envelope = first, consumer = alpha, attempt = 1, duration = 1.seconds),
+                equal = BusObservation.Delivered(envelope = first, consumer = alpha, attempt = 1, duration = 1.seconds),
+                different = listOf(
+                    BusObservation.Delivered(envelope = second, consumer = alpha, attempt = 1, duration = 1.seconds),
+                    BusObservation.Delivered(envelope = first, consumer = alpha, attempt = 2, duration = 1.seconds),
+                ),
             )
             checkValue(
-                BusObservation.Retrying(first, alpha, 2, 1.seconds),
-                BusObservation.Retrying(first, alpha, 2, 1.seconds),
-                BusObservation.Retrying(first, alpha, 2, 2.seconds),
+                value = BusObservation.Filtered(first, alpha),
+                equal = BusObservation.Filtered(first, alpha),
+                different = listOf(BusObservation.Filtered(second, alpha), BusObservation.Filtered(first, beta)),
             )
             checkValue(
-                BusObservation.Skipped(first, alpha, 1),
-                BusObservation.Skipped(first, alpha, 1),
-                BusObservation.Skipped(first, alpha, 2),
+                value = BusObservation.Failed(envelope = first, consumer = alpha, attempt = 1, cause = failure),
+                equal = BusObservation.Failed(envelope = first, consumer = alpha, attempt = 1, cause = failure),
+                different = listOf(
+                    BusObservation.Failed(envelope = first, consumer = alpha, attempt = 1, cause = other),
+                ),
             )
             checkValue(
-                BusObservation.DeadLettered(first, alpha, 1),
-                BusObservation.DeadLettered(first, alpha, 1),
-                BusObservation.DeadLettered(first, beta, 1),
+                value = BusObservation.Retrying(envelope = first, consumer = alpha, attempt = 2, delay = 1.seconds),
+                equal = BusObservation.Retrying(envelope = first, consumer = alpha, attempt = 2, delay = 1.seconds),
+                different = listOf(
+                    BusObservation.Retrying(envelope = first, consumer = alpha, attempt = 2, delay = 2.seconds),
+                ),
             )
             checkValue(
-                BusObservation.Dropped(first, alpha, DropReason.Overflow),
-                BusObservation.Dropped(first, alpha, DropReason.Overflow),
-                BusObservation.Dropped(first, null, DropReason.Overflow),
-                BusObservation.Dropped(first, alpha, DropReason.Closed),
+                value = BusObservation.Skipped(first, alpha, 1),
+                equal = BusObservation.Skipped(first, alpha, 1),
+                different = listOf(BusObservation.Skipped(first, alpha, 2)),
             )
             checkValue(
-                BusObservation.ConsumerAttached(devices, alpha),
-                BusObservation.ConsumerAttached(devices, alpha),
-                BusObservation.ConsumerAttached(audits, alpha),
-                BusObservation.ConsumerAttached(devices, beta),
+                value = BusObservation.DeadLettered(first, alpha, 1),
+                equal = BusObservation.DeadLettered(first, alpha, 1),
+                different = listOf(BusObservation.DeadLettered(first, beta, 1)),
             )
             checkValue(
-                BusObservation.ConsumerDetached(devices, alpha),
-                BusObservation.ConsumerDetached(devices, alpha),
-                BusObservation.ConsumerDetached(audits, alpha),
-                BusObservation.ConsumerDetached(devices, beta),
+                value = BusObservation.Dropped(first, alpha, DropReason.Overflow),
+                equal = BusObservation.Dropped(first, alpha, DropReason.Overflow),
+                different = listOf(
+                    BusObservation.Dropped(first, null, DropReason.Overflow),
+                    BusObservation.Dropped(first, alpha, DropReason.Closed),
+                ),
             )
             checkValue(
-                BusObservation.ConsumerStopped(devices, alpha, failure),
-                BusObservation.ConsumerStopped(devices, alpha, failure),
-                BusObservation.ConsumerStopped(devices, alpha, other),
+                value = BusObservation.ConsumerAttached(devices, alpha),
+                equal = BusObservation.ConsumerAttached(devices, alpha),
+                different = listOf(
+                    BusObservation.ConsumerAttached(audits, alpha),
+                    BusObservation.ConsumerAttached(devices, beta),
+                ),
             )
-            BusObservation.Failed(first, alpha, 1, failure).toString() shouldNotContain "secret"
-            BusObservation.Dropped(first, null, DropReason.Closed).toString() shouldContain "by topic"
+            checkValue(
+                value = BusObservation.ConsumerDetached(devices, alpha),
+                equal = BusObservation.ConsumerDetached(devices, alpha),
+                different = listOf(
+                    BusObservation.ConsumerDetached(audits, alpha),
+                    BusObservation.ConsumerDetached(devices, beta),
+                ),
+            )
+            checkValue(
+                value = BusObservation.ConsumerStopped(devices, alpha, failure),
+                equal = BusObservation.ConsumerStopped(devices, alpha, failure),
+                different = listOf(BusObservation.ConsumerStopped(devices, alpha, other)),
+            )
+            val failed = BusObservation.Failed(envelope = first, consumer = alpha, attempt = 1, cause = failure)
+            failed.toString() shouldNotContain "secret"
+            val dropped = BusObservation.Dropped(envelope = first, consumer = null, reason = DropReason.Closed)
+            dropped.toString() shouldContain "by topic"
         }
     }
 
     context("metrics and snapshots") {
         test("compare by every count") {
-            checkValue(metrics(), metrics(), metrics(received = 2))
-            checkValue(topicMetrics(), topicMetrics(), topicMetrics(published = 2))
-            checkValue(topicSnapshot(), topicSnapshot(), topicSnapshot(partitions = 2))
             checkValue(
-                BusSnapshot(BusState.Running, listOf(topicSnapshot()), 0, 0),
-                BusSnapshot(BusState.Running, listOf(topicSnapshot()), 0, 0),
-                BusSnapshot(BusState.Closed, listOf(topicSnapshot()), 0, 0),
+                value = metrics(),
+                equal = metrics(),
+                different = listOf(metrics(received = 2)),
+            )
+            checkValue(
+                value = topicMetrics(),
+                equal = topicMetrics(),
+                different = listOf(topicMetrics(published = 2)),
+            )
+            checkValue(
+                value = topicSnapshot(),
+                equal = topicSnapshot(),
+                different = listOf(topicSnapshot(partitions = 2)),
+            )
+            checkValue(
+                value = BusSnapshot(
+                    state = BusState.Running,
+                    topics = listOf(topicSnapshot()),
+                    observerFailures = 0,
+                    interceptorFailures = 0,
+                ),
+                equal = BusSnapshot(
+                    state = BusState.Running,
+                    topics = listOf(topicSnapshot()),
+                    observerFailures = 0,
+                    interceptorFailures = 0,
+                ),
+                different = listOf(
+                    BusSnapshot(
+                        state = BusState.Closed,
+                        topics = listOf(topicSnapshot()),
+                        observerFailures = 0,
+                        interceptorFailures = 0,
+                    ),
+                ),
             )
             metrics().settled shouldBe 1
-            SequencedObservation(3, 1, BusObservation.StateChanged(BusState.Closed)).toString() shouldContain "missed=1"
+            SequencedObservation(
+                sequence = SEQUENCE,
+                missed = 1,
+                observation = BusObservation.StateChanged(BusState.Closed),
+            ).toString() shouldContain "missed=1"
         }
     }
 
     context("results") {
         test("compare by value") {
-            checkValue(PublishResult.Published(first), PublishResult.Published(first), PublishResult.Published(second))
             checkValue(
-                PublishResult.Rejected(devices, Rejection.Closed),
-                PublishResult.Rejected(devices, Rejection.Closed),
-                PublishResult.Rejected(audits, Rejection.Closed),
-                PublishResult.Rejected(devices, Rejection.Overflow),
-            )
-            checkValue(CloseReport(1), CloseReport(1), CloseReport(2))
-            checkValue(DrainResult.TimedOut(1), DrainResult.TimedOut(1), DrainResult.TimedOut(2))
-            checkValue(ConsumerState.Stopped(failure), ConsumerState.Stopped(failure), ConsumerState.Stopped(other))
-            checkValue(
-                Declaration.AlreadyDeclared<AuditEvent>(devices),
-                Declaration.AlreadyDeclared(devices),
-                Declaration.AlreadyDeclared(audits),
-            )
-            checkValue(Declaration.Closed<AuditEvent>(devices), Declaration.Closed(devices), Declaration.Closed(audits))
-            checkValue(
-                Declaration.LimitReached<AuditEvent>(devices, 1),
-                Declaration.LimitReached(devices, 1),
-                Declaration.LimitReached(audits, 1),
-                Declaration.LimitReached(devices, 2),
+                value = PublishResult.Published(first),
+                equal = PublishResult.Published(first),
+                different = listOf(PublishResult.Published(second)),
             )
             checkValue(
-                Consumption.Duplicate(devices, alpha),
-                Consumption.Duplicate(devices, alpha),
-                Consumption.Duplicate(audits, alpha),
-                Consumption.Duplicate(devices, beta),
+                value = PublishResult.Rejected(devices, Rejection.Closed),
+                equal = PublishResult.Rejected(devices, Rejection.Closed),
+                different = listOf(
+                    PublishResult.Rejected(audits, Rejection.Closed),
+                    PublishResult.Rejected(devices, Rejection.Overflow),
+                ),
             )
-            checkValue(Consumption.Closed(devices), Consumption.Closed(devices), Consumption.Closed(audits))
             checkValue(
-                Consumption.LimitReached(devices, 1),
-                Consumption.LimitReached(devices, 1),
-                Consumption.LimitReached(audits, 1),
-                Consumption.LimitReached(devices, 2),
+                value = CloseReport(1),
+                equal = CloseReport(1),
+                different = listOf(CloseReport(2)),
+            )
+            checkValue(
+                value = DrainResult.TimedOut(1),
+                equal = DrainResult.TimedOut(1),
+                different = listOf(DrainResult.TimedOut(2)),
+            )
+            checkValue(
+                value = ConsumerState.Stopped(failure),
+                equal = ConsumerState.Stopped(failure),
+                different = listOf(ConsumerState.Stopped(other)),
+            )
+            checkValue(
+                value = Declaration.AlreadyDeclared<AuditEvent>(devices),
+                equal = Declaration.AlreadyDeclared(devices),
+                different = listOf(Declaration.AlreadyDeclared(audits)),
+            )
+            checkValue(
+                value = Declaration.Closed<AuditEvent>(devices),
+                equal = Declaration.Closed(devices),
+                different = listOf(Declaration.Closed(audits)),
+            )
+            checkValue(
+                value = Declaration.LimitReached<AuditEvent>(devices, 1),
+                equal = Declaration.LimitReached(devices, 1),
+                different = listOf(Declaration.LimitReached(audits, 1), Declaration.LimitReached(devices, 2)),
+            )
+            checkValue(
+                value = Consumption.Duplicate(devices, alpha),
+                equal = Consumption.Duplicate(devices, alpha),
+                different = listOf(Consumption.Duplicate(audits, alpha), Consumption.Duplicate(devices, beta)),
+            )
+            checkValue(
+                value = Consumption.Closed(devices),
+                equal = Consumption.Closed(devices),
+                different = listOf(Consumption.Closed(audits)),
+            )
+            checkValue(
+                value = Consumption.LimitReached(devices, 1),
+                equal = Consumption.LimitReached(devices, 1),
+                different = listOf(Consumption.LimitReached(audits, 1), Consumption.LimitReached(devices, 2)),
             )
             listOf(DrainResult.Completed, DrainResult.AlreadyClosed).map(Any::toString) shouldBe
                 listOf("Completed", "AlreadyClosed")
@@ -237,24 +317,32 @@ class ValueSemanticsTest : FunSpec({
 
     context("policies and attributions") {
         test("compare by value") {
-            checkValue(fixed(1.seconds), fixed(1.seconds), fixed(2.seconds))
             checkValue(
-                exponential(1.seconds, 2.seconds),
-                exponential(1.seconds, 2.seconds),
-                exponential(1.seconds, 3.seconds),
-                exponential(1.seconds, 2.seconds, jitter = true),
+                value = fixed(1.seconds),
+                equal = fixed(1.seconds),
+                different = listOf(fixed(2.seconds)),
             )
             checkValue(
-                retry(attempts = 2),
-                retry(attempts = 2),
-                retry(attempts = 3),
-                retry(attempts = 2, backoff = fixed(1.seconds)),
-                retry(attempts = 2, then = FailurePolicy.Skip),
+                value = exponential(initial = 1.seconds, max = 2.seconds),
+                equal = exponential(initial = 1.seconds, max = 2.seconds),
+                different = listOf(
+                    exponential(initial = 1.seconds, max = 3.seconds),
+                    exponential(initial = 1.seconds, max = 2.seconds, jitter = true),
+                ),
             )
             checkValue(
-                Attribution.forPrincipal(Principal("alice")),
-                Attribution.forPrincipal(Principal("alice")),
-                Attribution.forPrincipal(Principal("bob")),
+                value = retry(attempts = ATTEMPTS),
+                equal = retry(attempts = ATTEMPTS),
+                different = listOf(
+                    retry(attempts = ATTEMPTS + 1),
+                    retry(attempts = ATTEMPTS, backoff = fixed(1.seconds)),
+                    retry(attempts = ATTEMPTS, then = FailurePolicy.Skip),
+                ),
+            )
+            checkValue(
+                value = Attribution.forPrincipal(Principal("alice")),
+                equal = Attribution.forPrincipal(Principal("alice")),
+                different = listOf(Attribution.forPrincipal(Principal("bob"))),
             )
             listOf(FailurePolicy.Skip, FailurePolicy.Stop, FailurePolicy.DeadLetter).map(Any::toString) shouldBe
                 listOf("Skip", "Stop", "DeadLetter")
@@ -267,14 +355,23 @@ class ValueSemanticsTest : FunSpec({
     context("events in transit") {
         test("show their type, never their content") {
             val letter = DeadLetter(original = first, consumer = alpha, attempts = 1, cause = failure)
-            val publication = Publication(devices, DeviceEvent.Registered("r1"), first.headers, EmptyCoroutineContext)
-            val key = TopicKey<AuditEvent>("audit.entries")
+            val publication = Publication(
+                topic = devices,
+                event = DeviceEvent.Registered(DEVICE),
+                headers = first.headers,
+                context = EmptyCoroutineContext,
+            )
+            val key = TopicKey<AuditEvent>(AUDITS)
 
             letter.toString() shouldContain "cause=Broken"
             letter.toString() shouldNotContain "secret"
             publication.toString() shouldContain "event=Registered"
-            publication.toString() shouldNotContain "r1"
-            checkValue(key, TopicKey("audit.entries"), TopicKey<AuditEvent>("audit.other"))
+            publication.toString() shouldNotContain DEVICE
+            checkValue(
+                value = key,
+                equal = TopicKey(AUDITS),
+                different = listOf(TopicKey<AuditEvent>("audit.other")),
+            )
         }
     }
 })

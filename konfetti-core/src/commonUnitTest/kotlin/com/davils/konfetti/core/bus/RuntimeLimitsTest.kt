@@ -26,6 +26,7 @@ import com.davils.konfetti.core.fixture.DeviceEvent
 import com.davils.konfetti.core.fixture.INDEXER
 import com.davils.konfetti.core.fixture.Topics
 import com.davils.konfetti.core.fixture.bus
+import com.davils.konfetti.core.fixture.codes
 import com.davils.konfetti.core.fixture.devices
 import com.davils.konfetti.core.header.HeaderKey
 import com.davils.konfetti.core.header.headersOf
@@ -130,7 +131,7 @@ class RuntimeLimitsTest : FunSpec({
                 handle { }
             }
 
-            consumption.shouldBeInstanceOf<Consumption.Invalid>().report.errors.map { violation -> violation.code } shouldContainExactly
+            consumption.codes shouldContainExactly
                 listOf(
                     EventViolationCodes.INVALID_TIMEOUT,
                     EventViolationCodes.INVALID_RETRY,
@@ -144,7 +145,7 @@ class RuntimeLimitsTest : FunSpec({
                 handle { }
             }
 
-            consumption.shouldBeInstanceOf<Consumption.Invalid>().report.errors.map { violation -> violation.code } shouldContainExactly
+            consumption.codes shouldContainExactly
                 listOf(EventViolationCodes.INVALID_STALL)
         }
     }
