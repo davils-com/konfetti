@@ -1,0 +1,1187 @@
+// Klib ABI Dump
+// Targets: [wasmJs]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <com.davils:konfetti-core>
+final enum class com.davils.konfetti.core.consume/OverflowPolicy : kotlin/Enum<com.davils.konfetti.core.consume/OverflowPolicy> { // com.davils.konfetti.core.consume/OverflowPolicy|null[0]
+    enum entry Backpressure // com.davils.konfetti.core.consume/OverflowPolicy.Backpressure|null[0]
+    enum entry DropLatest // com.davils.konfetti.core.consume/OverflowPolicy.DropLatest|null[0]
+    enum entry DropOldest // com.davils.konfetti.core.consume/OverflowPolicy.DropOldest|null[0]
+
+    final val entries // com.davils.konfetti.core.consume/OverflowPolicy.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.konfetti.core.consume/OverflowPolicy> // com.davils.konfetti.core.consume/OverflowPolicy.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.konfetti.core.consume/OverflowPolicy // com.davils.konfetti.core.consume/OverflowPolicy.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.konfetti.core.consume/OverflowPolicy> // com.davils.konfetti.core.consume/OverflowPolicy.values|values#static(){}[0]
+}
+
+final enum class com.davils.konfetti.core.consume/StartPosition : kotlin/Enum<com.davils.konfetti.core.consume/StartPosition> { // com.davils.konfetti.core.consume/StartPosition|null[0]
+    enum entry Latest // com.davils.konfetti.core.consume/StartPosition.Latest|null[0]
+    enum entry Retained // com.davils.konfetti.core.consume/StartPosition.Retained|null[0]
+
+    final val entries // com.davils.konfetti.core.consume/StartPosition.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.konfetti.core.consume/StartPosition> // com.davils.konfetti.core.consume/StartPosition.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.konfetti.core.consume/StartPosition // com.davils.konfetti.core.consume/StartPosition.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.konfetti.core.consume/StartPosition> // com.davils.konfetti.core.consume/StartPosition.values|values#static(){}[0]
+}
+
+final enum class com.davils.konfetti.core.lifecycle/BusState : kotlin/Enum<com.davils.konfetti.core.lifecycle/BusState> { // com.davils.konfetti.core.lifecycle/BusState|null[0]
+    enum entry Closed // com.davils.konfetti.core.lifecycle/BusState.Closed|null[0]
+    enum entry Draining // com.davils.konfetti.core.lifecycle/BusState.Draining|null[0]
+    enum entry Running // com.davils.konfetti.core.lifecycle/BusState.Running|null[0]
+
+    final val entries // com.davils.konfetti.core.lifecycle/BusState.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.konfetti.core.lifecycle/BusState> // com.davils.konfetti.core.lifecycle/BusState.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.konfetti.core.lifecycle/BusState // com.davils.konfetti.core.lifecycle/BusState.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.konfetti.core.lifecycle/BusState> // com.davils.konfetti.core.lifecycle/BusState.values|values#static(){}[0]
+}
+
+final enum class com.davils.konfetti.core.observe/DropReason : kotlin/Enum<com.davils.konfetti.core.observe/DropReason> { // com.davils.konfetti.core.observe/DropReason|null[0]
+    enum entry Abandoned // com.davils.konfetti.core.observe/DropReason.Abandoned|null[0]
+    enum entry Closed // com.davils.konfetti.core.observe/DropReason.Closed|null[0]
+    enum entry DeadLetterOverflow // com.davils.konfetti.core.observe/DropReason.DeadLetterOverflow|null[0]
+    enum entry Detached // com.davils.konfetti.core.observe/DropReason.Detached|null[0]
+    enum entry Overflow // com.davils.konfetti.core.observe/DropReason.Overflow|null[0]
+    enum entry Stalled // com.davils.konfetti.core.observe/DropReason.Stalled|null[0]
+    enum entry Stopped // com.davils.konfetti.core.observe/DropReason.Stopped|null[0]
+
+    final val entries // com.davils.konfetti.core.observe/DropReason.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.konfetti.core.observe/DropReason> // com.davils.konfetti.core.observe/DropReason.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.konfetti.core.observe/DropReason // com.davils.konfetti.core.observe/DropReason.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.konfetti.core.observe/DropReason> // com.davils.konfetti.core.observe/DropReason.values|values#static(){}[0]
+}
+
+final enum class com.davils.konfetti.core.publish/Rejection : kotlin/Enum<com.davils.konfetti.core.publish/Rejection> { // com.davils.konfetti.core.publish/Rejection|null[0]
+    enum entry Closed // com.davils.konfetti.core.publish/Rejection.Closed|null[0]
+    enum entry InvalidOrderingKey // com.davils.konfetti.core.publish/Rejection.InvalidOrderingKey|null[0]
+    enum entry Overflow // com.davils.konfetti.core.publish/Rejection.Overflow|null[0]
+    enum entry OversizedHeaders // com.davils.konfetti.core.publish/Rejection.OversizedHeaders|null[0]
+
+    final val entries // com.davils.konfetti.core.publish/Rejection.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.konfetti.core.publish/Rejection> // com.davils.konfetti.core.publish/Rejection.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.konfetti.core.publish/Rejection // com.davils.konfetti.core.publish/Rejection.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.konfetti.core.publish/Rejection> // com.davils.konfetti.core.publish/Rejection.values|values#static(){}[0]
+}
+
+abstract fun interface com.davils.konfetti.core.bus/Entropy { // com.davils.konfetti.core.bus/Entropy|null[0]
+    abstract fun nextLong(): kotlin/Long // com.davils.konfetti.core.bus/Entropy.nextLong|nextLong(){}[0]
+}
+
+abstract fun interface com.davils.konfetti.core.consume/ConsumeInterceptor { // com.davils.konfetti.core.consume/ConsumeInterceptor|null[0]
+    abstract suspend fun intercept(com.davils.konfetti.core/Envelope<com.davils.konfetti.core/Event>, com.davils.konfetti.core.consume/ConsumerName, kotlin.coroutines/SuspendFunction0<kotlin/Unit>) // com.davils.konfetti.core.consume/ConsumeInterceptor.intercept|intercept(com.davils.konfetti.core.Envelope<com.davils.konfetti.core.Event>;com.davils.konfetti.core.consume.ConsumerName;kotlin.coroutines.SuspendFunction0<kotlin.Unit>){}[0]
+}
+
+abstract fun interface com.davils.konfetti.core.observe/BusObserver { // com.davils.konfetti.core.observe/BusObserver|null[0]
+    open val isObserving // com.davils.konfetti.core.observe/BusObserver.isObserving|{}isObserving[0]
+        open fun <get-isObserving>(): kotlin/Boolean // com.davils.konfetti.core.observe/BusObserver.isObserving.<get-isObserving>|<get-isObserving>(){}[0]
+
+    abstract fun observe(com.davils.konfetti.core.observe/BusObservation) // com.davils.konfetti.core.observe/BusObserver.observe|observe(com.davils.konfetti.core.observe.BusObservation){}[0]
+
+    final object None : com.davils.konfetti.core.observe/BusObserver { // com.davils.konfetti.core.observe/BusObserver.None|null[0]
+        final val isObserving // com.davils.konfetti.core.observe/BusObserver.None.isObserving|{}isObserving[0]
+            final fun <get-isObserving>(): kotlin/Boolean // com.davils.konfetti.core.observe/BusObserver.None.isObserving.<get-isObserving>|<get-isObserving>(){}[0]
+
+        final fun observe(com.davils.konfetti.core.observe/BusObservation) // com.davils.konfetti.core.observe/BusObserver.None.observe|observe(com.davils.konfetti.core.observe.BusObservation){}[0]
+    }
+}
+
+abstract fun interface com.davils.konfetti.core.publish/PublishInterceptor { // com.davils.konfetti.core.publish/PublishInterceptor|null[0]
+    abstract fun enrich(com.davils.konfetti.core.publish/Publication): com.davils.konfetti.core.header/EventHeaders // com.davils.konfetti.core.publish/PublishInterceptor.enrich|enrich(com.davils.konfetti.core.publish.Publication){}[0]
+}
+
+abstract interface <#A: kotlin/Any> com.davils.konfetti.core.header/HeaderCodec { // com.davils.konfetti.core.header/HeaderCodec|null[0]
+    abstract fun decode(kotlin/String): #A? // com.davils.konfetti.core.header/HeaderCodec.decode|decode(kotlin.String){}[0]
+    abstract fun encode(#A): kotlin/String // com.davils.konfetti.core.header/HeaderCodec.encode|encode(1:0){}[0]
+}
+
+abstract interface com.davils.konfetti.core/Event // com.davils.konfetti.core/Event|null[0]
+
+sealed interface <#A: com.davils.konfetti.core/Event> com.davils.konfetti.core.topic/Declaration { // com.davils.konfetti.core.topic/Declaration|null[0]
+    abstract fun getOrThrow(): com.davils.konfetti.core/Topic<#A> // com.davils.konfetti.core.topic/Declaration.getOrThrow|getOrThrow(){}[0]
+
+    final class <#A1: com.davils.konfetti.core/Event> AlreadyDeclared : com.davils.konfetti.core.topic/Declaration<#A1> { // com.davils.konfetti.core.topic/Declaration.AlreadyDeclared|null[0]
+        final val name // com.davils.konfetti.core.topic/Declaration.AlreadyDeclared.name|{}name[0]
+            final fun <get-name>(): com.davils.konfetti.core.topic/TopicName // com.davils.konfetti.core.topic/Declaration.AlreadyDeclared.name.<get-name>|<get-name>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.konfetti.core.topic/Declaration.AlreadyDeclared.equals|equals(kotlin.Any?){}[0]
+        final fun getOrThrow(): com.davils.konfetti.core/Topic<#A1> // com.davils.konfetti.core.topic/Declaration.AlreadyDeclared.getOrThrow|getOrThrow(){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.konfetti.core.topic/Declaration.AlreadyDeclared.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.konfetti.core.topic/Declaration.AlreadyDeclared.toString|toString(){}[0]
+    }
+
+    final class <#A1: com.davils.konfetti.core/Event> Closed : com.davils.konfetti.core.topic/Declaration<#A1> { // com.davils.konfetti.core.topic/Declaration.Closed|null[0]
+        final val name // com.davils.konfetti.core.topic/Declaration.Closed.name|{}name[0]
+            final fun <get-name>(): com.davils.konfetti.core.topic/TopicName // com.davils.konfetti.core.topic/Declaration.Closed.name.<get-name>|<get-name>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.konfetti.core.topic/Declaration.Closed.equals|equals(kotlin.Any?){}[0]
+        final fun getOrThrow(): com.davils.konfetti.core/Topic<#A1> // com.davils.konfetti.core.topic/Declaration.Closed.getOrThrow|getOrThrow(){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.konfetti.core.topic/Declaration.Closed.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.konfetti.core.topic/Declaration.Closed.toString|toString(){}[0]
+    }
+
+    final class <#A1: com.davils.konfetti.core/Event> Declared : com.davils.konfetti.core.topic/Declaration<#A1> { // com.davils.konfetti.core.topic/Declaration.Declared|null[0]
+        final val report // com.davils.konfetti.core.topic/Declaration.Declared.report|{}report[0]
+            final fun <get-report>(): com.davils.kore.core.validation.report/ValidationReport // com.davils.konfetti.core.topic/Declaration.Declared.report.<get-report>|<get-report>(){}[0]
+        final val topic // com.davils.konfetti.core.topic/Declaration.Declared.topic|{}topic[0]
+            final fun <get-topic>(): com.davils.konfetti.core/Topic<#A1> // com.davils.konfetti.core.topic/Declaration.Declared.topic.<get-topic>|<get-topic>(){}[0]
+
+        final fun getOrThrow(): com.davils.konfetti.core/Topic<#A1> // com.davils.konfetti.core.topic/Declaration.Declared.getOrThrow|getOrThrow(){}[0]
+        final fun toString(): kotlin/String // com.davils.konfetti.core.topic/Declaration.Declared.toString|toString(){}[0]
+    }
+
+    final class <#A1: com.davils.konfetti.core/Event> Invalid : com.davils.konfetti.core.topic/Declaration<#A1> { // com.davils.konfetti.core.topic/Declaration.Invalid|null[0]
+        final val report // com.davils.konfetti.core.topic/Declaration.Invalid.report|{}report[0]
+            final fun <get-report>(): com.davils.kore.core.validation.report/ValidationReport // com.davils.konfetti.core.topic/Declaration.Invalid.report.<get-report>|<get-report>(){}[0]
+
+        final fun getOrThrow(): com.davils.konfetti.core/Topic<#A1> // com.davils.konfetti.core.topic/Declaration.Invalid.getOrThrow|getOrThrow(){}[0]
+        final fun toString(): kotlin/String // com.davils.konfetti.core.topic/Declaration.Invalid.toString|toString(){}[0]
+    }
+
+    final class <#A1: com.davils.konfetti.core/Event> LimitReached : com.davils.konfetti.core.topic/Declaration<#A1> { // com.davils.konfetti.core.topic/Declaration.LimitReached|null[0]
+        final val limit // com.davils.konfetti.core.topic/Declaration.LimitReached.limit|{}limit[0]
+            final fun <get-limit>(): kotlin/Int // com.davils.konfetti.core.topic/Declaration.LimitReached.limit.<get-limit>|<get-limit>(){}[0]
+        final val name // com.davils.konfetti.core.topic/Declaration.LimitReached.name|{}name[0]
+            final fun <get-name>(): com.davils.konfetti.core.topic/TopicName // com.davils.konfetti.core.topic/Declaration.LimitReached.name.<get-name>|<get-name>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.konfetti.core.topic/Declaration.LimitReached.equals|equals(kotlin.Any?){}[0]
+        final fun getOrThrow(): com.davils.konfetti.core/Topic<#A1> // com.davils.konfetti.core.topic/Declaration.LimitReached.getOrThrow|getOrThrow(){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.konfetti.core.topic/Declaration.LimitReached.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.konfetti.core.topic/Declaration.LimitReached.toString|toString(){}[0]
+    }
+}
+
+sealed interface <#A: out com.davils.konfetti.core/Event> com.davils.konfetti.core.publish/PublishResult { // com.davils.konfetti.core.publish/PublishResult|null[0]
+    final class <#A1: out com.davils.konfetti.core/Event> Published : com.davils.konfetti.core.publish/PublishResult<#A1> { // com.davils.konfetti.core.publish/PublishResult.Published|null[0]
+        final val envelope // com.davils.konfetti.core.publish/PublishResult.Published.envelope|{}envelope[0]
+            final fun <get-envelope>(): com.davils.konfetti.core/Envelope<#A1> // com.davils.konfetti.core.publish/PublishResult.Published.envelope.<get-envelope>|<get-envelope>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.konfetti.core.publish/PublishResult.Published.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.konfetti.core.publish/PublishResult.Published.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.konfetti.core.publish/PublishResult.Published.toString|toString(){}[0]
+    }
+
+    final class Rejected : com.davils.konfetti.core.publish/PublishResult<kotlin/Nothing> { // com.davils.konfetti.core.publish/PublishResult.Rejected|null[0]
+        final val reason // com.davils.konfetti.core.publish/PublishResult.Rejected.reason|{}reason[0]
+            final fun <get-reason>(): com.davils.konfetti.core.publish/Rejection // com.davils.konfetti.core.publish/PublishResult.Rejected.reason.<get-reason>|<get-reason>(){}[0]
+        final val topic // com.davils.konfetti.core.publish/PublishResult.Rejected.topic|{}topic[0]
+            final fun <get-topic>(): com.davils.konfetti.core.topic/TopicName // com.davils.konfetti.core.publish/PublishResult.Rejected.topic.<get-topic>|<get-topic>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.konfetti.core.publish/PublishResult.Rejected.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.konfetti.core.publish/PublishResult.Rejected.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.konfetti.core.publish/PublishResult.Rejected.toString|toString(){}[0]
+    }
+}
+
+sealed interface com.davils.konfetti.core.consume/ConsumerState { // com.davils.konfetti.core.consume/ConsumerState|null[0]
+    final class Stopped : com.davils.konfetti.core.consume/ConsumerState { // com.davils.konfetti.core.consume/ConsumerState.Stopped|null[0]
+        final val cause // com.davils.konfetti.core.consume/ConsumerState.Stopped.cause|{}cause[0]
+            final fun <get-cause>(): kotlin/Throwable // com.davils.konfetti.core.consume/ConsumerState.Stopped.cause.<get-cause>|<get-cause>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.konfetti.core.consume/ConsumerState.Stopped.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.konfetti.core.consume/ConsumerState.Stopped.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.konfetti.core.consume/ConsumerState.Stopped.toString|toString(){}[0]
+    }
+
+    final object Detached : com.davils.konfetti.core.consume/ConsumerState { // com.davils.konfetti.core.consume/ConsumerState.Detached|null[0]
+        final fun toString(): kotlin/String // com.davils.konfetti.core.consume/ConsumerState.Detached.toString|toString(){}[0]
+    }
+
+    final object Draining : com.davils.konfetti.core.consume/ConsumerState { // com.davils.konfetti.core.consume/ConsumerState.Draining|null[0]
+        final fun toString(): kotlin/String // com.davils.konfetti.core.consume/ConsumerState.Draining.toString|toString(){}[0]
+    }
+
+    final object Running : com.davils.konfetti.core.consume/ConsumerState { // com.davils.konfetti.core.consume/ConsumerState.Running|null[0]
+        final fun toString(): kotlin/String // com.davils.konfetti.core.consume/ConsumerState.Running.toString|toString(){}[0]
+    }
+}
+
+sealed interface com.davils.konfetti.core.consume/Consumption { // com.davils.konfetti.core.consume/Consumption|null[0]
+    abstract fun getOrThrow(): com.davils.konfetti.core.consume/Consumer // com.davils.konfetti.core.consume/Consumption.getOrThrow|getOrThrow(){}[0]
+
+    final class Attached : com.davils.konfetti.core.consume/Consumption { // com.davils.konfetti.core.consume/Consumption.Attached|null[0]
+        final val consumer // com.davils.konfetti.core.consume/Consumption.Attached.consumer|{}consumer[0]
+            final fun <get-consumer>(): com.davils.konfetti.core.consume/Consumer // com.davils.konfetti.core.consume/Consumption.Attached.consumer.<get-consumer>|<get-consumer>(){}[0]
+
+        final fun getOrThrow(): com.davils.konfetti.core.consume/Consumer // com.davils.konfetti.core.consume/Consumption.Attached.getOrThrow|getOrThrow(){}[0]
+        final fun toString(): kotlin/String // com.davils.konfetti.core.consume/Consumption.Attached.toString|toString(){}[0]
+    }
+
+    final class Closed : com.davils.konfetti.core.consume/Consumption { // com.davils.konfetti.core.consume/Consumption.Closed|null[0]
+        final val topic // com.davils.konfetti.core.consume/Consumption.Closed.topic|{}topic[0]
+            final fun <get-topic>(): com.davils.konfetti.core.topic/TopicName // com.davils.konfetti.core.consume/Consumption.Closed.topic.<get-topic>|<get-topic>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.konfetti.core.consume/Consumption.Closed.equals|equals(kotlin.Any?){}[0]
+        final fun getOrThrow(): com.davils.konfetti.core.consume/Consumer // com.davils.konfetti.core.consume/Consumption.Closed.getOrThrow|getOrThrow(){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.konfetti.core.consume/Consumption.Closed.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.konfetti.core.consume/Consumption.Closed.toString|toString(){}[0]
+    }
+
+    final class Duplicate : com.davils.konfetti.core.consume/Consumption { // com.davils.konfetti.core.consume/Consumption.Duplicate|null[0]
+        final val name // com.davils.konfetti.core.consume/Consumption.Duplicate.name|{}name[0]
+            final fun <get-name>(): com.davils.konfetti.core.consume/ConsumerName // com.davils.konfetti.core.consume/Consumption.Duplicate.name.<get-name>|<get-name>(){}[0]
+        final val topic // com.davils.konfetti.core.consume/Consumption.Duplicate.topic|{}topic[0]
+            final fun <get-topic>(): com.davils.konfetti.core.topic/TopicName // com.davils.konfetti.core.consume/Consumption.Duplicate.topic.<get-topic>|<get-topic>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.konfetti.core.consume/Consumption.Duplicate.equals|equals(kotlin.Any?){}[0]
+        final fun getOrThrow(): com.davils.konfetti.core.consume/Consumer // com.davils.konfetti.core.consume/Consumption.Duplicate.getOrThrow|getOrThrow(){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.konfetti.core.consume/Consumption.Duplicate.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.konfetti.core.consume/Consumption.Duplicate.toString|toString(){}[0]
+    }
+
+    final class Invalid : com.davils.konfetti.core.consume/Consumption { // com.davils.konfetti.core.consume/Consumption.Invalid|null[0]
+        final val report // com.davils.konfetti.core.consume/Consumption.Invalid.report|{}report[0]
+            final fun <get-report>(): com.davils.kore.core.validation.report/ValidationReport // com.davils.konfetti.core.consume/Consumption.Invalid.report.<get-report>|<get-report>(){}[0]
+
+        final fun getOrThrow(): com.davils.konfetti.core.consume/Consumer // com.davils.konfetti.core.consume/Consumption.Invalid.getOrThrow|getOrThrow(){}[0]
+        final fun toString(): kotlin/String // com.davils.konfetti.core.consume/Consumption.Invalid.toString|toString(){}[0]
+    }
+
+    final class LimitReached : com.davils.konfetti.core.consume/Consumption { // com.davils.konfetti.core.consume/Consumption.LimitReached|null[0]
+        final val limit // com.davils.konfetti.core.consume/Consumption.LimitReached.limit|{}limit[0]
+            final fun <get-limit>(): kotlin/Int // com.davils.konfetti.core.consume/Consumption.LimitReached.limit.<get-limit>|<get-limit>(){}[0]
+        final val topic // com.davils.konfetti.core.consume/Consumption.LimitReached.topic|{}topic[0]
+            final fun <get-topic>(): com.davils.konfetti.core.topic/TopicName // com.davils.konfetti.core.consume/Consumption.LimitReached.topic.<get-topic>|<get-topic>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.konfetti.core.consume/Consumption.LimitReached.equals|equals(kotlin.Any?){}[0]
+        final fun getOrThrow(): com.davils.konfetti.core.consume/Consumer // com.davils.konfetti.core.consume/Consumption.LimitReached.getOrThrow|getOrThrow(){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.konfetti.core.consume/Consumption.LimitReached.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.konfetti.core.consume/Consumption.LimitReached.toString|toString(){}[0]
+    }
+}
+
+sealed interface com.davils.konfetti.core.failure/Backoff : com.davils.kore.core.validation/Validatable { // com.davils.konfetti.core.failure/Backoff|null[0]
+    final class Exponential : com.davils.konfetti.core.failure/Backoff { // com.davils.konfetti.core.failure/Backoff.Exponential|null[0]
+        final val factor // com.davils.konfetti.core.failure/Backoff.Exponential.factor|{}factor[0]
+            final fun <get-factor>(): kotlin/Double // com.davils.konfetti.core.failure/Backoff.Exponential.factor.<get-factor>|<get-factor>(){}[0]
+        final val hasJitter // com.davils.konfetti.core.failure/Backoff.Exponential.hasJitter|{}hasJitter[0]
+            final fun <get-hasJitter>(): kotlin/Boolean // com.davils.konfetti.core.failure/Backoff.Exponential.hasJitter.<get-hasJitter>|<get-hasJitter>(){}[0]
+        final val initial // com.davils.konfetti.core.failure/Backoff.Exponential.initial|{}initial[0]
+            final fun <get-initial>(): kotlin.time/Duration // com.davils.konfetti.core.failure/Backoff.Exponential.initial.<get-initial>|<get-initial>(){}[0]
+        final val max // com.davils.konfetti.core.failure/Backoff.Exponential.max|{}max[0]
+            final fun <get-max>(): kotlin.time/Duration // com.davils.konfetti.core.failure/Backoff.Exponential.max.<get-max>|<get-max>(){}[0]
+
+        final fun (com.davils.kore.core.validation/ValidationScope).validate() // com.davils.konfetti.core.failure/Backoff.Exponential.validate|validate@com.davils.kore.core.validation.ValidationScope(){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.konfetti.core.failure/Backoff.Exponential.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.konfetti.core.failure/Backoff.Exponential.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.konfetti.core.failure/Backoff.Exponential.toString|toString(){}[0]
+    }
+
+    final class Fixed : com.davils.konfetti.core.failure/Backoff { // com.davils.konfetti.core.failure/Backoff.Fixed|null[0]
+        final val delay // com.davils.konfetti.core.failure/Backoff.Fixed.delay|{}delay[0]
+            final fun <get-delay>(): kotlin.time/Duration // com.davils.konfetti.core.failure/Backoff.Fixed.delay.<get-delay>|<get-delay>(){}[0]
+
+        final fun (com.davils.kore.core.validation/ValidationScope).validate() // com.davils.konfetti.core.failure/Backoff.Fixed.validate|validate@com.davils.kore.core.validation.ValidationScope(){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.konfetti.core.failure/Backoff.Fixed.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.konfetti.core.failure/Backoff.Fixed.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.konfetti.core.failure/Backoff.Fixed.toString|toString(){}[0]
+    }
+}
+
+sealed interface com.davils.konfetti.core.failure/FailurePolicy { // com.davils.konfetti.core.failure/FailurePolicy|null[0]
+    sealed interface Terminal : com.davils.konfetti.core.failure/FailurePolicy // com.davils.konfetti.core.failure/FailurePolicy.Terminal|null[0]
+
+    final class Retry : com.davils.konfetti.core.failure/FailurePolicy, com.davils.kore.core.validation/Validatable { // com.davils.konfetti.core.failure/FailurePolicy.Retry|null[0]
+        final val attempts // com.davils.konfetti.core.failure/FailurePolicy.Retry.attempts|{}attempts[0]
+            final fun <get-attempts>(): kotlin/Int // com.davils.konfetti.core.failure/FailurePolicy.Retry.attempts.<get-attempts>|<get-attempts>(){}[0]
+        final val backoff // com.davils.konfetti.core.failure/FailurePolicy.Retry.backoff|{}backoff[0]
+            final fun <get-backoff>(): com.davils.konfetti.core.failure/Backoff // com.davils.konfetti.core.failure/FailurePolicy.Retry.backoff.<get-backoff>|<get-backoff>(){}[0]
+        final val then // com.davils.konfetti.core.failure/FailurePolicy.Retry.then|{}then[0]
+            final fun <get-then>(): com.davils.konfetti.core.failure/FailurePolicy.Terminal // com.davils.konfetti.core.failure/FailurePolicy.Retry.then.<get-then>|<get-then>(){}[0]
+
+        final fun (com.davils.kore.core.validation/ValidationScope).validate() // com.davils.konfetti.core.failure/FailurePolicy.Retry.validate|validate@com.davils.kore.core.validation.ValidationScope(){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.konfetti.core.failure/FailurePolicy.Retry.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.konfetti.core.failure/FailurePolicy.Retry.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.konfetti.core.failure/FailurePolicy.Retry.toString|toString(){}[0]
+    }
+
+    final object DeadLetter : com.davils.konfetti.core.failure/FailurePolicy.Terminal { // com.davils.konfetti.core.failure/FailurePolicy.DeadLetter|null[0]
+        final fun toString(): kotlin/String // com.davils.konfetti.core.failure/FailurePolicy.DeadLetter.toString|toString(){}[0]
+    }
+
+    final object Skip : com.davils.konfetti.core.failure/FailurePolicy.Terminal { // com.davils.konfetti.core.failure/FailurePolicy.Skip|null[0]
+        final fun toString(): kotlin/String // com.davils.konfetti.core.failure/FailurePolicy.Skip.toString|toString(){}[0]
+    }
+
+    final object Stop : com.davils.konfetti.core.failure/FailurePolicy.Terminal { // com.davils.konfetti.core.failure/FailurePolicy.Stop|null[0]
+        final fun toString(): kotlin/String // com.davils.konfetti.core.failure/FailurePolicy.Stop.toString|toString(){}[0]
+    }
+}
+
+sealed interface com.davils.konfetti.core.lifecycle/DrainResult { // com.davils.konfetti.core.lifecycle/DrainResult|null[0]
+    final class TimedOut : com.davils.konfetti.core.lifecycle/DrainResult { // com.davils.konfetti.core.lifecycle/DrainResult.TimedOut|null[0]
+        final val abandoned // com.davils.konfetti.core.lifecycle/DrainResult.TimedOut.abandoned|{}abandoned[0]
+            final fun <get-abandoned>(): kotlin/Long // com.davils.konfetti.core.lifecycle/DrainResult.TimedOut.abandoned.<get-abandoned>|<get-abandoned>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.konfetti.core.lifecycle/DrainResult.TimedOut.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.konfetti.core.lifecycle/DrainResult.TimedOut.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.konfetti.core.lifecycle/DrainResult.TimedOut.toString|toString(){}[0]
+    }
+
+    final object AlreadyClosed : com.davils.konfetti.core.lifecycle/DrainResult { // com.davils.konfetti.core.lifecycle/DrainResult.AlreadyClosed|null[0]
+        final fun toString(): kotlin/String // com.davils.konfetti.core.lifecycle/DrainResult.AlreadyClosed.toString|toString(){}[0]
+    }
+
+    final object Completed : com.davils.konfetti.core.lifecycle/DrainResult { // com.davils.konfetti.core.lifecycle/DrainResult.Completed|null[0]
+        final fun toString(): kotlin/String // com.davils.konfetti.core.lifecycle/DrainResult.Completed.toString|toString(){}[0]
+    }
+}
+
+sealed interface com.davils.konfetti.core.observe/BusObservation { // com.davils.konfetti.core.observe/BusObservation|null[0]
+    final class ConsumerAttached : com.davils.konfetti.core.observe/BusObservation { // com.davils.konfetti.core.observe/BusObservation.ConsumerAttached|null[0]
+        final val consumer // com.davils.konfetti.core.observe/BusObservation.ConsumerAttached.consumer|{}consumer[0]
+            final fun <get-consumer>(): com.davils.konfetti.core.consume/ConsumerName // com.davils.konfetti.core.observe/BusObservation.ConsumerAttached.consumer.<get-consumer>|<get-consumer>(){}[0]
+        final val topic // com.davils.konfetti.core.observe/BusObservation.ConsumerAttached.topic|{}topic[0]
+            final fun <get-topic>(): com.davils.konfetti.core.topic/TopicName // com.davils.konfetti.core.observe/BusObservation.ConsumerAttached.topic.<get-topic>|<get-topic>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.konfetti.core.observe/BusObservation.ConsumerAttached.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.konfetti.core.observe/BusObservation.ConsumerAttached.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.konfetti.core.observe/BusObservation.ConsumerAttached.toString|toString(){}[0]
+    }
+
+    final class ConsumerDetached : com.davils.konfetti.core.observe/BusObservation { // com.davils.konfetti.core.observe/BusObservation.ConsumerDetached|null[0]
+        final val consumer // com.davils.konfetti.core.observe/BusObservation.ConsumerDetached.consumer|{}consumer[0]
+            final fun <get-consumer>(): com.davils.konfetti.core.consume/ConsumerName // com.davils.konfetti.core.observe/BusObservation.ConsumerDetached.consumer.<get-consumer>|<get-consumer>(){}[0]
+        final val topic // com.davils.konfetti.core.observe/BusObservation.ConsumerDetached.topic|{}topic[0]
+            final fun <get-topic>(): com.davils.konfetti.core.topic/TopicName // com.davils.konfetti.core.observe/BusObservation.ConsumerDetached.topic.<get-topic>|<get-topic>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.konfetti.core.observe/BusObservation.ConsumerDetached.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.konfetti.core.observe/BusObservation.ConsumerDetached.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.konfetti.core.observe/BusObservation.ConsumerDetached.toString|toString(){}[0]
+    }
+
+    final class ConsumerStopped : com.davils.konfetti.core.observe/BusObservation { // com.davils.konfetti.core.observe/BusObservation.ConsumerStopped|null[0]
+        final val cause // com.davils.konfetti.core.observe/BusObservation.ConsumerStopped.cause|{}cause[0]
+            final fun <get-cause>(): kotlin/Throwable // com.davils.konfetti.core.observe/BusObservation.ConsumerStopped.cause.<get-cause>|<get-cause>(){}[0]
+        final val consumer // com.davils.konfetti.core.observe/BusObservation.ConsumerStopped.consumer|{}consumer[0]
+            final fun <get-consumer>(): com.davils.konfetti.core.consume/ConsumerName // com.davils.konfetti.core.observe/BusObservation.ConsumerStopped.consumer.<get-consumer>|<get-consumer>(){}[0]
+        final val topic // com.davils.konfetti.core.observe/BusObservation.ConsumerStopped.topic|{}topic[0]
+            final fun <get-topic>(): com.davils.konfetti.core.topic/TopicName // com.davils.konfetti.core.observe/BusObservation.ConsumerStopped.topic.<get-topic>|<get-topic>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.konfetti.core.observe/BusObservation.ConsumerStopped.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.konfetti.core.observe/BusObservation.ConsumerStopped.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.konfetti.core.observe/BusObservation.ConsumerStopped.toString|toString(){}[0]
+    }
+
+    final class DeadLettered : com.davils.konfetti.core.observe/BusObservation { // com.davils.konfetti.core.observe/BusObservation.DeadLettered|null[0]
+        final val attempts // com.davils.konfetti.core.observe/BusObservation.DeadLettered.attempts|{}attempts[0]
+            final fun <get-attempts>(): kotlin/Int // com.davils.konfetti.core.observe/BusObservation.DeadLettered.attempts.<get-attempts>|<get-attempts>(){}[0]
+        final val consumer // com.davils.konfetti.core.observe/BusObservation.DeadLettered.consumer|{}consumer[0]
+            final fun <get-consumer>(): com.davils.konfetti.core.consume/ConsumerName // com.davils.konfetti.core.observe/BusObservation.DeadLettered.consumer.<get-consumer>|<get-consumer>(){}[0]
+        final val envelope // com.davils.konfetti.core.observe/BusObservation.DeadLettered.envelope|{}envelope[0]
+            final fun <get-envelope>(): com.davils.konfetti.core/Envelope<com.davils.konfetti.core/Event> // com.davils.konfetti.core.observe/BusObservation.DeadLettered.envelope.<get-envelope>|<get-envelope>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.konfetti.core.observe/BusObservation.DeadLettered.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.konfetti.core.observe/BusObservation.DeadLettered.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.konfetti.core.observe/BusObservation.DeadLettered.toString|toString(){}[0]
+    }
+
+    final class Delivered : com.davils.konfetti.core.observe/BusObservation { // com.davils.konfetti.core.observe/BusObservation.Delivered|null[0]
+        final val attempt // com.davils.konfetti.core.observe/BusObservation.Delivered.attempt|{}attempt[0]
+            final fun <get-attempt>(): kotlin/Int // com.davils.konfetti.core.observe/BusObservation.Delivered.attempt.<get-attempt>|<get-attempt>(){}[0]
+        final val consumer // com.davils.konfetti.core.observe/BusObservation.Delivered.consumer|{}consumer[0]
+            final fun <get-consumer>(): com.davils.konfetti.core.consume/ConsumerName // com.davils.konfetti.core.observe/BusObservation.Delivered.consumer.<get-consumer>|<get-consumer>(){}[0]
+        final val duration // com.davils.konfetti.core.observe/BusObservation.Delivered.duration|{}duration[0]
+            final fun <get-duration>(): kotlin.time/Duration // com.davils.konfetti.core.observe/BusObservation.Delivered.duration.<get-duration>|<get-duration>(){}[0]
+        final val envelope // com.davils.konfetti.core.observe/BusObservation.Delivered.envelope|{}envelope[0]
+            final fun <get-envelope>(): com.davils.konfetti.core/Envelope<com.davils.konfetti.core/Event> // com.davils.konfetti.core.observe/BusObservation.Delivered.envelope.<get-envelope>|<get-envelope>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.konfetti.core.observe/BusObservation.Delivered.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.konfetti.core.observe/BusObservation.Delivered.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.konfetti.core.observe/BusObservation.Delivered.toString|toString(){}[0]
+    }
+
+    final class Dropped : com.davils.konfetti.core.observe/BusObservation { // com.davils.konfetti.core.observe/BusObservation.Dropped|null[0]
+        final val consumer // com.davils.konfetti.core.observe/BusObservation.Dropped.consumer|{}consumer[0]
+            final fun <get-consumer>(): com.davils.konfetti.core.consume/ConsumerName? // com.davils.konfetti.core.observe/BusObservation.Dropped.consumer.<get-consumer>|<get-consumer>(){}[0]
+        final val envelope // com.davils.konfetti.core.observe/BusObservation.Dropped.envelope|{}envelope[0]
+            final fun <get-envelope>(): com.davils.konfetti.core/Envelope<com.davils.konfetti.core/Event> // com.davils.konfetti.core.observe/BusObservation.Dropped.envelope.<get-envelope>|<get-envelope>(){}[0]
+        final val reason // com.davils.konfetti.core.observe/BusObservation.Dropped.reason|{}reason[0]
+            final fun <get-reason>(): com.davils.konfetti.core.observe/DropReason // com.davils.konfetti.core.observe/BusObservation.Dropped.reason.<get-reason>|<get-reason>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.konfetti.core.observe/BusObservation.Dropped.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.konfetti.core.observe/BusObservation.Dropped.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.konfetti.core.observe/BusObservation.Dropped.toString|toString(){}[0]
+    }
+
+    final class Failed : com.davils.konfetti.core.observe/BusObservation { // com.davils.konfetti.core.observe/BusObservation.Failed|null[0]
+        final val attempt // com.davils.konfetti.core.observe/BusObservation.Failed.attempt|{}attempt[0]
+            final fun <get-attempt>(): kotlin/Int // com.davils.konfetti.core.observe/BusObservation.Failed.attempt.<get-attempt>|<get-attempt>(){}[0]
+        final val cause // com.davils.konfetti.core.observe/BusObservation.Failed.cause|{}cause[0]
+            final fun <get-cause>(): kotlin/Throwable // com.davils.konfetti.core.observe/BusObservation.Failed.cause.<get-cause>|<get-cause>(){}[0]
+        final val consumer // com.davils.konfetti.core.observe/BusObservation.Failed.consumer|{}consumer[0]
+            final fun <get-consumer>(): com.davils.konfetti.core.consume/ConsumerName // com.davils.konfetti.core.observe/BusObservation.Failed.consumer.<get-consumer>|<get-consumer>(){}[0]
+        final val envelope // com.davils.konfetti.core.observe/BusObservation.Failed.envelope|{}envelope[0]
+            final fun <get-envelope>(): com.davils.konfetti.core/Envelope<com.davils.konfetti.core/Event> // com.davils.konfetti.core.observe/BusObservation.Failed.envelope.<get-envelope>|<get-envelope>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.konfetti.core.observe/BusObservation.Failed.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.konfetti.core.observe/BusObservation.Failed.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.konfetti.core.observe/BusObservation.Failed.toString|toString(){}[0]
+    }
+
+    final class Filtered : com.davils.konfetti.core.observe/BusObservation { // com.davils.konfetti.core.observe/BusObservation.Filtered|null[0]
+        final val consumer // com.davils.konfetti.core.observe/BusObservation.Filtered.consumer|{}consumer[0]
+            final fun <get-consumer>(): com.davils.konfetti.core.consume/ConsumerName // com.davils.konfetti.core.observe/BusObservation.Filtered.consumer.<get-consumer>|<get-consumer>(){}[0]
+        final val envelope // com.davils.konfetti.core.observe/BusObservation.Filtered.envelope|{}envelope[0]
+            final fun <get-envelope>(): com.davils.konfetti.core/Envelope<com.davils.konfetti.core/Event> // com.davils.konfetti.core.observe/BusObservation.Filtered.envelope.<get-envelope>|<get-envelope>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.konfetti.core.observe/BusObservation.Filtered.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.konfetti.core.observe/BusObservation.Filtered.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.konfetti.core.observe/BusObservation.Filtered.toString|toString(){}[0]
+    }
+
+    final class Published : com.davils.konfetti.core.observe/BusObservation { // com.davils.konfetti.core.observe/BusObservation.Published|null[0]
+        final val envelope // com.davils.konfetti.core.observe/BusObservation.Published.envelope|{}envelope[0]
+            final fun <get-envelope>(): com.davils.konfetti.core/Envelope<com.davils.konfetti.core/Event> // com.davils.konfetti.core.observe/BusObservation.Published.envelope.<get-envelope>|<get-envelope>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.konfetti.core.observe/BusObservation.Published.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.konfetti.core.observe/BusObservation.Published.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.konfetti.core.observe/BusObservation.Published.toString|toString(){}[0]
+    }
+
+    final class Rejected : com.davils.konfetti.core.observe/BusObservation { // com.davils.konfetti.core.observe/BusObservation.Rejected|null[0]
+        final val reason // com.davils.konfetti.core.observe/BusObservation.Rejected.reason|{}reason[0]
+            final fun <get-reason>(): com.davils.konfetti.core.publish/Rejection // com.davils.konfetti.core.observe/BusObservation.Rejected.reason.<get-reason>|<get-reason>(){}[0]
+        final val topic // com.davils.konfetti.core.observe/BusObservation.Rejected.topic|{}topic[0]
+            final fun <get-topic>(): com.davils.konfetti.core.topic/TopicName // com.davils.konfetti.core.observe/BusObservation.Rejected.topic.<get-topic>|<get-topic>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.konfetti.core.observe/BusObservation.Rejected.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.konfetti.core.observe/BusObservation.Rejected.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.konfetti.core.observe/BusObservation.Rejected.toString|toString(){}[0]
+    }
+
+    final class Retrying : com.davils.konfetti.core.observe/BusObservation { // com.davils.konfetti.core.observe/BusObservation.Retrying|null[0]
+        final val attempt // com.davils.konfetti.core.observe/BusObservation.Retrying.attempt|{}attempt[0]
+            final fun <get-attempt>(): kotlin/Int // com.davils.konfetti.core.observe/BusObservation.Retrying.attempt.<get-attempt>|<get-attempt>(){}[0]
+        final val consumer // com.davils.konfetti.core.observe/BusObservation.Retrying.consumer|{}consumer[0]
+            final fun <get-consumer>(): com.davils.konfetti.core.consume/ConsumerName // com.davils.konfetti.core.observe/BusObservation.Retrying.consumer.<get-consumer>|<get-consumer>(){}[0]
+        final val delay // com.davils.konfetti.core.observe/BusObservation.Retrying.delay|{}delay[0]
+            final fun <get-delay>(): kotlin.time/Duration // com.davils.konfetti.core.observe/BusObservation.Retrying.delay.<get-delay>|<get-delay>(){}[0]
+        final val envelope // com.davils.konfetti.core.observe/BusObservation.Retrying.envelope|{}envelope[0]
+            final fun <get-envelope>(): com.davils.konfetti.core/Envelope<com.davils.konfetti.core/Event> // com.davils.konfetti.core.observe/BusObservation.Retrying.envelope.<get-envelope>|<get-envelope>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.konfetti.core.observe/BusObservation.Retrying.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.konfetti.core.observe/BusObservation.Retrying.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.konfetti.core.observe/BusObservation.Retrying.toString|toString(){}[0]
+    }
+
+    final class Skipped : com.davils.konfetti.core.observe/BusObservation { // com.davils.konfetti.core.observe/BusObservation.Skipped|null[0]
+        final val attempts // com.davils.konfetti.core.observe/BusObservation.Skipped.attempts|{}attempts[0]
+            final fun <get-attempts>(): kotlin/Int // com.davils.konfetti.core.observe/BusObservation.Skipped.attempts.<get-attempts>|<get-attempts>(){}[0]
+        final val consumer // com.davils.konfetti.core.observe/BusObservation.Skipped.consumer|{}consumer[0]
+            final fun <get-consumer>(): com.davils.konfetti.core.consume/ConsumerName // com.davils.konfetti.core.observe/BusObservation.Skipped.consumer.<get-consumer>|<get-consumer>(){}[0]
+        final val envelope // com.davils.konfetti.core.observe/BusObservation.Skipped.envelope|{}envelope[0]
+            final fun <get-envelope>(): com.davils.konfetti.core/Envelope<com.davils.konfetti.core/Event> // com.davils.konfetti.core.observe/BusObservation.Skipped.envelope.<get-envelope>|<get-envelope>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.konfetti.core.observe/BusObservation.Skipped.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.konfetti.core.observe/BusObservation.Skipped.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.konfetti.core.observe/BusObservation.Skipped.toString|toString(){}[0]
+    }
+
+    final class StateChanged : com.davils.konfetti.core.observe/BusObservation { // com.davils.konfetti.core.observe/BusObservation.StateChanged|null[0]
+        final val state // com.davils.konfetti.core.observe/BusObservation.StateChanged.state|{}state[0]
+            final fun <get-state>(): com.davils.konfetti.core.lifecycle/BusState // com.davils.konfetti.core.observe/BusObservation.StateChanged.state.<get-state>|<get-state>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.konfetti.core.observe/BusObservation.StateChanged.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.konfetti.core.observe/BusObservation.StateChanged.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.konfetti.core.observe/BusObservation.StateChanged.toString|toString(){}[0]
+    }
+
+    final class TopicDeclared : com.davils.konfetti.core.observe/BusObservation { // com.davils.konfetti.core.observe/BusObservation.TopicDeclared|null[0]
+        final val topic // com.davils.konfetti.core.observe/BusObservation.TopicDeclared.topic|{}topic[0]
+            final fun <get-topic>(): com.davils.konfetti.core.topic/TopicName // com.davils.konfetti.core.observe/BusObservation.TopicDeclared.topic.<get-topic>|<get-topic>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.konfetti.core.observe/BusObservation.TopicDeclared.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.konfetti.core.observe/BusObservation.TopicDeclared.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.konfetti.core.observe/BusObservation.TopicDeclared.toString|toString(){}[0]
+    }
+}
+
+sealed interface com.davils.konfetti.core.publish/Attribution { // com.davils.konfetti.core.publish/Attribution|null[0]
+    final class Explicit : com.davils.konfetti.core.publish/Attribution { // com.davils.konfetti.core.publish/Attribution.Explicit|null[0]
+        final val principal // com.davils.konfetti.core.publish/Attribution.Explicit.principal|{}principal[0]
+            final fun <get-principal>(): com.davils.kore.core.principal/Principal // com.davils.konfetti.core.publish/Attribution.Explicit.principal.<get-principal>|<get-principal>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.konfetti.core.publish/Attribution.Explicit.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.konfetti.core.publish/Attribution.Explicit.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.konfetti.core.publish/Attribution.Explicit.toString|toString(){}[0]
+    }
+
+    final object Anonymous : com.davils.konfetti.core.publish/Attribution { // com.davils.konfetti.core.publish/Attribution.Anonymous|null[0]
+        final fun toString(): kotlin/String // com.davils.konfetti.core.publish/Attribution.Anonymous.toString|toString(){}[0]
+    }
+
+    final object Companion { // com.davils.konfetti.core.publish/Attribution.Companion|null[0]
+        final fun forPrincipal(com.davils.kore.core.principal/Principal?): com.davils.konfetti.core.publish/Attribution // com.davils.konfetti.core.publish/Attribution.Companion.forPrincipal|forPrincipal(com.davils.kore.core.principal.Principal?){}[0]
+    }
+
+    final object Inherited : com.davils.konfetti.core.publish/Attribution { // com.davils.konfetti.core.publish/Attribution.Inherited|null[0]
+        final fun toString(): kotlin/String // com.davils.konfetti.core.publish/Attribution.Inherited.toString|toString(){}[0]
+    }
+}
+
+final class <#A: com.davils.konfetti.core/Event> com.davils.konfetti.core.consume/ConsumerBuilder : com.davils.kore.core.dsl/ValidatingBuilder<com.davils.konfetti.core.consume/ConsumerConfiguration<#A>> { // com.davils.konfetti.core.consume/ConsumerBuilder|null[0]
+    final var concurrency // com.davils.konfetti.core.consume/ConsumerBuilder.concurrency|{}concurrency[0]
+        final fun <get-concurrency>(): kotlin/Int // com.davils.konfetti.core.consume/ConsumerBuilder.concurrency.<get-concurrency>|<get-concurrency>(){}[0]
+        final fun <set-concurrency>(kotlin/Int) // com.davils.konfetti.core.consume/ConsumerBuilder.concurrency.<set-concurrency>|<set-concurrency>(kotlin.Int){}[0]
+    final var handlingTimeout // com.davils.konfetti.core.consume/ConsumerBuilder.handlingTimeout|{}handlingTimeout[0]
+        final fun <get-handlingTimeout>(): kotlin.time/Duration? // com.davils.konfetti.core.consume/ConsumerBuilder.handlingTimeout.<get-handlingTimeout>|<get-handlingTimeout>(){}[0]
+        final fun <set-handlingTimeout>(kotlin.time/Duration?) // com.davils.konfetti.core.consume/ConsumerBuilder.handlingTimeout.<set-handlingTimeout>|<set-handlingTimeout>(kotlin.time.Duration?){}[0]
+    final var mailboxCapacity // com.davils.konfetti.core.consume/ConsumerBuilder.mailboxCapacity|{}mailboxCapacity[0]
+        final fun <get-mailboxCapacity>(): kotlin/Int // com.davils.konfetti.core.consume/ConsumerBuilder.mailboxCapacity.<get-mailboxCapacity>|<get-mailboxCapacity>(){}[0]
+        final fun <set-mailboxCapacity>(kotlin/Int) // com.davils.konfetti.core.consume/ConsumerBuilder.mailboxCapacity.<set-mailboxCapacity>|<set-mailboxCapacity>(kotlin.Int){}[0]
+    final var maximumStall // com.davils.konfetti.core.consume/ConsumerBuilder.maximumStall|{}maximumStall[0]
+        final fun <get-maximumStall>(): kotlin.time/Duration // com.davils.konfetti.core.consume/ConsumerBuilder.maximumStall.<get-maximumStall>|<get-maximumStall>(){}[0]
+        final fun <set-maximumStall>(kotlin.time/Duration) // com.davils.konfetti.core.consume/ConsumerBuilder.maximumStall.<set-maximumStall>|<set-maximumStall>(kotlin.time.Duration){}[0]
+    final var onFailure // com.davils.konfetti.core.consume/ConsumerBuilder.onFailure|{}onFailure[0]
+        final fun <get-onFailure>(): com.davils.konfetti.core.failure/FailurePolicy // com.davils.konfetti.core.consume/ConsumerBuilder.onFailure.<get-onFailure>|<get-onFailure>(){}[0]
+        final fun <set-onFailure>(com.davils.konfetti.core.failure/FailurePolicy) // com.davils.konfetti.core.consume/ConsumerBuilder.onFailure.<set-onFailure>|<set-onFailure>(com.davils.konfetti.core.failure.FailurePolicy){}[0]
+    final var overflow // com.davils.konfetti.core.consume/ConsumerBuilder.overflow|{}overflow[0]
+        final fun <get-overflow>(): com.davils.konfetti.core.consume/OverflowPolicy // com.davils.konfetti.core.consume/ConsumerBuilder.overflow.<get-overflow>|<get-overflow>(){}[0]
+        final fun <set-overflow>(com.davils.konfetti.core.consume/OverflowPolicy) // com.davils.konfetti.core.consume/ConsumerBuilder.overflow.<set-overflow>|<set-overflow>(com.davils.konfetti.core.consume.OverflowPolicy){}[0]
+    final var start // com.davils.konfetti.core.consume/ConsumerBuilder.start|{}start[0]
+        final fun <get-start>(): com.davils.konfetti.core.consume/StartPosition // com.davils.konfetti.core.consume/ConsumerBuilder.start.<get-start>|<get-start>(){}[0]
+        final fun <set-start>(com.davils.konfetti.core.consume/StartPosition) // com.davils.konfetti.core.consume/ConsumerBuilder.start.<set-start>|<set-start>(com.davils.konfetti.core.consume.StartPosition){}[0]
+
+    final fun handle(kotlin.coroutines/SuspendFunction1<com.davils.konfetti.core/Envelope<#A>, kotlin/Unit>) // com.davils.konfetti.core.consume/ConsumerBuilder.handle|handle(kotlin.coroutines.SuspendFunction1<com.davils.konfetti.core.Envelope<1:0>,kotlin.Unit>){}[0]
+    final fun where(kotlin/Function1<com.davils.konfetti.core/Envelope<#A>, kotlin/Boolean>) // com.davils.konfetti.core.consume/ConsumerBuilder.where|where(kotlin.Function1<com.davils.konfetti.core.Envelope<1:0>,kotlin.Boolean>){}[0]
+    final inline fun <#A1: reified #A> handleOnly(noinline kotlin.coroutines/SuspendFunction1<com.davils.konfetti.core/Envelope<#A1>, kotlin/Unit>) // com.davils.konfetti.core.consume/ConsumerBuilder.handleOnly|handleOnly(kotlin.coroutines.SuspendFunction1<com.davils.konfetti.core.Envelope<0:0>,kotlin.Unit>){0§<1:0>}[0]
+}
+
+final class <#A: com.davils.konfetti.core/Event> com.davils.konfetti.core.consume/ConsumerConfiguration : com.davils.kore.core.validation/Validatable { // com.davils.konfetti.core.consume/ConsumerConfiguration|null[0]
+    final fun (com.davils.kore.core.validation/ValidationScope).validate() // com.davils.konfetti.core.consume/ConsumerConfiguration.validate|validate@com.davils.kore.core.validation.ValidationScope(){}[0]
+}
+
+final class <#A: com.davils.konfetti.core/Event> com.davils.konfetti.core.topic/TopicBuilder : com.davils.kore.core.dsl/ValidatingBuilder<com.davils.konfetti.core.topic/TopicConfiguration<#A>> { // com.davils.konfetti.core.topic/TopicBuilder|null[0]
+    final var bufferCapacity // com.davils.konfetti.core.topic/TopicBuilder.bufferCapacity|{}bufferCapacity[0]
+        final fun <get-bufferCapacity>(): kotlin/Int // com.davils.konfetti.core.topic/TopicBuilder.bufferCapacity.<get-bufferCapacity>|<get-bufferCapacity>(){}[0]
+        final fun <set-bufferCapacity>(kotlin/Int) // com.davils.konfetti.core.topic/TopicBuilder.bufferCapacity.<set-bufferCapacity>|<set-bufferCapacity>(kotlin.Int){}[0]
+    final var partitions // com.davils.konfetti.core.topic/TopicBuilder.partitions|{}partitions[0]
+        final fun <get-partitions>(): kotlin/Int // com.davils.konfetti.core.topic/TopicBuilder.partitions.<get-partitions>|<get-partitions>(){}[0]
+        final fun <set-partitions>(kotlin/Int) // com.davils.konfetti.core.topic/TopicBuilder.partitions.<set-partitions>|<set-partitions>(kotlin.Int){}[0]
+    final var retain // com.davils.konfetti.core.topic/TopicBuilder.retain|{}retain[0]
+        final fun <get-retain>(): kotlin/Int // com.davils.konfetti.core.topic/TopicBuilder.retain.<get-retain>|<get-retain>(){}[0]
+        final fun <set-retain>(kotlin/Int) // com.davils.konfetti.core.topic/TopicBuilder.retain.<set-retain>|<set-retain>(kotlin.Int){}[0]
+
+    final fun orderBy(kotlin/Function1<#A, kotlin/String>) // com.davils.konfetti.core.topic/TopicBuilder.orderBy|orderBy(kotlin.Function1<1:0,kotlin.String>){}[0]
+}
+
+final class <#A: com.davils.konfetti.core/Event> com.davils.konfetti.core.topic/TopicConfiguration : com.davils.kore.core.validation/Validatable { // com.davils.konfetti.core.topic/TopicConfiguration|null[0]
+    final fun (com.davils.kore.core.validation/ValidationScope).validate() // com.davils.konfetti.core.topic/TopicConfiguration.validate|validate@com.davils.kore.core.validation.ValidationScope(){}[0]
+}
+
+final class <#A: com.davils.konfetti.core/Event> com.davils.konfetti.core/Topic { // com.davils.konfetti.core/Topic|null[0]
+    final val eventType // com.davils.konfetti.core/Topic.eventType|{}eventType[0]
+        final fun <get-eventType>(): kotlin.reflect/KClass<#A> // com.davils.konfetti.core/Topic.eventType.<get-eventType>|<get-eventType>(){}[0]
+    final val hasConsumers // com.davils.konfetti.core/Topic.hasConsumers|{}hasConsumers[0]
+        final fun <get-hasConsumers>(): kotlin/Boolean // com.davils.konfetti.core/Topic.hasConsumers.<get-hasConsumers>|<get-hasConsumers>(){}[0]
+    final val metrics // com.davils.konfetti.core/Topic.metrics|{}metrics[0]
+        final fun <get-metrics>(): com.davils.konfetti.core.observe/TopicMetrics // com.davils.konfetti.core/Topic.metrics.<get-metrics>|<get-metrics>(){}[0]
+    final val name // com.davils.konfetti.core/Topic.name|{}name[0]
+        final fun <get-name>(): com.davils.konfetti.core.topic/TopicName // com.davils.konfetti.core/Topic.name.<get-name>|<get-name>(){}[0]
+    final val partitionCount // com.davils.konfetti.core/Topic.partitionCount|{}partitionCount[0]
+        final fun <get-partitionCount>(): kotlin/Int // com.davils.konfetti.core/Topic.partitionCount.<get-partitionCount>|<get-partitionCount>(){}[0]
+    final val state // com.davils.konfetti.core/Topic.state|{}state[0]
+        final fun <get-state>(): com.davils.konfetti.core.lifecycle/BusState // com.davils.konfetti.core/Topic.state.<get-state>|<get-state>(){}[0]
+
+    final fun consume(kotlin/String, kotlinx.coroutines/CoroutineScope? = ..., kotlin/Function1<com.davils.konfetti.core.consume/ConsumerBuilder<#A>, kotlin/Unit>): com.davils.konfetti.core.consume/Consumption // com.davils.konfetti.core/Topic.consume|consume(kotlin.String;kotlinx.coroutines.CoroutineScope?;kotlin.Function1<com.davils.konfetti.core.consume.ConsumerBuilder<1:0>,kotlin.Unit>){}[0]
+    final fun events(com.davils.konfetti.core.consume/StartPosition = ...): kotlinx.coroutines.flow/Flow<com.davils.konfetti.core/Envelope<#A>> // com.davils.konfetti.core/Topic.events|events(com.davils.konfetti.core.consume.StartPosition){}[0]
+    final fun offer(#A, com.davils.konfetti.core.header/EventHeaders = ..., com.davils.konfetti.core/Envelope<com.davils.konfetti.core/Event>? = ..., com.davils.kore.core.principal/Principal? = ...): com.davils.konfetti.core.publish/PublishResult<#A> // com.davils.konfetti.core/Topic.offer|offer(1:0;com.davils.konfetti.core.header.EventHeaders;com.davils.konfetti.core.Envelope<com.davils.konfetti.core.Event>?;com.davils.kore.core.principal.Principal?){}[0]
+    final fun toString(): kotlin/String // com.davils.konfetti.core/Topic.toString|toString(){}[0]
+    final suspend fun publish(#A, com.davils.konfetti.core.header/EventHeaders = ..., com.davils.konfetti.core/Envelope<com.davils.konfetti.core/Event>? = ..., com.davils.konfetti.core.publish/Attribution = ...): com.davils.konfetti.core.publish/PublishResult<#A> // com.davils.konfetti.core/Topic.publish|publish(1:0;com.davils.konfetti.core.header.EventHeaders;com.davils.konfetti.core.Envelope<com.davils.konfetti.core.Event>?;com.davils.konfetti.core.publish.Attribution){}[0]
+    final suspend fun tryPublish(#A, com.davils.konfetti.core.header/EventHeaders = ..., com.davils.konfetti.core/Envelope<com.davils.konfetti.core/Event>? = ..., com.davils.konfetti.core.publish/Attribution = ...): com.davils.konfetti.core.publish/PublishResult<#A> // com.davils.konfetti.core/Topic.tryPublish|tryPublish(1:0;com.davils.konfetti.core.header.EventHeaders;com.davils.konfetti.core.Envelope<com.davils.konfetti.core.Event>?;com.davils.konfetti.core.publish.Attribution){}[0]
+}
+
+final class <#A: com.davils.konfetti.core/Event> com.davils.konfetti.core/TopicKey { // com.davils.konfetti.core/TopicKey|null[0]
+    constructor <init>(com.davils.konfetti.core.topic/TopicName, kotlin.reflect/KClass<#A>) // com.davils.konfetti.core/TopicKey.<init>|<init>(com.davils.konfetti.core.topic.TopicName;kotlin.reflect.KClass<1:0>){}[0]
+
+    final val eventType // com.davils.konfetti.core/TopicKey.eventType|{}eventType[0]
+        final fun <get-eventType>(): kotlin.reflect/KClass<#A> // com.davils.konfetti.core/TopicKey.eventType.<get-eventType>|<get-eventType>(){}[0]
+    final val name // com.davils.konfetti.core/TopicKey.name|{}name[0]
+        final fun <get-name>(): com.davils.konfetti.core.topic/TopicName // com.davils.konfetti.core/TopicKey.name.<get-name>|<get-name>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.konfetti.core/TopicKey.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.konfetti.core/TopicKey.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.konfetti.core/TopicKey.toString|toString(){}[0]
+}
+
+final class <#A: kotlin/Any> com.davils.konfetti.core.header/HeaderEntry { // com.davils.konfetti.core.header/HeaderEntry|null[0]
+    final val key // com.davils.konfetti.core.header/HeaderEntry.key|{}key[0]
+        final fun <get-key>(): com.davils.konfetti.core.header/HeaderKey<#A> // com.davils.konfetti.core.header/HeaderEntry.key.<get-key>|<get-key>(){}[0]
+    final val value // com.davils.konfetti.core.header/HeaderEntry.value|{}value[0]
+        final fun <get-value>(): #A // com.davils.konfetti.core.header/HeaderEntry.value.<get-value>|<get-value>(){}[0]
+
+    final fun toString(): kotlin/String // com.davils.konfetti.core.header/HeaderEntry.toString|toString(){}[0]
+}
+
+final class <#A: kotlin/Any> com.davils.konfetti.core.header/HeaderKey { // com.davils.konfetti.core.header/HeaderKey|null[0]
+    constructor <init>(com.davils.konfetti.core.header/HeaderName, com.davils.konfetti.core.header/HeaderCodec<#A>, kotlin/Boolean = ...) // com.davils.konfetti.core.header/HeaderKey.<init>|<init>(com.davils.konfetti.core.header.HeaderName;com.davils.konfetti.core.header.HeaderCodec<1:0>;kotlin.Boolean){}[0]
+
+    final val codec // com.davils.konfetti.core.header/HeaderKey.codec|{}codec[0]
+        final fun <get-codec>(): com.davils.konfetti.core.header/HeaderCodec<#A> // com.davils.konfetti.core.header/HeaderKey.codec.<get-codec>|<get-codec>(){}[0]
+    final val isSensitive // com.davils.konfetti.core.header/HeaderKey.isSensitive|{}isSensitive[0]
+        final fun <get-isSensitive>(): kotlin/Boolean // com.davils.konfetti.core.header/HeaderKey.isSensitive.<get-isSensitive>|<get-isSensitive>(){}[0]
+    final val name // com.davils.konfetti.core.header/HeaderKey.name|{}name[0]
+        final fun <get-name>(): com.davils.konfetti.core.header/HeaderName // com.davils.konfetti.core.header/HeaderKey.name.<get-name>|<get-name>(){}[0]
+
+    final fun invoke(#A): com.davils.konfetti.core.header/HeaderEntry<#A> // com.davils.konfetti.core.header/HeaderKey.invoke|invoke(1:0){}[0]
+    final fun toString(): kotlin/String // com.davils.konfetti.core.header/HeaderKey.toString|toString(){}[0]
+
+    final object Companion { // com.davils.konfetti.core.header/HeaderKey.Companion|null[0]
+        final fun boolean(kotlin/String, kotlin/Boolean = ...): com.davils.konfetti.core.header/HeaderKey<kotlin/Boolean> // com.davils.konfetti.core.header/HeaderKey.Companion.boolean|boolean(kotlin.String;kotlin.Boolean){}[0]
+        final fun long(kotlin/String, kotlin/Boolean = ...): com.davils.konfetti.core.header/HeaderKey<kotlin/Long> // com.davils.konfetti.core.header/HeaderKey.Companion.long|long(kotlin.String;kotlin.Boolean){}[0]
+        final fun text(kotlin/String, kotlin/Boolean = ...): com.davils.konfetti.core.header/HeaderKey<kotlin/String> // com.davils.konfetti.core.header/HeaderKey.Companion.text|text(kotlin.String;kotlin.Boolean){}[0]
+        final fun uuid(kotlin/String, kotlin/Boolean = ...): com.davils.konfetti.core.header/HeaderKey<com.davils.kore.core.identity/Uuid> // com.davils.konfetti.core.header/HeaderKey.Companion.uuid|uuid(kotlin.String;kotlin.Boolean){}[0]
+    }
+}
+
+final class <#A: out com.davils.konfetti.core/Event> com.davils.konfetti.core/Envelope { // com.davils.konfetti.core/Envelope|null[0]
+    final val causationId // com.davils.konfetti.core/Envelope.causationId|{}causationId[0]
+        final fun <get-causationId>(): com.davils.kore.core.identity/UuidV7? // com.davils.konfetti.core/Envelope.causationId.<get-causationId>|<get-causationId>(){}[0]
+    final val correlationId // com.davils.konfetti.core/Envelope.correlationId|{}correlationId[0]
+        final fun <get-correlationId>(): com.davils.kore.core.identity/UuidV7 // com.davils.konfetti.core/Envelope.correlationId.<get-correlationId>|<get-correlationId>(){}[0]
+    final val headers // com.davils.konfetti.core/Envelope.headers|{}headers[0]
+        final fun <get-headers>(): com.davils.konfetti.core.header/EventHeaders // com.davils.konfetti.core/Envelope.headers.<get-headers>|<get-headers>(){}[0]
+    final val id // com.davils.konfetti.core/Envelope.id|{}id[0]
+        final fun <get-id>(): com.davils.kore.core.identity/UuidV7 // com.davils.konfetti.core/Envelope.id.<get-id>|<get-id>(){}[0]
+    final val isCaused // com.davils.konfetti.core/Envelope.isCaused|{}isCaused[0]
+        final fun <get-isCaused>(): kotlin/Boolean // com.davils.konfetti.core/Envelope.isCaused.<get-isCaused>|<get-isCaused>(){}[0]
+    final val occurredAt // com.davils.konfetti.core/Envelope.occurredAt|{}occurredAt[0]
+        final fun <get-occurredAt>(): kotlin.time/Instant // com.davils.konfetti.core/Envelope.occurredAt.<get-occurredAt>|<get-occurredAt>(){}[0]
+    final val orderingKey // com.davils.konfetti.core/Envelope.orderingKey|{}orderingKey[0]
+        final fun <get-orderingKey>(): com.davils.konfetti.core.topic/OrderingKey? // com.davils.konfetti.core/Envelope.orderingKey.<get-orderingKey>|<get-orderingKey>(){}[0]
+    final val payload // com.davils.konfetti.core/Envelope.payload|{}payload[0]
+        final fun <get-payload>(): #A // com.davils.konfetti.core/Envelope.payload.<get-payload>|<get-payload>(){}[0]
+    final val principal // com.davils.konfetti.core/Envelope.principal|{}principal[0]
+        final fun <get-principal>(): com.davils.kore.core.principal/Principal? // com.davils.konfetti.core/Envelope.principal.<get-principal>|<get-principal>(){}[0]
+    final val topic // com.davils.konfetti.core/Envelope.topic|{}topic[0]
+        final fun <get-topic>(): com.davils.konfetti.core.topic/TopicName // com.davils.konfetti.core/Envelope.topic.<get-topic>|<get-topic>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.konfetti.core/Envelope.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.konfetti.core/Envelope.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.konfetti.core/Envelope.toString|toString(){}[0]
+}
+
+final class com.davils.konfetti.core.bus/EventBusBuilder : com.davils.kore.core.dsl/ValidatingBuilder<com.davils.konfetti.core.bus/EventBusConfiguration> { // com.davils.konfetti.core.bus/EventBusBuilder|null[0]
+    final var deadLetterRetention // com.davils.konfetti.core.bus/EventBusBuilder.deadLetterRetention|{}deadLetterRetention[0]
+        final fun <get-deadLetterRetention>(): kotlin/Int // com.davils.konfetti.core.bus/EventBusBuilder.deadLetterRetention.<get-deadLetterRetention>|<get-deadLetterRetention>(){}[0]
+        final fun <set-deadLetterRetention>(kotlin/Int) // com.davils.konfetti.core.bus/EventBusBuilder.deadLetterRetention.<set-deadLetterRetention>|<set-deadLetterRetention>(kotlin.Int){}[0]
+    final var deadLetterStall // com.davils.konfetti.core.bus/EventBusBuilder.deadLetterStall|{}deadLetterStall[0]
+        final fun <get-deadLetterStall>(): kotlin.time/Duration // com.davils.konfetti.core.bus/EventBusBuilder.deadLetterStall.<get-deadLetterStall>|<get-deadLetterStall>(){}[0]
+        final fun <set-deadLetterStall>(kotlin.time/Duration) // com.davils.konfetti.core.bus/EventBusBuilder.deadLetterStall.<set-deadLetterStall>|<set-deadLetterStall>(kotlin.time.Duration){}[0]
+    final var entropy // com.davils.konfetti.core.bus/EventBusBuilder.entropy|{}entropy[0]
+        final fun <get-entropy>(): com.davils.konfetti.core.bus/Entropy // com.davils.konfetti.core.bus/EventBusBuilder.entropy.<get-entropy>|<get-entropy>(){}[0]
+        final fun <set-entropy>(com.davils.konfetti.core.bus/Entropy) // com.davils.konfetti.core.bus/EventBusBuilder.entropy.<set-entropy>|<set-entropy>(com.davils.konfetti.core.bus.Entropy){}[0]
+    final var identifiers // com.davils.konfetti.core.bus/EventBusBuilder.identifiers|{}identifiers[0]
+        final fun <get-identifiers>(): com.davils.kore.core.identity.generator/UuidGenerator<com.davils.kore.core.identity/UuidV7> // com.davils.konfetti.core.bus/EventBusBuilder.identifiers.<get-identifiers>|<get-identifiers>(){}[0]
+        final fun <set-identifiers>(com.davils.kore.core.identity.generator/UuidGenerator<com.davils.kore.core.identity/UuidV7>) // com.davils.konfetti.core.bus/EventBusBuilder.identifiers.<set-identifiers>|<set-identifiers>(com.davils.kore.core.identity.generator.UuidGenerator<com.davils.kore.core.identity.UuidV7>){}[0]
+    final var limits // com.davils.konfetti.core.bus/EventBusBuilder.limits|{}limits[0]
+        final fun <get-limits>(): com.davils.konfetti.core.limit/BusLimits // com.davils.konfetti.core.bus/EventBusBuilder.limits.<get-limits>|<get-limits>(){}[0]
+        final fun <set-limits>(com.davils.konfetti.core.limit/BusLimits) // com.davils.konfetti.core.bus/EventBusBuilder.limits.<set-limits>|<set-limits>(com.davils.konfetti.core.limit.BusLimits){}[0]
+    final var timeSource // com.davils.konfetti.core.bus/EventBusBuilder.timeSource|{}timeSource[0]
+        final fun <get-timeSource>(): kotlin.time/TimeSource.WithComparableMarks // com.davils.konfetti.core.bus/EventBusBuilder.timeSource.<get-timeSource>|<get-timeSource>(){}[0]
+        final fun <set-timeSource>(kotlin.time/TimeSource.WithComparableMarks) // com.davils.konfetti.core.bus/EventBusBuilder.timeSource.<set-timeSource>|<set-timeSource>(kotlin.time.TimeSource.WithComparableMarks){}[0]
+
+    final fun <#A1: com.davils.konfetti.core/Event> topic(com.davils.konfetti.core/TopicKey<#A1>, kotlin/Function1<com.davils.konfetti.core.topic/TopicBuilder<#A1>, kotlin/Unit> = ...) // com.davils.konfetti.core.bus/EventBusBuilder.topic|topic(com.davils.konfetti.core.TopicKey<0:0>;kotlin.Function1<com.davils.konfetti.core.topic.TopicBuilder<0:0>,kotlin.Unit>){0§<com.davils.konfetti.core.Event>}[0]
+    final fun consumerDefaults(kotlin/Function1<com.davils.konfetti.core.consume/ConsumerDefaults, kotlin/Unit>) // com.davils.konfetti.core.bus/EventBusBuilder.consumerDefaults|consumerDefaults(kotlin.Function1<com.davils.konfetti.core.consume.ConsumerDefaults,kotlin.Unit>){}[0]
+    final fun enrich(com.davils.konfetti.core.publish/PublishInterceptor) // com.davils.konfetti.core.bus/EventBusBuilder.enrich|enrich(com.davils.konfetti.core.publish.PublishInterceptor){}[0]
+    final fun intercept(com.davils.konfetti.core.consume/ConsumeInterceptor) // com.davils.konfetti.core.bus/EventBusBuilder.intercept|intercept(com.davils.konfetti.core.consume.ConsumeInterceptor){}[0]
+    final fun observe(com.davils.konfetti.core.observe/BusObserver) // com.davils.konfetti.core.bus/EventBusBuilder.observe|observe(com.davils.konfetti.core.observe.BusObserver){}[0]
+    final fun topicDefaults(kotlin/Function1<com.davils.konfetti.core.topic/TopicDefaults, kotlin/Unit>) // com.davils.konfetti.core.bus/EventBusBuilder.topicDefaults|topicDefaults(kotlin.Function1<com.davils.konfetti.core.topic.TopicDefaults,kotlin.Unit>){}[0]
+}
+
+final class com.davils.konfetti.core.bus/EventBusConfiguration : com.davils.kore.core.validation/Validatable { // com.davils.konfetti.core.bus/EventBusConfiguration|null[0]
+    final fun (com.davils.kore.core.validation/ValidationScope).validate() // com.davils.konfetti.core.bus/EventBusConfiguration.validate|validate@com.davils.kore.core.validation.ValidationScope(){}[0]
+}
+
+final class com.davils.konfetti.core.consume/Consumer { // com.davils.konfetti.core.consume/Consumer|null[0]
+    final val metrics // com.davils.konfetti.core.consume/Consumer.metrics|{}metrics[0]
+        final fun <get-metrics>(): com.davils.konfetti.core.observe/ConsumerMetrics // com.davils.konfetti.core.consume/Consumer.metrics.<get-metrics>|<get-metrics>(){}[0]
+    final val name // com.davils.konfetti.core.consume/Consumer.name|{}name[0]
+        final fun <get-name>(): com.davils.konfetti.core.consume/ConsumerName // com.davils.konfetti.core.consume/Consumer.name.<get-name>|<get-name>(){}[0]
+    final val state // com.davils.konfetti.core.consume/Consumer.state|{}state[0]
+        final fun <get-state>(): kotlinx.coroutines.flow/StateFlow<com.davils.konfetti.core.consume/ConsumerState> // com.davils.konfetti.core.consume/Consumer.state.<get-state>|<get-state>(){}[0]
+    final val topic // com.davils.konfetti.core.consume/Consumer.topic|{}topic[0]
+        final fun <get-topic>(): com.davils.konfetti.core.topic/TopicName // com.davils.konfetti.core.consume/Consumer.topic.<get-topic>|<get-topic>(){}[0]
+
+    final fun detach() // com.davils.konfetti.core.consume/Consumer.detach|detach(){}[0]
+    final fun toString(): kotlin/String // com.davils.konfetti.core.consume/Consumer.toString|toString(){}[0]
+    final suspend fun drain(kotlin.time/Duration): com.davils.konfetti.core.lifecycle/DrainResult // com.davils.konfetti.core.consume/Consumer.drain|drain(kotlin.time.Duration){}[0]
+}
+
+final class com.davils.konfetti.core.consume/ConsumerDefaults { // com.davils.konfetti.core.consume/ConsumerDefaults|null[0]
+    final var handlingTimeout // com.davils.konfetti.core.consume/ConsumerDefaults.handlingTimeout|{}handlingTimeout[0]
+        final fun <get-handlingTimeout>(): kotlin.time/Duration? // com.davils.konfetti.core.consume/ConsumerDefaults.handlingTimeout.<get-handlingTimeout>|<get-handlingTimeout>(){}[0]
+        final fun <set-handlingTimeout>(kotlin.time/Duration?) // com.davils.konfetti.core.consume/ConsumerDefaults.handlingTimeout.<set-handlingTimeout>|<set-handlingTimeout>(kotlin.time.Duration?){}[0]
+    final var mailboxCapacity // com.davils.konfetti.core.consume/ConsumerDefaults.mailboxCapacity|{}mailboxCapacity[0]
+        final fun <get-mailboxCapacity>(): kotlin/Int // com.davils.konfetti.core.consume/ConsumerDefaults.mailboxCapacity.<get-mailboxCapacity>|<get-mailboxCapacity>(){}[0]
+        final fun <set-mailboxCapacity>(kotlin/Int) // com.davils.konfetti.core.consume/ConsumerDefaults.mailboxCapacity.<set-mailboxCapacity>|<set-mailboxCapacity>(kotlin.Int){}[0]
+    final var maximumStall // com.davils.konfetti.core.consume/ConsumerDefaults.maximumStall|{}maximumStall[0]
+        final fun <get-maximumStall>(): kotlin.time/Duration // com.davils.konfetti.core.consume/ConsumerDefaults.maximumStall.<get-maximumStall>|<get-maximumStall>(){}[0]
+        final fun <set-maximumStall>(kotlin.time/Duration) // com.davils.konfetti.core.consume/ConsumerDefaults.maximumStall.<set-maximumStall>|<set-maximumStall>(kotlin.time.Duration){}[0]
+    final var onFailure // com.davils.konfetti.core.consume/ConsumerDefaults.onFailure|{}onFailure[0]
+        final fun <get-onFailure>(): com.davils.konfetti.core.failure/FailurePolicy // com.davils.konfetti.core.consume/ConsumerDefaults.onFailure.<get-onFailure>|<get-onFailure>(){}[0]
+        final fun <set-onFailure>(com.davils.konfetti.core.failure/FailurePolicy) // com.davils.konfetti.core.consume/ConsumerDefaults.onFailure.<set-onFailure>|<set-onFailure>(com.davils.konfetti.core.failure.FailurePolicy){}[0]
+    final var overflow // com.davils.konfetti.core.consume/ConsumerDefaults.overflow|{}overflow[0]
+        final fun <get-overflow>(): com.davils.konfetti.core.consume/OverflowPolicy // com.davils.konfetti.core.consume/ConsumerDefaults.overflow.<get-overflow>|<get-overflow>(){}[0]
+        final fun <set-overflow>(com.davils.konfetti.core.consume/OverflowPolicy) // com.davils.konfetti.core.consume/ConsumerDefaults.overflow.<set-overflow>|<set-overflow>(com.davils.konfetti.core.consume.OverflowPolicy){}[0]
+    final var start // com.davils.konfetti.core.consume/ConsumerDefaults.start|{}start[0]
+        final fun <get-start>(): com.davils.konfetti.core.consume/StartPosition // com.davils.konfetti.core.consume/ConsumerDefaults.start.<get-start>|<get-start>(){}[0]
+        final fun <set-start>(com.davils.konfetti.core.consume/StartPosition) // com.davils.konfetti.core.consume/ConsumerDefaults.start.<set-start>|<set-start>(com.davils.konfetti.core.consume.StartPosition){}[0]
+}
+
+final class com.davils.konfetti.core.error/TopicNotDeclaredException : kotlin/IllegalArgumentException { // com.davils.konfetti.core.error/TopicNotDeclaredException|null[0]
+    final val declared // com.davils.konfetti.core.error/TopicNotDeclaredException.declared|{}declared[0]
+        final fun <get-declared>(): kotlin.collections/Set<com.davils.konfetti.core.topic/TopicName> // com.davils.konfetti.core.error/TopicNotDeclaredException.declared.<get-declared>|<get-declared>(){}[0]
+    final val topic // com.davils.konfetti.core.error/TopicNotDeclaredException.topic|{}topic[0]
+        final fun <get-topic>(): com.davils.konfetti.core.topic/TopicName // com.davils.konfetti.core.error/TopicNotDeclaredException.topic.<get-topic>|<get-topic>(){}[0]
+}
+
+final class com.davils.konfetti.core.error/TopicTypeMismatchException : kotlin/IllegalArgumentException { // com.davils.konfetti.core.error/TopicTypeMismatchException|null[0]
+    final val declared // com.davils.konfetti.core.error/TopicTypeMismatchException.declared|{}declared[0]
+        final fun <get-declared>(): kotlin.reflect/KClass<*> // com.davils.konfetti.core.error/TopicTypeMismatchException.declared.<get-declared>|<get-declared>(){}[0]
+    final val requested // com.davils.konfetti.core.error/TopicTypeMismatchException.requested|{}requested[0]
+        final fun <get-requested>(): kotlin.reflect/KClass<*> // com.davils.konfetti.core.error/TopicTypeMismatchException.requested.<get-requested>|<get-requested>(){}[0]
+    final val topic // com.davils.konfetti.core.error/TopicTypeMismatchException.topic|{}topic[0]
+        final fun <get-topic>(): com.davils.konfetti.core.topic/TopicName // com.davils.konfetti.core.error/TopicTypeMismatchException.topic.<get-topic>|<get-topic>(){}[0]
+}
+
+final class com.davils.konfetti.core.failure/DeadLetter : com.davils.konfetti.core/Event { // com.davils.konfetti.core.failure/DeadLetter|null[0]
+    final val attempts // com.davils.konfetti.core.failure/DeadLetter.attempts|{}attempts[0]
+        final fun <get-attempts>(): kotlin/Int // com.davils.konfetti.core.failure/DeadLetter.attempts.<get-attempts>|<get-attempts>(){}[0]
+    final val cause // com.davils.konfetti.core.failure/DeadLetter.cause|{}cause[0]
+        final fun <get-cause>(): kotlin/Throwable // com.davils.konfetti.core.failure/DeadLetter.cause.<get-cause>|<get-cause>(){}[0]
+    final val consumer // com.davils.konfetti.core.failure/DeadLetter.consumer|{}consumer[0]
+        final fun <get-consumer>(): com.davils.konfetti.core.consume/ConsumerName // com.davils.konfetti.core.failure/DeadLetter.consumer.<get-consumer>|<get-consumer>(){}[0]
+    final val original // com.davils.konfetti.core.failure/DeadLetter.original|{}original[0]
+        final fun <get-original>(): com.davils.konfetti.core/Envelope<com.davils.konfetti.core/Event> // com.davils.konfetti.core.failure/DeadLetter.original.<get-original>|<get-original>(){}[0]
+
+    final fun toString(): kotlin/String // com.davils.konfetti.core.failure/DeadLetter.toString|toString(){}[0]
+}
+
+final class com.davils.konfetti.core.failure/HandlingTimeoutException : kotlin/RuntimeException { // com.davils.konfetti.core.failure/HandlingTimeoutException|null[0]
+    final val consumer // com.davils.konfetti.core.failure/HandlingTimeoutException.consumer|{}consumer[0]
+        final fun <get-consumer>(): com.davils.konfetti.core.consume/ConsumerName // com.davils.konfetti.core.failure/HandlingTimeoutException.consumer.<get-consumer>|<get-consumer>(){}[0]
+    final val timeout // com.davils.konfetti.core.failure/HandlingTimeoutException.timeout|{}timeout[0]
+        final fun <get-timeout>(): kotlin.time/Duration // com.davils.konfetti.core.failure/HandlingTimeoutException.timeout.<get-timeout>|<get-timeout>(){}[0]
+}
+
+final class com.davils.konfetti.core.header/EventHeaders { // com.davils.konfetti.core.header/EventHeaders|null[0]
+    final val isEmpty // com.davils.konfetti.core.header/EventHeaders.isEmpty|{}isEmpty[0]
+        final fun <get-isEmpty>(): kotlin/Boolean // com.davils.konfetti.core.header/EventHeaders.isEmpty.<get-isEmpty>|<get-isEmpty>(){}[0]
+    final val names // com.davils.konfetti.core.header/EventHeaders.names|{}names[0]
+        final fun <get-names>(): kotlin.collections/List<com.davils.konfetti.core.header/HeaderName> // com.davils.konfetti.core.header/EventHeaders.names.<get-names>|<get-names>(){}[0]
+    final val size // com.davils.konfetti.core.header/EventHeaders.size|{}size[0]
+        final fun <get-size>(): kotlin/Int // com.davils.konfetti.core.header/EventHeaders.size.<get-size>|<get-size>(){}[0]
+
+    final fun <#A1: kotlin/Any> get(com.davils.konfetti.core.header/HeaderKey<#A1>): #A1? // com.davils.konfetti.core.header/EventHeaders.get|get(com.davils.konfetti.core.header.HeaderKey<0:0>){0§<kotlin.Any>}[0]
+    final fun contains(com.davils.konfetti.core.header/HeaderKey<*>): kotlin/Boolean // com.davils.konfetti.core.header/EventHeaders.contains|contains(com.davils.konfetti.core.header.HeaderKey<*>){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.konfetti.core.header/EventHeaders.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.konfetti.core.header/EventHeaders.hashCode|hashCode(){}[0]
+    final fun isSensitive(com.davils.konfetti.core.header/HeaderName): kotlin/Boolean // com.davils.konfetti.core.header/EventHeaders.isSensitive|isSensitive(com.davils.konfetti.core.header.HeaderName){}[0]
+    final fun plus(com.davils.konfetti.core.header/EventHeaders): com.davils.konfetti.core.header/EventHeaders // com.davils.konfetti.core.header/EventHeaders.plus|plus(com.davils.konfetti.core.header.EventHeaders){}[0]
+    final fun textOf(com.davils.konfetti.core.header/HeaderName): kotlin/String? // com.davils.konfetti.core.header/EventHeaders.textOf|textOf(com.davils.konfetti.core.header.HeaderName){}[0]
+    final fun toString(): kotlin/String // com.davils.konfetti.core.header/EventHeaders.toString|toString(){}[0]
+    final fun with(com.davils.konfetti.core.header/HeaderEntry<*>): com.davils.konfetti.core.header/EventHeaders // com.davils.konfetti.core.header/EventHeaders.with|with(com.davils.konfetti.core.header.HeaderEntry<*>){}[0]
+    final fun without(com.davils.konfetti.core.header/HeaderKey<*>): com.davils.konfetti.core.header/EventHeaders // com.davils.konfetti.core.header/EventHeaders.without|without(com.davils.konfetti.core.header.HeaderKey<*>){}[0]
+
+    final object Companion { // com.davils.konfetti.core.header/EventHeaders.Companion|null[0]
+        final val EMPTY // com.davils.konfetti.core.header/EventHeaders.Companion.EMPTY|{}EMPTY[0]
+            final fun <get-EMPTY>(): com.davils.konfetti.core.header/EventHeaders // com.davils.konfetti.core.header/EventHeaders.Companion.EMPTY.<get-EMPTY>|<get-EMPTY>(){}[0]
+    }
+}
+
+final class com.davils.konfetti.core.lifecycle/CloseReport { // com.davils.konfetti.core.lifecycle/CloseReport|null[0]
+    final val dropped // com.davils.konfetti.core.lifecycle/CloseReport.dropped|{}dropped[0]
+        final fun <get-dropped>(): kotlin/Long // com.davils.konfetti.core.lifecycle/CloseReport.dropped.<get-dropped>|<get-dropped>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.konfetti.core.lifecycle/CloseReport.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.konfetti.core.lifecycle/CloseReport.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.konfetti.core.lifecycle/CloseReport.toString|toString(){}[0]
+}
+
+final class com.davils.konfetti.core.limit/BusLimits : com.davils.kore.core.validation/Validatable { // com.davils.konfetti.core.limit/BusLimits|null[0]
+    final val maximumAttempts // com.davils.konfetti.core.limit/BusLimits.maximumAttempts|{}maximumAttempts[0]
+        final fun <get-maximumAttempts>(): kotlin/Int // com.davils.konfetti.core.limit/BusLimits.maximumAttempts.<get-maximumAttempts>|<get-maximumAttempts>(){}[0]
+    final val maximumBufferCapacity // com.davils.konfetti.core.limit/BusLimits.maximumBufferCapacity|{}maximumBufferCapacity[0]
+        final fun <get-maximumBufferCapacity>(): kotlin/Int // com.davils.konfetti.core.limit/BusLimits.maximumBufferCapacity.<get-maximumBufferCapacity>|<get-maximumBufferCapacity>(){}[0]
+    final val maximumConsumers // com.davils.konfetti.core.limit/BusLimits.maximumConsumers|{}maximumConsumers[0]
+        final fun <get-maximumConsumers>(): kotlin/Int // com.davils.konfetti.core.limit/BusLimits.maximumConsumers.<get-maximumConsumers>|<get-maximumConsumers>(){}[0]
+    final val maximumHandlingTimeout // com.davils.konfetti.core.limit/BusLimits.maximumHandlingTimeout|{}maximumHandlingTimeout[0]
+        final fun <get-maximumHandlingTimeout>(): kotlin.time/Duration // com.davils.konfetti.core.limit/BusLimits.maximumHandlingTimeout.<get-maximumHandlingTimeout>|<get-maximumHandlingTimeout>(){}[0]
+    final val maximumHeaderValueLength // com.davils.konfetti.core.limit/BusLimits.maximumHeaderValueLength|{}maximumHeaderValueLength[0]
+        final fun <get-maximumHeaderValueLength>(): kotlin/Int // com.davils.konfetti.core.limit/BusLimits.maximumHeaderValueLength.<get-maximumHeaderValueLength>|<get-maximumHeaderValueLength>(){}[0]
+    final val maximumHeaders // com.davils.konfetti.core.limit/BusLimits.maximumHeaders|{}maximumHeaders[0]
+        final fun <get-maximumHeaders>(): kotlin/Int // com.davils.konfetti.core.limit/BusLimits.maximumHeaders.<get-maximumHeaders>|<get-maximumHeaders>(){}[0]
+    final val maximumMailboxCapacity // com.davils.konfetti.core.limit/BusLimits.maximumMailboxCapacity|{}maximumMailboxCapacity[0]
+        final fun <get-maximumMailboxCapacity>(): kotlin/Int // com.davils.konfetti.core.limit/BusLimits.maximumMailboxCapacity.<get-maximumMailboxCapacity>|<get-maximumMailboxCapacity>(){}[0]
+    final val maximumOrderingKeyLength // com.davils.konfetti.core.limit/BusLimits.maximumOrderingKeyLength|{}maximumOrderingKeyLength[0]
+        final fun <get-maximumOrderingKeyLength>(): kotlin/Int // com.davils.konfetti.core.limit/BusLimits.maximumOrderingKeyLength.<get-maximumOrderingKeyLength>|<get-maximumOrderingKeyLength>(){}[0]
+    final val maximumPartitions // com.davils.konfetti.core.limit/BusLimits.maximumPartitions|{}maximumPartitions[0]
+        final fun <get-maximumPartitions>(): kotlin/Int // com.davils.konfetti.core.limit/BusLimits.maximumPartitions.<get-maximumPartitions>|<get-maximumPartitions>(){}[0]
+    final val maximumRetain // com.davils.konfetti.core.limit/BusLimits.maximumRetain|{}maximumRetain[0]
+        final fun <get-maximumRetain>(): kotlin/Int // com.davils.konfetti.core.limit/BusLimits.maximumRetain.<get-maximumRetain>|<get-maximumRetain>(){}[0]
+    final val maximumRetryDelay // com.davils.konfetti.core.limit/BusLimits.maximumRetryDelay|{}maximumRetryDelay[0]
+        final fun <get-maximumRetryDelay>(): kotlin.time/Duration // com.davils.konfetti.core.limit/BusLimits.maximumRetryDelay.<get-maximumRetryDelay>|<get-maximumRetryDelay>(){}[0]
+    final val maximumTopics // com.davils.konfetti.core.limit/BusLimits.maximumTopics|{}maximumTopics[0]
+        final fun <get-maximumTopics>(): kotlin/Int // com.davils.konfetti.core.limit/BusLimits.maximumTopics.<get-maximumTopics>|<get-maximumTopics>(){}[0]
+
+    final fun (com.davils.kore.core.validation/ValidationScope).validate() // com.davils.konfetti.core.limit/BusLimits.validate|validate@com.davils.kore.core.validation.ValidationScope(){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.konfetti.core.limit/BusLimits.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.konfetti.core.limit/BusLimits.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.konfetti.core.limit/BusLimits.toString|toString(){}[0]
+
+    final object Companion { // com.davils.konfetti.core.limit/BusLimits.Companion|null[0]
+        final const val HARD_ATTEMPTS // com.davils.konfetti.core.limit/BusLimits.Companion.HARD_ATTEMPTS|{}HARD_ATTEMPTS[0]
+            final fun <get-HARD_ATTEMPTS>(): kotlin/Int // com.davils.konfetti.core.limit/BusLimits.Companion.HARD_ATTEMPTS.<get-HARD_ATTEMPTS>|<get-HARD_ATTEMPTS>(){}[0]
+        final const val HARD_BUFFER_CAPACITY // com.davils.konfetti.core.limit/BusLimits.Companion.HARD_BUFFER_CAPACITY|{}HARD_BUFFER_CAPACITY[0]
+            final fun <get-HARD_BUFFER_CAPACITY>(): kotlin/Int // com.davils.konfetti.core.limit/BusLimits.Companion.HARD_BUFFER_CAPACITY.<get-HARD_BUFFER_CAPACITY>|<get-HARD_BUFFER_CAPACITY>(){}[0]
+        final const val HARD_CONSUMERS // com.davils.konfetti.core.limit/BusLimits.Companion.HARD_CONSUMERS|{}HARD_CONSUMERS[0]
+            final fun <get-HARD_CONSUMERS>(): kotlin/Int // com.davils.konfetti.core.limit/BusLimits.Companion.HARD_CONSUMERS.<get-HARD_CONSUMERS>|<get-HARD_CONSUMERS>(){}[0]
+        final const val HARD_HEADERS // com.davils.konfetti.core.limit/BusLimits.Companion.HARD_HEADERS|{}HARD_HEADERS[0]
+            final fun <get-HARD_HEADERS>(): kotlin/Int // com.davils.konfetti.core.limit/BusLimits.Companion.HARD_HEADERS.<get-HARD_HEADERS>|<get-HARD_HEADERS>(){}[0]
+        final const val HARD_HEADER_VALUE_LENGTH // com.davils.konfetti.core.limit/BusLimits.Companion.HARD_HEADER_VALUE_LENGTH|{}HARD_HEADER_VALUE_LENGTH[0]
+            final fun <get-HARD_HEADER_VALUE_LENGTH>(): kotlin/Int // com.davils.konfetti.core.limit/BusLimits.Companion.HARD_HEADER_VALUE_LENGTH.<get-HARD_HEADER_VALUE_LENGTH>|<get-HARD_HEADER_VALUE_LENGTH>(){}[0]
+        final const val HARD_MAILBOX_CAPACITY // com.davils.konfetti.core.limit/BusLimits.Companion.HARD_MAILBOX_CAPACITY|{}HARD_MAILBOX_CAPACITY[0]
+            final fun <get-HARD_MAILBOX_CAPACITY>(): kotlin/Int // com.davils.konfetti.core.limit/BusLimits.Companion.HARD_MAILBOX_CAPACITY.<get-HARD_MAILBOX_CAPACITY>|<get-HARD_MAILBOX_CAPACITY>(){}[0]
+        final const val HARD_ORDERING_KEY_LENGTH // com.davils.konfetti.core.limit/BusLimits.Companion.HARD_ORDERING_KEY_LENGTH|{}HARD_ORDERING_KEY_LENGTH[0]
+            final fun <get-HARD_ORDERING_KEY_LENGTH>(): kotlin/Int // com.davils.konfetti.core.limit/BusLimits.Companion.HARD_ORDERING_KEY_LENGTH.<get-HARD_ORDERING_KEY_LENGTH>|<get-HARD_ORDERING_KEY_LENGTH>(){}[0]
+        final const val HARD_PARTITIONS // com.davils.konfetti.core.limit/BusLimits.Companion.HARD_PARTITIONS|{}HARD_PARTITIONS[0]
+            final fun <get-HARD_PARTITIONS>(): kotlin/Int // com.davils.konfetti.core.limit/BusLimits.Companion.HARD_PARTITIONS.<get-HARD_PARTITIONS>|<get-HARD_PARTITIONS>(){}[0]
+        final const val HARD_RETAIN // com.davils.konfetti.core.limit/BusLimits.Companion.HARD_RETAIN|{}HARD_RETAIN[0]
+            final fun <get-HARD_RETAIN>(): kotlin/Int // com.davils.konfetti.core.limit/BusLimits.Companion.HARD_RETAIN.<get-HARD_RETAIN>|<get-HARD_RETAIN>(){}[0]
+        final const val HARD_TOPICS // com.davils.konfetti.core.limit/BusLimits.Companion.HARD_TOPICS|{}HARD_TOPICS[0]
+            final fun <get-HARD_TOPICS>(): kotlin/Int // com.davils.konfetti.core.limit/BusLimits.Companion.HARD_TOPICS.<get-HARD_TOPICS>|<get-HARD_TOPICS>(){}[0]
+
+        final val Default // com.davils.konfetti.core.limit/BusLimits.Companion.Default|{}Default[0]
+            final fun <get-Default>(): com.davils.konfetti.core.limit/BusLimits // com.davils.konfetti.core.limit/BusLimits.Companion.Default.<get-Default>|<get-Default>(){}[0]
+        final val HARD_HANDLING_TIMEOUT // com.davils.konfetti.core.limit/BusLimits.Companion.HARD_HANDLING_TIMEOUT|{}HARD_HANDLING_TIMEOUT[0]
+            final fun <get-HARD_HANDLING_TIMEOUT>(): kotlin.time/Duration // com.davils.konfetti.core.limit/BusLimits.Companion.HARD_HANDLING_TIMEOUT.<get-HARD_HANDLING_TIMEOUT>|<get-HARD_HANDLING_TIMEOUT>(){}[0]
+        final val HARD_RETRY_DELAY // com.davils.konfetti.core.limit/BusLimits.Companion.HARD_RETRY_DELAY|{}HARD_RETRY_DELAY[0]
+            final fun <get-HARD_RETRY_DELAY>(): kotlin.time/Duration // com.davils.konfetti.core.limit/BusLimits.Companion.HARD_RETRY_DELAY.<get-HARD_RETRY_DELAY>|<get-HARD_RETRY_DELAY>(){}[0]
+    }
+}
+
+final class com.davils.konfetti.core.limit/BusLimitsBuilder : com.davils.kore.core.dsl/ValidatingBuilder<com.davils.konfetti.core.limit/BusLimits> { // com.davils.konfetti.core.limit/BusLimitsBuilder|null[0]
+    final var maximumAttempts // com.davils.konfetti.core.limit/BusLimitsBuilder.maximumAttempts|{}maximumAttempts[0]
+        final fun <get-maximumAttempts>(): kotlin/Int // com.davils.konfetti.core.limit/BusLimitsBuilder.maximumAttempts.<get-maximumAttempts>|<get-maximumAttempts>(){}[0]
+        final fun <set-maximumAttempts>(kotlin/Int) // com.davils.konfetti.core.limit/BusLimitsBuilder.maximumAttempts.<set-maximumAttempts>|<set-maximumAttempts>(kotlin.Int){}[0]
+    final var maximumBufferCapacity // com.davils.konfetti.core.limit/BusLimitsBuilder.maximumBufferCapacity|{}maximumBufferCapacity[0]
+        final fun <get-maximumBufferCapacity>(): kotlin/Int // com.davils.konfetti.core.limit/BusLimitsBuilder.maximumBufferCapacity.<get-maximumBufferCapacity>|<get-maximumBufferCapacity>(){}[0]
+        final fun <set-maximumBufferCapacity>(kotlin/Int) // com.davils.konfetti.core.limit/BusLimitsBuilder.maximumBufferCapacity.<set-maximumBufferCapacity>|<set-maximumBufferCapacity>(kotlin.Int){}[0]
+    final var maximumConsumers // com.davils.konfetti.core.limit/BusLimitsBuilder.maximumConsumers|{}maximumConsumers[0]
+        final fun <get-maximumConsumers>(): kotlin/Int // com.davils.konfetti.core.limit/BusLimitsBuilder.maximumConsumers.<get-maximumConsumers>|<get-maximumConsumers>(){}[0]
+        final fun <set-maximumConsumers>(kotlin/Int) // com.davils.konfetti.core.limit/BusLimitsBuilder.maximumConsumers.<set-maximumConsumers>|<set-maximumConsumers>(kotlin.Int){}[0]
+    final var maximumHandlingTimeout // com.davils.konfetti.core.limit/BusLimitsBuilder.maximumHandlingTimeout|{}maximumHandlingTimeout[0]
+        final fun <get-maximumHandlingTimeout>(): kotlin.time/Duration // com.davils.konfetti.core.limit/BusLimitsBuilder.maximumHandlingTimeout.<get-maximumHandlingTimeout>|<get-maximumHandlingTimeout>(){}[0]
+        final fun <set-maximumHandlingTimeout>(kotlin.time/Duration) // com.davils.konfetti.core.limit/BusLimitsBuilder.maximumHandlingTimeout.<set-maximumHandlingTimeout>|<set-maximumHandlingTimeout>(kotlin.time.Duration){}[0]
+    final var maximumHeaderValueLength // com.davils.konfetti.core.limit/BusLimitsBuilder.maximumHeaderValueLength|{}maximumHeaderValueLength[0]
+        final fun <get-maximumHeaderValueLength>(): kotlin/Int // com.davils.konfetti.core.limit/BusLimitsBuilder.maximumHeaderValueLength.<get-maximumHeaderValueLength>|<get-maximumHeaderValueLength>(){}[0]
+        final fun <set-maximumHeaderValueLength>(kotlin/Int) // com.davils.konfetti.core.limit/BusLimitsBuilder.maximumHeaderValueLength.<set-maximumHeaderValueLength>|<set-maximumHeaderValueLength>(kotlin.Int){}[0]
+    final var maximumHeaders // com.davils.konfetti.core.limit/BusLimitsBuilder.maximumHeaders|{}maximumHeaders[0]
+        final fun <get-maximumHeaders>(): kotlin/Int // com.davils.konfetti.core.limit/BusLimitsBuilder.maximumHeaders.<get-maximumHeaders>|<get-maximumHeaders>(){}[0]
+        final fun <set-maximumHeaders>(kotlin/Int) // com.davils.konfetti.core.limit/BusLimitsBuilder.maximumHeaders.<set-maximumHeaders>|<set-maximumHeaders>(kotlin.Int){}[0]
+    final var maximumMailboxCapacity // com.davils.konfetti.core.limit/BusLimitsBuilder.maximumMailboxCapacity|{}maximumMailboxCapacity[0]
+        final fun <get-maximumMailboxCapacity>(): kotlin/Int // com.davils.konfetti.core.limit/BusLimitsBuilder.maximumMailboxCapacity.<get-maximumMailboxCapacity>|<get-maximumMailboxCapacity>(){}[0]
+        final fun <set-maximumMailboxCapacity>(kotlin/Int) // com.davils.konfetti.core.limit/BusLimitsBuilder.maximumMailboxCapacity.<set-maximumMailboxCapacity>|<set-maximumMailboxCapacity>(kotlin.Int){}[0]
+    final var maximumOrderingKeyLength // com.davils.konfetti.core.limit/BusLimitsBuilder.maximumOrderingKeyLength|{}maximumOrderingKeyLength[0]
+        final fun <get-maximumOrderingKeyLength>(): kotlin/Int // com.davils.konfetti.core.limit/BusLimitsBuilder.maximumOrderingKeyLength.<get-maximumOrderingKeyLength>|<get-maximumOrderingKeyLength>(){}[0]
+        final fun <set-maximumOrderingKeyLength>(kotlin/Int) // com.davils.konfetti.core.limit/BusLimitsBuilder.maximumOrderingKeyLength.<set-maximumOrderingKeyLength>|<set-maximumOrderingKeyLength>(kotlin.Int){}[0]
+    final var maximumPartitions // com.davils.konfetti.core.limit/BusLimitsBuilder.maximumPartitions|{}maximumPartitions[0]
+        final fun <get-maximumPartitions>(): kotlin/Int // com.davils.konfetti.core.limit/BusLimitsBuilder.maximumPartitions.<get-maximumPartitions>|<get-maximumPartitions>(){}[0]
+        final fun <set-maximumPartitions>(kotlin/Int) // com.davils.konfetti.core.limit/BusLimitsBuilder.maximumPartitions.<set-maximumPartitions>|<set-maximumPartitions>(kotlin.Int){}[0]
+    final var maximumRetain // com.davils.konfetti.core.limit/BusLimitsBuilder.maximumRetain|{}maximumRetain[0]
+        final fun <get-maximumRetain>(): kotlin/Int // com.davils.konfetti.core.limit/BusLimitsBuilder.maximumRetain.<get-maximumRetain>|<get-maximumRetain>(){}[0]
+        final fun <set-maximumRetain>(kotlin/Int) // com.davils.konfetti.core.limit/BusLimitsBuilder.maximumRetain.<set-maximumRetain>|<set-maximumRetain>(kotlin.Int){}[0]
+    final var maximumRetryDelay // com.davils.konfetti.core.limit/BusLimitsBuilder.maximumRetryDelay|{}maximumRetryDelay[0]
+        final fun <get-maximumRetryDelay>(): kotlin.time/Duration // com.davils.konfetti.core.limit/BusLimitsBuilder.maximumRetryDelay.<get-maximumRetryDelay>|<get-maximumRetryDelay>(){}[0]
+        final fun <set-maximumRetryDelay>(kotlin.time/Duration) // com.davils.konfetti.core.limit/BusLimitsBuilder.maximumRetryDelay.<set-maximumRetryDelay>|<set-maximumRetryDelay>(kotlin.time.Duration){}[0]
+    final var maximumTopics // com.davils.konfetti.core.limit/BusLimitsBuilder.maximumTopics|{}maximumTopics[0]
+        final fun <get-maximumTopics>(): kotlin/Int // com.davils.konfetti.core.limit/BusLimitsBuilder.maximumTopics.<get-maximumTopics>|<get-maximumTopics>(){}[0]
+        final fun <set-maximumTopics>(kotlin/Int) // com.davils.konfetti.core.limit/BusLimitsBuilder.maximumTopics.<set-maximumTopics>|<set-maximumTopics>(kotlin.Int){}[0]
+}
+
+final class com.davils.konfetti.core.observe/BusSnapshot { // com.davils.konfetti.core.observe/BusSnapshot|null[0]
+    final val interceptorFailures // com.davils.konfetti.core.observe/BusSnapshot.interceptorFailures|{}interceptorFailures[0]
+        final fun <get-interceptorFailures>(): kotlin/Long // com.davils.konfetti.core.observe/BusSnapshot.interceptorFailures.<get-interceptorFailures>|<get-interceptorFailures>(){}[0]
+    final val observerFailures // com.davils.konfetti.core.observe/BusSnapshot.observerFailures|{}observerFailures[0]
+        final fun <get-observerFailures>(): kotlin/Long // com.davils.konfetti.core.observe/BusSnapshot.observerFailures.<get-observerFailures>|<get-observerFailures>(){}[0]
+    final val state // com.davils.konfetti.core.observe/BusSnapshot.state|{}state[0]
+        final fun <get-state>(): com.davils.konfetti.core.lifecycle/BusState // com.davils.konfetti.core.observe/BusSnapshot.state.<get-state>|<get-state>(){}[0]
+    final val topics // com.davils.konfetti.core.observe/BusSnapshot.topics|{}topics[0]
+        final fun <get-topics>(): kotlin.collections/List<com.davils.konfetti.core.observe/TopicSnapshot> // com.davils.konfetti.core.observe/BusSnapshot.topics.<get-topics>|<get-topics>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.konfetti.core.observe/BusSnapshot.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.konfetti.core.observe/BusSnapshot.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.konfetti.core.observe/BusSnapshot.toString|toString(){}[0]
+}
+
+final class com.davils.konfetti.core.observe/ConsumerMetrics { // com.davils.konfetti.core.observe/ConsumerMetrics|null[0]
+    final val deadLettered // com.davils.konfetti.core.observe/ConsumerMetrics.deadLettered|{}deadLettered[0]
+        final fun <get-deadLettered>(): kotlin/Long // com.davils.konfetti.core.observe/ConsumerMetrics.deadLettered.<get-deadLettered>|<get-deadLettered>(){}[0]
+    final val delivered // com.davils.konfetti.core.observe/ConsumerMetrics.delivered|{}delivered[0]
+        final fun <get-delivered>(): kotlin/Long // com.davils.konfetti.core.observe/ConsumerMetrics.delivered.<get-delivered>|<get-delivered>(){}[0]
+    final val dropped // com.davils.konfetti.core.observe/ConsumerMetrics.dropped|{}dropped[0]
+        final fun <get-dropped>(): kotlin/Long // com.davils.konfetti.core.observe/ConsumerMetrics.dropped.<get-dropped>|<get-dropped>(){}[0]
+    final val failed // com.davils.konfetti.core.observe/ConsumerMetrics.failed|{}failed[0]
+        final fun <get-failed>(): kotlin/Long // com.davils.konfetti.core.observe/ConsumerMetrics.failed.<get-failed>|<get-failed>(){}[0]
+    final val filtered // com.davils.konfetti.core.observe/ConsumerMetrics.filtered|{}filtered[0]
+        final fun <get-filtered>(): kotlin/Long // com.davils.konfetti.core.observe/ConsumerMetrics.filtered.<get-filtered>|<get-filtered>(){}[0]
+    final val inFlight // com.davils.konfetti.core.observe/ConsumerMetrics.inFlight|{}inFlight[0]
+        final fun <get-inFlight>(): kotlin/Long // com.davils.konfetti.core.observe/ConsumerMetrics.inFlight.<get-inFlight>|<get-inFlight>(){}[0]
+    final val queued // com.davils.konfetti.core.observe/ConsumerMetrics.queued|{}queued[0]
+        final fun <get-queued>(): kotlin/Long // com.davils.konfetti.core.observe/ConsumerMetrics.queued.<get-queued>|<get-queued>(){}[0]
+    final val received // com.davils.konfetti.core.observe/ConsumerMetrics.received|{}received[0]
+        final fun <get-received>(): kotlin/Long // com.davils.konfetti.core.observe/ConsumerMetrics.received.<get-received>|<get-received>(){}[0]
+    final val retried // com.davils.konfetti.core.observe/ConsumerMetrics.retried|{}retried[0]
+        final fun <get-retried>(): kotlin/Long // com.davils.konfetti.core.observe/ConsumerMetrics.retried.<get-retried>|<get-retried>(){}[0]
+    final val settled // com.davils.konfetti.core.observe/ConsumerMetrics.settled|{}settled[0]
+        final fun <get-settled>(): kotlin/Long // com.davils.konfetti.core.observe/ConsumerMetrics.settled.<get-settled>|<get-settled>(){}[0]
+    final val skipped // com.davils.konfetti.core.observe/ConsumerMetrics.skipped|{}skipped[0]
+        final fun <get-skipped>(): kotlin/Long // com.davils.konfetti.core.observe/ConsumerMetrics.skipped.<get-skipped>|<get-skipped>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.konfetti.core.observe/ConsumerMetrics.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.konfetti.core.observe/ConsumerMetrics.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.konfetti.core.observe/ConsumerMetrics.toString|toString(){}[0]
+}
+
+final class com.davils.konfetti.core.observe/ObservationStream : com.davils.konfetti.core.observe/BusObserver { // com.davils.konfetti.core.observe/ObservationStream|null[0]
+    constructor <init>(kotlin/Int = ...) // com.davils.konfetti.core.observe/ObservationStream.<init>|<init>(kotlin.Int){}[0]
+
+    final val capacity // com.davils.konfetti.core.observe/ObservationStream.capacity|{}capacity[0]
+        final fun <get-capacity>(): kotlin/Int // com.davils.konfetti.core.observe/ObservationStream.capacity.<get-capacity>|<get-capacity>(){}[0]
+    final val isObserving // com.davils.konfetti.core.observe/ObservationStream.isObserving|{}isObserving[0]
+        final fun <get-isObserving>(): kotlin/Boolean // com.davils.konfetti.core.observe/ObservationStream.isObserving.<get-isObserving>|<get-isObserving>(){}[0]
+
+    final fun observations(): kotlinx.coroutines.flow/Flow<com.davils.konfetti.core.observe/BusObservation> // com.davils.konfetti.core.observe/ObservationStream.observations|observations(){}[0]
+    final fun observe(com.davils.konfetti.core.observe/BusObservation) // com.davils.konfetti.core.observe/ObservationStream.observe|observe(com.davils.konfetti.core.observe.BusObservation){}[0]
+    final fun sequenced(): kotlinx.coroutines.flow/Flow<com.davils.konfetti.core.observe/SequencedObservation> // com.davils.konfetti.core.observe/ObservationStream.sequenced|sequenced(){}[0]
+
+    final object Companion { // com.davils.konfetti.core.observe/ObservationStream.Companion|null[0]
+        final const val DEFAULT_CAPACITY // com.davils.konfetti.core.observe/ObservationStream.Companion.DEFAULT_CAPACITY|{}DEFAULT_CAPACITY[0]
+            final fun <get-DEFAULT_CAPACITY>(): kotlin/Int // com.davils.konfetti.core.observe/ObservationStream.Companion.DEFAULT_CAPACITY.<get-DEFAULT_CAPACITY>|<get-DEFAULT_CAPACITY>(){}[0]
+        final const val MAX_CAPACITY // com.davils.konfetti.core.observe/ObservationStream.Companion.MAX_CAPACITY|{}MAX_CAPACITY[0]
+            final fun <get-MAX_CAPACITY>(): kotlin/Int // com.davils.konfetti.core.observe/ObservationStream.Companion.MAX_CAPACITY.<get-MAX_CAPACITY>|<get-MAX_CAPACITY>(){}[0]
+    }
+}
+
+final class com.davils.konfetti.core.observe/SequencedObservation { // com.davils.konfetti.core.observe/SequencedObservation|null[0]
+    final val missed // com.davils.konfetti.core.observe/SequencedObservation.missed|{}missed[0]
+        final fun <get-missed>(): kotlin/Long // com.davils.konfetti.core.observe/SequencedObservation.missed.<get-missed>|<get-missed>(){}[0]
+    final val observation // com.davils.konfetti.core.observe/SequencedObservation.observation|{}observation[0]
+        final fun <get-observation>(): com.davils.konfetti.core.observe/BusObservation // com.davils.konfetti.core.observe/SequencedObservation.observation.<get-observation>|<get-observation>(){}[0]
+    final val sequence // com.davils.konfetti.core.observe/SequencedObservation.sequence|{}sequence[0]
+        final fun <get-sequence>(): kotlin/Long // com.davils.konfetti.core.observe/SequencedObservation.sequence.<get-sequence>|<get-sequence>(){}[0]
+
+    final fun toString(): kotlin/String // com.davils.konfetti.core.observe/SequencedObservation.toString|toString(){}[0]
+}
+
+final class com.davils.konfetti.core.observe/TopicMetrics { // com.davils.konfetti.core.observe/TopicMetrics|null[0]
+    final val consumers // com.davils.konfetti.core.observe/TopicMetrics.consumers|{}consumers[0]
+        final fun <get-consumers>(): kotlin/Int // com.davils.konfetti.core.observe/TopicMetrics.consumers.<get-consumers>|<get-consumers>(){}[0]
+    final val dispatched // com.davils.konfetti.core.observe/TopicMetrics.dispatched|{}dispatched[0]
+        final fun <get-dispatched>(): kotlin/Long // com.davils.konfetti.core.observe/TopicMetrics.dispatched.<get-dispatched>|<get-dispatched>(){}[0]
+    final val dropped // com.davils.konfetti.core.observe/TopicMetrics.dropped|{}dropped[0]
+        final fun <get-dropped>(): kotlin/Long // com.davils.konfetti.core.observe/TopicMetrics.dropped.<get-dropped>|<get-dropped>(){}[0]
+    final val published // com.davils.konfetti.core.observe/TopicMetrics.published|{}published[0]
+        final fun <get-published>(): kotlin/Long // com.davils.konfetti.core.observe/TopicMetrics.published.<get-published>|<get-published>(){}[0]
+    final val queued // com.davils.konfetti.core.observe/TopicMetrics.queued|{}queued[0]
+        final fun <get-queued>(): kotlin/Long // com.davils.konfetti.core.observe/TopicMetrics.queued.<get-queued>|<get-queued>(){}[0]
+    final val rejected // com.davils.konfetti.core.observe/TopicMetrics.rejected|{}rejected[0]
+        final fun <get-rejected>(): kotlin/Long // com.davils.konfetti.core.observe/TopicMetrics.rejected.<get-rejected>|<get-rejected>(){}[0]
+    final val retained // com.davils.konfetti.core.observe/TopicMetrics.retained|{}retained[0]
+        final fun <get-retained>(): kotlin/Int // com.davils.konfetti.core.observe/TopicMetrics.retained.<get-retained>|<get-retained>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.konfetti.core.observe/TopicMetrics.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.konfetti.core.observe/TopicMetrics.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.konfetti.core.observe/TopicMetrics.toString|toString(){}[0]
+}
+
+final class com.davils.konfetti.core.observe/TopicSnapshot { // com.davils.konfetti.core.observe/TopicSnapshot|null[0]
+    final val consumers // com.davils.konfetti.core.observe/TopicSnapshot.consumers|{}consumers[0]
+        final fun <get-consumers>(): kotlin.collections/Map<com.davils.konfetti.core.consume/ConsumerName, com.davils.konfetti.core.observe/ConsumerMetrics> // com.davils.konfetti.core.observe/TopicSnapshot.consumers.<get-consumers>|<get-consumers>(){}[0]
+    final val metrics // com.davils.konfetti.core.observe/TopicSnapshot.metrics|{}metrics[0]
+        final fun <get-metrics>(): com.davils.konfetti.core.observe/TopicMetrics // com.davils.konfetti.core.observe/TopicSnapshot.metrics.<get-metrics>|<get-metrics>(){}[0]
+    final val name // com.davils.konfetti.core.observe/TopicSnapshot.name|{}name[0]
+        final fun <get-name>(): com.davils.konfetti.core.topic/TopicName // com.davils.konfetti.core.observe/TopicSnapshot.name.<get-name>|<get-name>(){}[0]
+    final val partitions // com.davils.konfetti.core.observe/TopicSnapshot.partitions|{}partitions[0]
+        final fun <get-partitions>(): kotlin/Int // com.davils.konfetti.core.observe/TopicSnapshot.partitions.<get-partitions>|<get-partitions>(){}[0]
+    final val state // com.davils.konfetti.core.observe/TopicSnapshot.state|{}state[0]
+        final fun <get-state>(): com.davils.konfetti.core.lifecycle/BusState // com.davils.konfetti.core.observe/TopicSnapshot.state.<get-state>|<get-state>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.konfetti.core.observe/TopicSnapshot.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.konfetti.core.observe/TopicSnapshot.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.konfetti.core.observe/TopicSnapshot.toString|toString(){}[0]
+}
+
+final class com.davils.konfetti.core.publish/Publication { // com.davils.konfetti.core.publish/Publication|null[0]
+    final val context // com.davils.konfetti.core.publish/Publication.context|{}context[0]
+        final fun <get-context>(): kotlin.coroutines/CoroutineContext // com.davils.konfetti.core.publish/Publication.context.<get-context>|<get-context>(){}[0]
+    final val event // com.davils.konfetti.core.publish/Publication.event|{}event[0]
+        final fun <get-event>(): com.davils.konfetti.core/Event // com.davils.konfetti.core.publish/Publication.event.<get-event>|<get-event>(){}[0]
+    final val headers // com.davils.konfetti.core.publish/Publication.headers|{}headers[0]
+        final fun <get-headers>(): com.davils.konfetti.core.header/EventHeaders // com.davils.konfetti.core.publish/Publication.headers.<get-headers>|<get-headers>(){}[0]
+    final val topic // com.davils.konfetti.core.publish/Publication.topic|{}topic[0]
+        final fun <get-topic>(): com.davils.konfetti.core.topic/TopicName // com.davils.konfetti.core.publish/Publication.topic.<get-topic>|<get-topic>(){}[0]
+
+    final fun toString(): kotlin/String // com.davils.konfetti.core.publish/Publication.toString|toString(){}[0]
+}
+
+final class com.davils.konfetti.core.topic/TopicDefaults { // com.davils.konfetti.core.topic/TopicDefaults|null[0]
+    final var bufferCapacity // com.davils.konfetti.core.topic/TopicDefaults.bufferCapacity|{}bufferCapacity[0]
+        final fun <get-bufferCapacity>(): kotlin/Int // com.davils.konfetti.core.topic/TopicDefaults.bufferCapacity.<get-bufferCapacity>|<get-bufferCapacity>(){}[0]
+        final fun <set-bufferCapacity>(kotlin/Int) // com.davils.konfetti.core.topic/TopicDefaults.bufferCapacity.<set-bufferCapacity>|<set-bufferCapacity>(kotlin.Int){}[0]
+    final var partitions // com.davils.konfetti.core.topic/TopicDefaults.partitions|{}partitions[0]
+        final fun <get-partitions>(): kotlin/Int // com.davils.konfetti.core.topic/TopicDefaults.partitions.<get-partitions>|<get-partitions>(){}[0]
+        final fun <set-partitions>(kotlin/Int) // com.davils.konfetti.core.topic/TopicDefaults.partitions.<set-partitions>|<set-partitions>(kotlin.Int){}[0]
+    final var retain // com.davils.konfetti.core.topic/TopicDefaults.retain|{}retain[0]
+        final fun <get-retain>(): kotlin/Int // com.davils.konfetti.core.topic/TopicDefaults.retain.<get-retain>|<get-retain>(){}[0]
+        final fun <set-retain>(kotlin/Int) // com.davils.konfetti.core.topic/TopicDefaults.retain.<set-retain>|<set-retain>(kotlin.Int){}[0]
+}
+
+final class com.davils.konfetti.core/EventBus { // com.davils.konfetti.core/EventBus|null[0]
+    final val deadLetters // com.davils.konfetti.core/EventBus.deadLetters|{}deadLetters[0]
+        final fun <get-deadLetters>(): com.davils.konfetti.core/Topic<com.davils.konfetti.core.failure/DeadLetter> // com.davils.konfetti.core/EventBus.deadLetters.<get-deadLetters>|<get-deadLetters>(){}[0]
+    final val limits // com.davils.konfetti.core/EventBus.limits|{}limits[0]
+        final fun <get-limits>(): com.davils.konfetti.core.limit/BusLimits // com.davils.konfetti.core/EventBus.limits.<get-limits>|<get-limits>(){}[0]
+    final val state // com.davils.konfetti.core/EventBus.state|{}state[0]
+        final fun <get-state>(): kotlinx.coroutines.flow/StateFlow<com.davils.konfetti.core.lifecycle/BusState> // com.davils.konfetti.core/EventBus.state.<get-state>|<get-state>(){}[0]
+    final val topicNames // com.davils.konfetti.core/EventBus.topicNames|{}topicNames[0]
+        final fun <get-topicNames>(): kotlin.collections/Set<com.davils.konfetti.core.topic/TopicName> // com.davils.konfetti.core/EventBus.topicNames.<get-topicNames>|<get-topicNames>(){}[0]
+
+    final fun <#A1: com.davils.konfetti.core/Event> declare(com.davils.konfetti.core/TopicKey<#A1>, kotlin/Function1<com.davils.konfetti.core.topic/TopicBuilder<#A1>, kotlin/Unit> = ...): com.davils.konfetti.core.topic/Declaration<#A1> // com.davils.konfetti.core/EventBus.declare|declare(com.davils.konfetti.core.TopicKey<0:0>;kotlin.Function1<com.davils.konfetti.core.topic.TopicBuilder<0:0>,kotlin.Unit>){0§<com.davils.konfetti.core.Event>}[0]
+    final fun <#A1: com.davils.konfetti.core/Event> get(com.davils.konfetti.core/TopicKey<#A1>): com.davils.konfetti.core/Topic<#A1> // com.davils.konfetti.core/EventBus.get|get(com.davils.konfetti.core.TopicKey<0:0>){0§<com.davils.konfetti.core.Event>}[0]
+    final fun abort(): kotlin/Boolean // com.davils.konfetti.core/EventBus.abort|abort(){}[0]
+    final fun contains(com.davils.konfetti.core/TopicKey<*>): kotlin/Boolean // com.davils.konfetti.core/EventBus.contains|contains(com.davils.konfetti.core.TopicKey<*>){}[0]
+    final fun snapshot(): com.davils.konfetti.core.observe/BusSnapshot // com.davils.konfetti.core/EventBus.snapshot|snapshot(){}[0]
+    final fun toString(): kotlin/String // com.davils.konfetti.core/EventBus.toString|toString(){}[0]
+    final suspend fun close(): com.davils.konfetti.core.lifecycle/CloseReport // com.davils.konfetti.core/EventBus.close|close(){}[0]
+    final suspend fun drain(kotlin.time/Duration): com.davils.konfetti.core.lifecycle/DrainResult // com.davils.konfetti.core/EventBus.drain|drain(kotlin.time.Duration){}[0]
+}
+
+final value class com.davils.konfetti.core.consume/ConsumerName : kotlin/Comparable<com.davils.konfetti.core.consume/ConsumerName> { // com.davils.konfetti.core.consume/ConsumerName|null[0]
+    constructor <init>(kotlin/String) // com.davils.konfetti.core.consume/ConsumerName.<init>|<init>(kotlin.String){}[0]
+
+    final val value // com.davils.konfetti.core.consume/ConsumerName.value|{}value[0]
+        final fun <get-value>(): kotlin/String // com.davils.konfetti.core.consume/ConsumerName.value.<get-value>|<get-value>(){}[0]
+
+    final fun compareTo(com.davils.konfetti.core.consume/ConsumerName): kotlin/Int // com.davils.konfetti.core.consume/ConsumerName.compareTo|compareTo(com.davils.konfetti.core.consume.ConsumerName){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.konfetti.core.consume/ConsumerName.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.konfetti.core.consume/ConsumerName.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.konfetti.core.consume/ConsumerName.toString|toString(){}[0]
+
+    final object Companion { // com.davils.konfetti.core.consume/ConsumerName.Companion|null[0]
+        final const val MAX_LENGTH // com.davils.konfetti.core.consume/ConsumerName.Companion.MAX_LENGTH|{}MAX_LENGTH[0]
+            final fun <get-MAX_LENGTH>(): kotlin/Int // com.davils.konfetti.core.consume/ConsumerName.Companion.MAX_LENGTH.<get-MAX_LENGTH>|<get-MAX_LENGTH>(){}[0]
+
+        final fun isValid(kotlin/String): kotlin/Boolean // com.davils.konfetti.core.consume/ConsumerName.Companion.isValid|isValid(kotlin.String){}[0]
+    }
+}
+
+final value class com.davils.konfetti.core.header/HeaderName : kotlin/Comparable<com.davils.konfetti.core.header/HeaderName> { // com.davils.konfetti.core.header/HeaderName|null[0]
+    constructor <init>(kotlin/String) // com.davils.konfetti.core.header/HeaderName.<init>|<init>(kotlin.String){}[0]
+
+    final val value // com.davils.konfetti.core.header/HeaderName.value|{}value[0]
+        final fun <get-value>(): kotlin/String // com.davils.konfetti.core.header/HeaderName.value.<get-value>|<get-value>(){}[0]
+
+    final fun compareTo(com.davils.konfetti.core.header/HeaderName): kotlin/Int // com.davils.konfetti.core.header/HeaderName.compareTo|compareTo(com.davils.konfetti.core.header.HeaderName){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.konfetti.core.header/HeaderName.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.konfetti.core.header/HeaderName.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.konfetti.core.header/HeaderName.toString|toString(){}[0]
+
+    final object Companion { // com.davils.konfetti.core.header/HeaderName.Companion|null[0]
+        final const val MAX_LENGTH // com.davils.konfetti.core.header/HeaderName.Companion.MAX_LENGTH|{}MAX_LENGTH[0]
+            final fun <get-MAX_LENGTH>(): kotlin/Int // com.davils.konfetti.core.header/HeaderName.Companion.MAX_LENGTH.<get-MAX_LENGTH>|<get-MAX_LENGTH>(){}[0]
+
+        final fun isValid(kotlin/String): kotlin/Boolean // com.davils.konfetti.core.header/HeaderName.Companion.isValid|isValid(kotlin.String){}[0]
+    }
+}
+
+final value class com.davils.konfetti.core.topic/OrderingKey { // com.davils.konfetti.core.topic/OrderingKey|null[0]
+    constructor <init>(kotlin/String) // com.davils.konfetti.core.topic/OrderingKey.<init>|<init>(kotlin.String){}[0]
+
+    final val value // com.davils.konfetti.core.topic/OrderingKey.value|{}value[0]
+        final fun <get-value>(): kotlin/String // com.davils.konfetti.core.topic/OrderingKey.value.<get-value>|<get-value>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.konfetti.core.topic/OrderingKey.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.konfetti.core.topic/OrderingKey.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.konfetti.core.topic/OrderingKey.toString|toString(){}[0]
+}
+
+final value class com.davils.konfetti.core.topic/TopicName : kotlin/Comparable<com.davils.konfetti.core.topic/TopicName> { // com.davils.konfetti.core.topic/TopicName|null[0]
+    constructor <init>(kotlin/String) // com.davils.konfetti.core.topic/TopicName.<init>|<init>(kotlin.String){}[0]
+
+    final val value // com.davils.konfetti.core.topic/TopicName.value|{}value[0]
+        final fun <get-value>(): kotlin/String // com.davils.konfetti.core.topic/TopicName.value.<get-value>|<get-value>(){}[0]
+
+    final fun compareTo(com.davils.konfetti.core.topic/TopicName): kotlin/Int // com.davils.konfetti.core.topic/TopicName.compareTo|compareTo(com.davils.konfetti.core.topic.TopicName){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.konfetti.core.topic/TopicName.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.konfetti.core.topic/TopicName.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.konfetti.core.topic/TopicName.toString|toString(){}[0]
+
+    final object Companion { // com.davils.konfetti.core.topic/TopicName.Companion|null[0]
+        final const val MAX_LENGTH // com.davils.konfetti.core.topic/TopicName.Companion.MAX_LENGTH|{}MAX_LENGTH[0]
+            final fun <get-MAX_LENGTH>(): kotlin/Int // com.davils.konfetti.core.topic/TopicName.Companion.MAX_LENGTH.<get-MAX_LENGTH>|<get-MAX_LENGTH>(){}[0]
+
+        final val DEAD_LETTERS // com.davils.konfetti.core.topic/TopicName.Companion.DEAD_LETTERS|{}DEAD_LETTERS[0]
+            final fun <get-DEAD_LETTERS>(): com.davils.konfetti.core.topic/TopicName // com.davils.konfetti.core.topic/TopicName.Companion.DEAD_LETTERS.<get-DEAD_LETTERS>|<get-DEAD_LETTERS>(){}[0]
+
+        final fun isValid(kotlin/String): kotlin/Boolean // com.davils.konfetti.core.topic/TopicName.Companion.isValid|isValid(kotlin.String){}[0]
+    }
+}
+
+final object com.davils.konfetti.core.error/EventViolationCodes { // com.davils.konfetti.core.error/EventViolationCodes|null[0]
+    final val ABOVE_HARD_LIMIT // com.davils.konfetti.core.error/EventViolationCodes.ABOVE_HARD_LIMIT|{}ABOVE_HARD_LIMIT[0]
+        final fun <get-ABOVE_HARD_LIMIT>(): com.davils.kore.core.validation.violation/ViolationCode // com.davils.konfetti.core.error/EventViolationCodes.ABOVE_HARD_LIMIT.<get-ABOVE_HARD_LIMIT>|<get-ABOVE_HARD_LIMIT>(){}[0]
+    final val DEAD_LETTER_LOOP // com.davils.konfetti.core.error/EventViolationCodes.DEAD_LETTER_LOOP|{}DEAD_LETTER_LOOP[0]
+        final fun <get-DEAD_LETTER_LOOP>(): com.davils.kore.core.validation.violation/ViolationCode // com.davils.konfetti.core.error/EventViolationCodes.DEAD_LETTER_LOOP.<get-DEAD_LETTER_LOOP>|<get-DEAD_LETTER_LOOP>(){}[0]
+    final val INVALID_BACKOFF // com.davils.konfetti.core.error/EventViolationCodes.INVALID_BACKOFF|{}INVALID_BACKOFF[0]
+        final fun <get-INVALID_BACKOFF>(): com.davils.kore.core.validation.violation/ViolationCode // com.davils.konfetti.core.error/EventViolationCodes.INVALID_BACKOFF.<get-INVALID_BACKOFF>|<get-INVALID_BACKOFF>(){}[0]
+    final val INVALID_BUFFER // com.davils.konfetti.core.error/EventViolationCodes.INVALID_BUFFER|{}INVALID_BUFFER[0]
+        final fun <get-INVALID_BUFFER>(): com.davils.kore.core.validation.violation/ViolationCode // com.davils.konfetti.core.error/EventViolationCodes.INVALID_BUFFER.<get-INVALID_BUFFER>|<get-INVALID_BUFFER>(){}[0]
+    final val INVALID_CONCURRENCY // com.davils.konfetti.core.error/EventViolationCodes.INVALID_CONCURRENCY|{}INVALID_CONCURRENCY[0]
+        final fun <get-INVALID_CONCURRENCY>(): com.davils.kore.core.validation.violation/ViolationCode // com.davils.konfetti.core.error/EventViolationCodes.INVALID_CONCURRENCY.<get-INVALID_CONCURRENCY>|<get-INVALID_CONCURRENCY>(){}[0]
+    final val INVALID_MAILBOX // com.davils.konfetti.core.error/EventViolationCodes.INVALID_MAILBOX|{}INVALID_MAILBOX[0]
+        final fun <get-INVALID_MAILBOX>(): com.davils.kore.core.validation.violation/ViolationCode // com.davils.konfetti.core.error/EventViolationCodes.INVALID_MAILBOX.<get-INVALID_MAILBOX>|<get-INVALID_MAILBOX>(){}[0]
+    final val INVALID_NAME // com.davils.konfetti.core.error/EventViolationCodes.INVALID_NAME|{}INVALID_NAME[0]
+        final fun <get-INVALID_NAME>(): com.davils.kore.core.validation.violation/ViolationCode // com.davils.konfetti.core.error/EventViolationCodes.INVALID_NAME.<get-INVALID_NAME>|<get-INVALID_NAME>(){}[0]
+    final val INVALID_PARTITIONS // com.davils.konfetti.core.error/EventViolationCodes.INVALID_PARTITIONS|{}INVALID_PARTITIONS[0]
+        final fun <get-INVALID_PARTITIONS>(): com.davils.kore.core.validation.violation/ViolationCode // com.davils.konfetti.core.error/EventViolationCodes.INVALID_PARTITIONS.<get-INVALID_PARTITIONS>|<get-INVALID_PARTITIONS>(){}[0]
+    final val INVALID_RETENTION // com.davils.konfetti.core.error/EventViolationCodes.INVALID_RETENTION|{}INVALID_RETENTION[0]
+        final fun <get-INVALID_RETENTION>(): com.davils.kore.core.validation.violation/ViolationCode // com.davils.konfetti.core.error/EventViolationCodes.INVALID_RETENTION.<get-INVALID_RETENTION>|<get-INVALID_RETENTION>(){}[0]
+    final val INVALID_RETRY // com.davils.konfetti.core.error/EventViolationCodes.INVALID_RETRY|{}INVALID_RETRY[0]
+        final fun <get-INVALID_RETRY>(): com.davils.kore.core.validation.violation/ViolationCode // com.davils.konfetti.core.error/EventViolationCodes.INVALID_RETRY.<get-INVALID_RETRY>|<get-INVALID_RETRY>(){}[0]
+    final val INVALID_STALL // com.davils.konfetti.core.error/EventViolationCodes.INVALID_STALL|{}INVALID_STALL[0]
+        final fun <get-INVALID_STALL>(): com.davils.kore.core.validation.violation/ViolationCode // com.davils.konfetti.core.error/EventViolationCodes.INVALID_STALL.<get-INVALID_STALL>|<get-INVALID_STALL>(){}[0]
+    final val INVALID_TIMEOUT // com.davils.konfetti.core.error/EventViolationCodes.INVALID_TIMEOUT|{}INVALID_TIMEOUT[0]
+        final fun <get-INVALID_TIMEOUT>(): com.davils.kore.core.validation.violation/ViolationCode // com.davils.konfetti.core.error/EventViolationCodes.INVALID_TIMEOUT.<get-INVALID_TIMEOUT>|<get-INVALID_TIMEOUT>(){}[0]
+    final val LATE_DEFAULT // com.davils.konfetti.core.error/EventViolationCodes.LATE_DEFAULT|{}LATE_DEFAULT[0]
+        final fun <get-LATE_DEFAULT>(): com.davils.kore.core.validation.violation/ViolationCode // com.davils.konfetti.core.error/EventViolationCodes.LATE_DEFAULT.<get-LATE_DEFAULT>|<get-LATE_DEFAULT>(){}[0]
+    final val MISSING_HANDLER // com.davils.konfetti.core.error/EventViolationCodes.MISSING_HANDLER|{}MISSING_HANDLER[0]
+        final fun <get-MISSING_HANDLER>(): com.davils.kore.core.validation.violation/ViolationCode // com.davils.konfetti.core.error/EventViolationCodes.MISSING_HANDLER.<get-MISSING_HANDLER>|<get-MISSING_HANDLER>(){}[0]
+    final val NOT_POSITIVE // com.davils.konfetti.core.error/EventViolationCodes.NOT_POSITIVE|{}NOT_POSITIVE[0]
+        final fun <get-NOT_POSITIVE>(): com.davils.kore.core.validation.violation/ViolationCode // com.davils.konfetti.core.error/EventViolationCodes.NOT_POSITIVE.<get-NOT_POSITIVE>|<get-NOT_POSITIVE>(){}[0]
+    final val RESERVED_NAME // com.davils.konfetti.core.error/EventViolationCodes.RESERVED_NAME|{}RESERVED_NAME[0]
+        final fun <get-RESERVED_NAME>(): com.davils.kore.core.validation.violation/ViolationCode // com.davils.konfetti.core.error/EventViolationCodes.RESERVED_NAME.<get-RESERVED_NAME>|<get-RESERVED_NAME>(){}[0]
+    final val TOO_MANY_TOPICS // com.davils.konfetti.core.error/EventViolationCodes.TOO_MANY_TOPICS|{}TOO_MANY_TOPICS[0]
+        final fun <get-TOO_MANY_TOPICS>(): com.davils.kore.core.validation.violation/ViolationCode // com.davils.konfetti.core.error/EventViolationCodes.TOO_MANY_TOPICS.<get-TOO_MANY_TOPICS>|<get-TOO_MANY_TOPICS>(){}[0]
+    final val UNORDERED_PARTITIONS // com.davils.konfetti.core.error/EventViolationCodes.UNORDERED_PARTITIONS|{}UNORDERED_PARTITIONS[0]
+        final fun <get-UNORDERED_PARTITIONS>(): com.davils.kore.core.validation.violation/ViolationCode // com.davils.konfetti.core.error/EventViolationCodes.UNORDERED_PARTITIONS.<get-UNORDERED_PARTITIONS>|<get-UNORDERED_PARTITIONS>(){}[0]
+}
+
+final fun <#A: com.davils.konfetti.core/Event> com.davils.konfetti.core/envelopeOf(com.davils.kore.core.identity/UuidV7, com.davils.konfetti.core.topic/TopicName, com.davils.konfetti.core.topic/OrderingKey?, com.davils.konfetti.core/Envelope<com.davils.konfetti.core/Event>?, com.davils.konfetti.core.header/EventHeaders, #A, com.davils.kore.core.principal/Principal?): com.davils.konfetti.core/Envelope<#A> // com.davils.konfetti.core/envelopeOf|envelopeOf(com.davils.kore.core.identity.UuidV7;com.davils.konfetti.core.topic.TopicName;com.davils.konfetti.core.topic.OrderingKey?;com.davils.konfetti.core.Envelope<com.davils.konfetti.core.Event>?;com.davils.konfetti.core.header.EventHeaders;0:0;com.davils.kore.core.principal.Principal?){0§<com.davils.konfetti.core.Event>}[0]
+final fun com.davils.konfetti.core.failure/exponential(kotlin.time/Duration, kotlin.time/Duration, kotlin/Double = ..., kotlin/Boolean = ...): com.davils.konfetti.core.failure/Backoff.Exponential // com.davils.konfetti.core.failure/exponential|exponential(kotlin.time.Duration;kotlin.time.Duration;kotlin.Double;kotlin.Boolean){}[0]
+final fun com.davils.konfetti.core.failure/fixed(kotlin.time/Duration): com.davils.konfetti.core.failure/Backoff.Fixed // com.davils.konfetti.core.failure/fixed|fixed(kotlin.time.Duration){}[0]
+final fun com.davils.konfetti.core.failure/retry(kotlin/Int, com.davils.konfetti.core.failure/Backoff = ..., com.davils.konfetti.core.failure/FailurePolicy.Terminal = ...): com.davils.konfetti.core.failure/FailurePolicy.Retry // com.davils.konfetti.core.failure/retry|retry(kotlin.Int;com.davils.konfetti.core.failure.Backoff;com.davils.konfetti.core.failure.FailurePolicy.Terminal){}[0]
+final fun com.davils.konfetti.core.header/headersOf(kotlin/Array<out com.davils.konfetti.core.header/HeaderEntry<*>>...): com.davils.konfetti.core.header/EventHeaders // com.davils.konfetti.core.header/headersOf|headersOf(kotlin.Array<out|com.davils.konfetti.core.header.HeaderEntry<*>>...){}[0]
+final fun com.davils.konfetti.core.limit/busLimits(com.davils.konfetti.core.limit/BusLimits = ..., kotlin/Function1<com.davils.konfetti.core.limit/BusLimitsBuilder, kotlin/Unit>): com.davils.konfetti.core.limit/BusLimits // com.davils.konfetti.core.limit/busLimits|busLimits(com.davils.konfetti.core.limit.BusLimits;kotlin.Function1<com.davils.konfetti.core.limit.BusLimitsBuilder,kotlin.Unit>){}[0]
+final fun com.davils.konfetti.core/eventBus(kotlinx.coroutines/CoroutineScope, kotlin/Function1<com.davils.konfetti.core.bus/EventBusBuilder, kotlin/Unit> = ...): com.davils.konfetti.core/EventBus // com.davils.konfetti.core/eventBus|eventBus(kotlinx.coroutines.CoroutineScope;kotlin.Function1<com.davils.konfetti.core.bus.EventBusBuilder,kotlin.Unit>){}[0]
+final inline fun <#A: reified com.davils.konfetti.core/Event> com.davils.konfetti.core/TopicKey(kotlin/String): com.davils.konfetti.core/TopicKey<#A> // com.davils.konfetti.core/TopicKey|TopicKey(kotlin.String){0§<com.davils.konfetti.core.Event>}[0]
+final suspend fun com.davils.konfetti.core/currentAttempt(): kotlin/Int? // com.davils.konfetti.core/currentAttempt|currentAttempt(){}[0]
+final suspend fun com.davils.konfetti.core/currentEnvelope(): com.davils.konfetti.core/Envelope<com.davils.konfetti.core/Event>? // com.davils.konfetti.core/currentEnvelope|currentEnvelope(){}[0]

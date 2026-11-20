@@ -1,0 +1,82 @@
+// Klib ABI Dump
+// Targets: [wasmJs]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <com.davils:konfetti-testing>
+final class <#A: com.davils.konfetti.core/Event> com.davils.konfetti.testing/EventRecorder { // com.davils.konfetti.testing/EventRecorder|null[0]
+    constructor <init>(kotlin/Int = ...) // com.davils.konfetti.testing/EventRecorder.<init>|<init>(kotlin.Int){}[0]
+
+    final val capacity // com.davils.konfetti.testing/EventRecorder.capacity|{}capacity[0]
+        final fun <get-capacity>(): kotlin/Int // com.davils.konfetti.testing/EventRecorder.capacity.<get-capacity>|<get-capacity>(){}[0]
+    final val envelopes // com.davils.konfetti.testing/EventRecorder.envelopes|{}envelopes[0]
+        final fun <get-envelopes>(): kotlin.collections/List<com.davils.konfetti.core/Envelope<#A>> // com.davils.konfetti.testing/EventRecorder.envelopes.<get-envelopes>|<get-envelopes>(){}[0]
+    final val overflow // com.davils.konfetti.testing/EventRecorder.overflow|{}overflow[0]
+        final fun <get-overflow>(): kotlin/Long // com.davils.konfetti.testing/EventRecorder.overflow.<get-overflow>|<get-overflow>(){}[0]
+    final val payloads // com.davils.konfetti.testing/EventRecorder.payloads|{}payloads[0]
+        final fun <get-payloads>(): kotlin.collections/List<#A> // com.davils.konfetti.testing/EventRecorder.payloads.<get-payloads>|<get-payloads>(){}[0]
+
+    final fun record(com.davils.konfetti.core/Envelope<#A>) // com.davils.konfetti.testing/EventRecorder.record|record(com.davils.konfetti.core.Envelope<1:0>){}[0]
+    final fun toString(): kotlin/String // com.davils.konfetti.testing/EventRecorder.toString|toString(){}[0]
+    final suspend fun awaitCount(kotlin/Int): kotlin.collections/List<com.davils.konfetti.core/Envelope<#A>> // com.davils.konfetti.testing/EventRecorder.awaitCount|awaitCount(kotlin.Int){}[0]
+
+    final object Companion { // com.davils.konfetti.testing/EventRecorder.Companion|null[0]
+        final const val DEFAULT_CAPACITY // com.davils.konfetti.testing/EventRecorder.Companion.DEFAULT_CAPACITY|{}DEFAULT_CAPACITY[0]
+            final fun <get-DEFAULT_CAPACITY>(): kotlin/Int // com.davils.konfetti.testing/EventRecorder.Companion.DEFAULT_CAPACITY.<get-DEFAULT_CAPACITY>|<get-DEFAULT_CAPACITY>(){}[0]
+        final const val MAX_CAPACITY // com.davils.konfetti.testing/EventRecorder.Companion.MAX_CAPACITY|{}MAX_CAPACITY[0]
+            final fun <get-MAX_CAPACITY>(): kotlin/Int // com.davils.konfetti.testing/EventRecorder.Companion.MAX_CAPACITY.<get-MAX_CAPACITY>|<get-MAX_CAPACITY>(){}[0]
+    }
+}
+
+final class com.davils.konfetti.testing/RecordingObserver : com.davils.konfetti.core.observe/BusObserver { // com.davils.konfetti.testing/RecordingObserver|null[0]
+    constructor <init>(kotlin/Int = ...) // com.davils.konfetti.testing/RecordingObserver.<init>|<init>(kotlin.Int){}[0]
+
+    final val capacity // com.davils.konfetti.testing/RecordingObserver.capacity|{}capacity[0]
+        final fun <get-capacity>(): kotlin/Int // com.davils.konfetti.testing/RecordingObserver.capacity.<get-capacity>|<get-capacity>(){}[0]
+    final val observations // com.davils.konfetti.testing/RecordingObserver.observations|{}observations[0]
+        final fun <get-observations>(): kotlin.collections/List<com.davils.konfetti.core.observe/BusObservation> // com.davils.konfetti.testing/RecordingObserver.observations.<get-observations>|<get-observations>(){}[0]
+    final val overflow // com.davils.konfetti.testing/RecordingObserver.overflow|{}overflow[0]
+        final fun <get-overflow>(): kotlin/Long // com.davils.konfetti.testing/RecordingObserver.overflow.<get-overflow>|<get-overflow>(){}[0]
+
+    final fun clear() // com.davils.konfetti.testing/RecordingObserver.clear|clear(){}[0]
+    final fun observe(com.davils.konfetti.core.observe/BusObservation) // com.davils.konfetti.testing/RecordingObserver.observe|observe(com.davils.konfetti.core.observe.BusObservation){}[0]
+    final fun toString(): kotlin/String // com.davils.konfetti.testing/RecordingObserver.toString|toString(){}[0]
+    final inline fun <#A1: reified com.davils.konfetti.core.observe/BusObservation> count(): kotlin/Int // com.davils.konfetti.testing/RecordingObserver.count|count(){0§<com.davils.konfetti.core.observe.BusObservation>}[0]
+    final inline fun <#A1: reified com.davils.konfetti.core.observe/BusObservation> only(): kotlin.collections/List<#A1> // com.davils.konfetti.testing/RecordingObserver.only|only(){0§<com.davils.konfetti.core.observe.BusObservation>}[0]
+}
+
+final class com.davils.konfetti.testing/SeededEntropy : com.davils.konfetti.core.bus/Entropy { // com.davils.konfetti.testing/SeededEntropy|null[0]
+    constructor <init>(kotlin/Long) // com.davils.konfetti.testing/SeededEntropy.<init>|<init>(kotlin.Long){}[0]
+
+    final val seed // com.davils.konfetti.testing/SeededEntropy.seed|{}seed[0]
+        final fun <get-seed>(): kotlin/Long // com.davils.konfetti.testing/SeededEntropy.seed.<get-seed>|<get-seed>(){}[0]
+
+    final fun nextLong(): kotlin/Long // com.davils.konfetti.testing/SeededEntropy.nextLong|nextLong(){}[0]
+    final fun toString(): kotlin/String // com.davils.konfetti.testing/SeededEntropy.toString|toString(){}[0]
+}
+
+final class com.davils.konfetti.testing/TestEnvelopeBuilder { // com.davils.konfetti.testing/TestEnvelopeBuilder|null[0]
+    final var causedBy // com.davils.konfetti.testing/TestEnvelopeBuilder.causedBy|{}causedBy[0]
+        final fun <get-causedBy>(): com.davils.konfetti.core/Envelope<com.davils.konfetti.core/Event>? // com.davils.konfetti.testing/TestEnvelopeBuilder.causedBy.<get-causedBy>|<get-causedBy>(){}[0]
+        final fun <set-causedBy>(com.davils.konfetti.core/Envelope<com.davils.konfetti.core/Event>?) // com.davils.konfetti.testing/TestEnvelopeBuilder.causedBy.<set-causedBy>|<set-causedBy>(com.davils.konfetti.core.Envelope<com.davils.konfetti.core.Event>?){}[0]
+    final var headers // com.davils.konfetti.testing/TestEnvelopeBuilder.headers|{}headers[0]
+        final fun <get-headers>(): com.davils.konfetti.core.header/EventHeaders // com.davils.konfetti.testing/TestEnvelopeBuilder.headers.<get-headers>|<get-headers>(){}[0]
+        final fun <set-headers>(com.davils.konfetti.core.header/EventHeaders) // com.davils.konfetti.testing/TestEnvelopeBuilder.headers.<set-headers>|<set-headers>(com.davils.konfetti.core.header.EventHeaders){}[0]
+    final var identifiers // com.davils.konfetti.testing/TestEnvelopeBuilder.identifiers|{}identifiers[0]
+        final fun <get-identifiers>(): com.davils.kore.core.identity.generator/UuidGenerator<com.davils.kore.core.identity/UuidV7> // com.davils.konfetti.testing/TestEnvelopeBuilder.identifiers.<get-identifiers>|<get-identifiers>(){}[0]
+        final fun <set-identifiers>(com.davils.kore.core.identity.generator/UuidGenerator<com.davils.kore.core.identity/UuidV7>) // com.davils.konfetti.testing/TestEnvelopeBuilder.identifiers.<set-identifiers>|<set-identifiers>(com.davils.kore.core.identity.generator.UuidGenerator<com.davils.kore.core.identity.UuidV7>){}[0]
+    final var orderingKey // com.davils.konfetti.testing/TestEnvelopeBuilder.orderingKey|{}orderingKey[0]
+        final fun <get-orderingKey>(): com.davils.konfetti.core.topic/OrderingKey? // com.davils.konfetti.testing/TestEnvelopeBuilder.orderingKey.<get-orderingKey>|<get-orderingKey>(){}[0]
+        final fun <set-orderingKey>(com.davils.konfetti.core.topic/OrderingKey?) // com.davils.konfetti.testing/TestEnvelopeBuilder.orderingKey.<set-orderingKey>|<set-orderingKey>(com.davils.konfetti.core.topic.OrderingKey?){}[0]
+    final var principal // com.davils.konfetti.testing/TestEnvelopeBuilder.principal|{}principal[0]
+        final fun <get-principal>(): com.davils.kore.core.principal/Principal? // com.davils.konfetti.testing/TestEnvelopeBuilder.principal.<get-principal>|<get-principal>(){}[0]
+        final fun <set-principal>(com.davils.kore.core.principal/Principal?) // com.davils.konfetti.testing/TestEnvelopeBuilder.principal.<set-principal>|<set-principal>(com.davils.kore.core.principal.Principal?){}[0]
+    final var topic // com.davils.konfetti.testing/TestEnvelopeBuilder.topic|{}topic[0]
+        final fun <get-topic>(): com.davils.konfetti.core.topic/TopicName // com.davils.konfetti.testing/TestEnvelopeBuilder.topic.<get-topic>|<get-topic>(){}[0]
+        final fun <set-topic>(com.davils.konfetti.core.topic/TopicName) // com.davils.konfetti.testing/TestEnvelopeBuilder.topic.<set-topic>|<set-topic>(com.davils.konfetti.core.topic.TopicName){}[0]
+}
+
+final fun <#A: com.davils.konfetti.core/Event> com.davils.konfetti.testing/testEnvelope(#A, kotlin/Function1<com.davils.konfetti.testing/TestEnvelopeBuilder, kotlin/Unit> = ...): com.davils.konfetti.core/Envelope<#A> // com.davils.konfetti.testing/testEnvelope|testEnvelope(0:0;kotlin.Function1<com.davils.konfetti.testing.TestEnvelopeBuilder,kotlin.Unit>){0§<com.davils.konfetti.core.Event>}[0]
+final fun com.davils.konfetti.testing/testEventBus(kotlinx.coroutines/CoroutineScope, kotlin/Function1<com.davils.konfetti.core.bus/EventBusBuilder, kotlin/Unit> = ...): com.davils.konfetti.core/EventBus // com.davils.konfetti.testing/testEventBus|testEventBus(kotlinx.coroutines.CoroutineScope;kotlin.Function1<com.davils.konfetti.core.bus.EventBusBuilder,kotlin.Unit>){}[0]

@@ -1,0 +1,952 @@
+public final class com/davils/konfetti/core/DeliveriesKt {
+	public static final fun currentAttempt (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static final fun currentEnvelope (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class com/davils/konfetti/core/Envelope {
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCausationId ()Lcom/davils/kore/core/identity/UuidV7;
+	public final fun getCorrelationId ()Lcom/davils/kore/core/identity/UuidV7;
+	public final fun getHeaders ()Lcom/davils/konfetti/core/header/EventHeaders;
+	public final fun getId ()Lcom/davils/kore/core/identity/UuidV7;
+	public final fun getOccurredAt ()Lkotlin/time/Instant;
+	public final fun getOrderingKey-zJCSzlo ()Ljava/lang/String;
+	public final fun getPayload ()Lcom/davils/konfetti/core/Event;
+	public final fun getPrincipal ()Lcom/davils/kore/core/principal/Principal;
+	public final fun getTopic-akLR7iU ()Ljava/lang/String;
+	public fun hashCode ()I
+	public final fun isCaused ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/konfetti/core/EnvelopesKt {
+	public static final fun envelopeOf-Wgdiv88 (Lcom/davils/kore/core/identity/UuidV7;Ljava/lang/String;Ljava/lang/String;Lcom/davils/konfetti/core/Envelope;Lcom/davils/konfetti/core/header/EventHeaders;Lcom/davils/konfetti/core/Event;Lcom/davils/kore/core/principal/Principal;)Lcom/davils/konfetti/core/Envelope;
+}
+
+public abstract interface class com/davils/konfetti/core/Event {
+}
+
+public final class com/davils/konfetti/core/EventBus {
+	public final fun abort ()Z
+	public final fun close (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun contains (Lcom/davils/konfetti/core/TopicKey;)Z
+	public final fun declare (Lcom/davils/konfetti/core/TopicKey;Lkotlin/jvm/functions/Function1;)Lcom/davils/konfetti/core/topic/Declaration;
+	public static synthetic fun declare$default (Lcom/davils/konfetti/core/EventBus;Lcom/davils/konfetti/core/TopicKey;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/davils/konfetti/core/topic/Declaration;
+	public final fun drain-VtjQ1oo (JLkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun get (Lcom/davils/konfetti/core/TopicKey;)Lcom/davils/konfetti/core/Topic;
+	public final fun getDeadLetters ()Lcom/davils/konfetti/core/Topic;
+	public final fun getLimits ()Lcom/davils/konfetti/core/limit/BusLimits;
+	public final fun getState ()Lkotlinx/coroutines/flow/StateFlow;
+	public final fun getTopicNames ()Ljava/util/Set;
+	public final fun snapshot ()Lcom/davils/konfetti/core/observe/BusSnapshot;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/konfetti/core/EventBusesKt {
+	public static final fun eventBus (Lkotlinx/coroutines/CoroutineScope;Lkotlin/jvm/functions/Function1;)Lcom/davils/konfetti/core/EventBus;
+	public static synthetic fun eventBus$default (Lkotlinx/coroutines/CoroutineScope;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/davils/konfetti/core/EventBus;
+}
+
+public final class com/davils/konfetti/core/Topic {
+	public final fun consume (Ljava/lang/String;Lkotlinx/coroutines/CoroutineScope;Lkotlin/jvm/functions/Function1;)Lcom/davils/konfetti/core/consume/Consumption;
+	public static synthetic fun consume$default (Lcom/davils/konfetti/core/Topic;Ljava/lang/String;Lkotlinx/coroutines/CoroutineScope;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/davils/konfetti/core/consume/Consumption;
+	public final fun events (Lcom/davils/konfetti/core/consume/StartPosition;)Lkotlinx/coroutines/flow/Flow;
+	public static synthetic fun events$default (Lcom/davils/konfetti/core/Topic;Lcom/davils/konfetti/core/consume/StartPosition;ILjava/lang/Object;)Lkotlinx/coroutines/flow/Flow;
+	public final fun getEventType ()Lkotlin/reflect/KClass;
+	public final fun getHasConsumers ()Z
+	public final fun getMetrics ()Lcom/davils/konfetti/core/observe/TopicMetrics;
+	public final fun getName-akLR7iU ()Ljava/lang/String;
+	public final fun getPartitionCount ()I
+	public final fun getState ()Lcom/davils/konfetti/core/lifecycle/BusState;
+	public final fun offer (Lcom/davils/konfetti/core/Event;Lcom/davils/konfetti/core/header/EventHeaders;Lcom/davils/konfetti/core/Envelope;Lcom/davils/kore/core/principal/Principal;)Lcom/davils/konfetti/core/publish/PublishResult;
+	public static synthetic fun offer$default (Lcom/davils/konfetti/core/Topic;Lcom/davils/konfetti/core/Event;Lcom/davils/konfetti/core/header/EventHeaders;Lcom/davils/konfetti/core/Envelope;Lcom/davils/kore/core/principal/Principal;ILjava/lang/Object;)Lcom/davils/konfetti/core/publish/PublishResult;
+	public final fun publish (Lcom/davils/konfetti/core/Event;Lcom/davils/konfetti/core/header/EventHeaders;Lcom/davils/konfetti/core/Envelope;Lcom/davils/konfetti/core/publish/Attribution;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun publish$default (Lcom/davils/konfetti/core/Topic;Lcom/davils/konfetti/core/Event;Lcom/davils/konfetti/core/header/EventHeaders;Lcom/davils/konfetti/core/Envelope;Lcom/davils/konfetti/core/publish/Attribution;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public fun toString ()Ljava/lang/String;
+	public final fun tryPublish (Lcom/davils/konfetti/core/Event;Lcom/davils/konfetti/core/header/EventHeaders;Lcom/davils/konfetti/core/Envelope;Lcom/davils/konfetti/core/publish/Attribution;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun tryPublish$default (Lcom/davils/konfetti/core/Topic;Lcom/davils/konfetti/core/Event;Lcom/davils/konfetti/core/header/EventHeaders;Lcom/davils/konfetti/core/Envelope;Lcom/davils/konfetti/core/publish/Attribution;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+}
+
+public final class com/davils/konfetti/core/TopicKey {
+	public synthetic fun <init> (Ljava/lang/String;Lkotlin/reflect/KClass;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getEventType ()Lkotlin/reflect/KClass;
+	public final fun getName-akLR7iU ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class com/davils/konfetti/core/bus/Entropy {
+	public abstract fun nextLong ()J
+}
+
+public final class com/davils/konfetti/core/bus/EventBusBuilder : com/davils/kore/core/dsl/ValidatingBuilder {
+	public synthetic fun assemble ()Lcom/davils/kore/core/validation/Validatable;
+	public final fun consumerDefaults (Lkotlin/jvm/functions/Function1;)V
+	public final fun enrich (Lcom/davils/konfetti/core/publish/PublishInterceptor;)V
+	public final fun getDeadLetterRetention ()I
+	public final fun getDeadLetterStall-UwyO8pc ()J
+	public final fun getEntropy ()Lcom/davils/konfetti/core/bus/Entropy;
+	public final fun getIdentifiers ()Lcom/davils/kore/core/identity/generator/UuidGenerator;
+	public final fun getLimits ()Lcom/davils/konfetti/core/limit/BusLimits;
+	public final fun getTimeSource ()Lkotlin/time/TimeSource$WithComparableMarks;
+	public final fun intercept (Lcom/davils/konfetti/core/consume/ConsumeInterceptor;)V
+	public final fun observe (Lcom/davils/konfetti/core/observe/BusObserver;)V
+	public final fun setDeadLetterRetention (I)V
+	public final fun setDeadLetterStall-LRDsOJo (J)V
+	public final fun setEntropy (Lcom/davils/konfetti/core/bus/Entropy;)V
+	public final fun setIdentifiers (Lcom/davils/kore/core/identity/generator/UuidGenerator;)V
+	public final fun setLimits (Lcom/davils/konfetti/core/limit/BusLimits;)V
+	public final fun setTimeSource (Lkotlin/time/TimeSource$WithComparableMarks;)V
+	public final fun topic (Lcom/davils/konfetti/core/TopicKey;Lkotlin/jvm/functions/Function1;)V
+	public static synthetic fun topic$default (Lcom/davils/konfetti/core/bus/EventBusBuilder;Lcom/davils/konfetti/core/TopicKey;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)V
+	public final fun topicDefaults (Lkotlin/jvm/functions/Function1;)V
+}
+
+public final class com/davils/konfetti/core/bus/EventBusConfiguration : com/davils/kore/core/validation/Validatable {
+	public fun validate (Lcom/davils/kore/core/validation/ValidationScope;)V
+}
+
+public abstract interface class com/davils/konfetti/core/consume/ConsumeInterceptor {
+	public abstract fun intercept-RUHJrnI (Lcom/davils/konfetti/core/Envelope;Ljava/lang/String;Lkotlin/jvm/functions/Function1;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class com/davils/konfetti/core/consume/Consumer {
+	public final fun detach ()V
+	public final fun drain-VtjQ1oo (JLkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun getMetrics ()Lcom/davils/konfetti/core/observe/ConsumerMetrics;
+	public final fun getName-lK7b4Nw ()Ljava/lang/String;
+	public final fun getState ()Lkotlinx/coroutines/flow/StateFlow;
+	public final fun getTopic-akLR7iU ()Ljava/lang/String;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/konfetti/core/consume/ConsumerBuilder : com/davils/kore/core/dsl/ValidatingBuilder {
+	public synthetic fun assemble ()Lcom/davils/kore/core/validation/Validatable;
+	public final fun getConcurrency ()I
+	public final fun getHandlingTimeout-FghU774 ()Lkotlin/time/Duration;
+	public final fun getMailboxCapacity ()I
+	public final fun getMaximumStall-UwyO8pc ()J
+	public final fun getOnFailure ()Lcom/davils/konfetti/core/failure/FailurePolicy;
+	public final fun getOverflow ()Lcom/davils/konfetti/core/consume/OverflowPolicy;
+	public final fun getStart ()Lcom/davils/konfetti/core/consume/StartPosition;
+	public final fun handle (Lkotlin/jvm/functions/Function2;)V
+	public final fun setConcurrency (I)V
+	public final fun setHandlingTimeout-BwNAW2A (Lkotlin/time/Duration;)V
+	public final fun setMailboxCapacity (I)V
+	public final fun setMaximumStall-LRDsOJo (J)V
+	public final fun setOnFailure (Lcom/davils/konfetti/core/failure/FailurePolicy;)V
+	public final fun setOverflow (Lcom/davils/konfetti/core/consume/OverflowPolicy;)V
+	public final fun setStart (Lcom/davils/konfetti/core/consume/StartPosition;)V
+	public final fun where (Lkotlin/jvm/functions/Function1;)V
+}
+
+public final class com/davils/konfetti/core/consume/ConsumerConfiguration : com/davils/kore/core/validation/Validatable {
+	public fun validate (Lcom/davils/kore/core/validation/ValidationScope;)V
+}
+
+public final class com/davils/konfetti/core/consume/ConsumerDefaults {
+	public final fun getHandlingTimeout-FghU774 ()Lkotlin/time/Duration;
+	public final fun getMailboxCapacity ()I
+	public final fun getMaximumStall-UwyO8pc ()J
+	public final fun getOnFailure ()Lcom/davils/konfetti/core/failure/FailurePolicy;
+	public final fun getOverflow ()Lcom/davils/konfetti/core/consume/OverflowPolicy;
+	public final fun getStart ()Lcom/davils/konfetti/core/consume/StartPosition;
+	public final fun setHandlingTimeout-BwNAW2A (Lkotlin/time/Duration;)V
+	public final fun setMailboxCapacity (I)V
+	public final fun setMaximumStall-LRDsOJo (J)V
+	public final fun setOnFailure (Lcom/davils/konfetti/core/failure/FailurePolicy;)V
+	public final fun setOverflow (Lcom/davils/konfetti/core/consume/OverflowPolicy;)V
+	public final fun setStart (Lcom/davils/konfetti/core/consume/StartPosition;)V
+}
+
+public final class com/davils/konfetti/core/consume/ConsumerName : java/lang/Comparable {
+	public static final field Companion Lcom/davils/konfetti/core/consume/ConsumerName$Companion;
+	public static final field MAX_LENGTH I
+	public static final synthetic fun box-impl (Ljava/lang/String;)Lcom/davils/konfetti/core/consume/ConsumerName;
+	public synthetic fun compareTo (Ljava/lang/Object;)I
+	public fun compareTo-bmSVwu8 (Ljava/lang/String;)I
+	public static fun compareTo-bmSVwu8 (Ljava/lang/String;Ljava/lang/String;)I
+	public static fun constructor-impl (Ljava/lang/String;)Ljava/lang/String;
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (Ljava/lang/String;Ljava/lang/Object;)Z
+	public static final fun equals-impl0 (Ljava/lang/String;Ljava/lang/String;)Z
+	public final fun getValue ()Ljava/lang/String;
+	public fun hashCode ()I
+	public static fun hashCode-impl (Ljava/lang/String;)I
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (Ljava/lang/String;)Ljava/lang/String;
+	public final synthetic fun unbox-impl ()Ljava/lang/String;
+}
+
+public final class com/davils/konfetti/core/consume/ConsumerName$Companion {
+	public final fun isValid (Ljava/lang/String;)Z
+}
+
+public abstract interface class com/davils/konfetti/core/consume/ConsumerState {
+}
+
+public final class com/davils/konfetti/core/consume/ConsumerState$Detached : com/davils/konfetti/core/consume/ConsumerState {
+	public static final field INSTANCE Lcom/davils/konfetti/core/consume/ConsumerState$Detached;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/konfetti/core/consume/ConsumerState$Draining : com/davils/konfetti/core/consume/ConsumerState {
+	public static final field INSTANCE Lcom/davils/konfetti/core/consume/ConsumerState$Draining;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/konfetti/core/consume/ConsumerState$Running : com/davils/konfetti/core/consume/ConsumerState {
+	public static final field INSTANCE Lcom/davils/konfetti/core/consume/ConsumerState$Running;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/konfetti/core/consume/ConsumerState$Stopped : com/davils/konfetti/core/consume/ConsumerState {
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCause ()Ljava/lang/Throwable;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class com/davils/konfetti/core/consume/Consumption {
+	public abstract fun getOrThrow ()Lcom/davils/konfetti/core/consume/Consumer;
+}
+
+public final class com/davils/konfetti/core/consume/Consumption$Attached : com/davils/konfetti/core/consume/Consumption {
+	public final fun getConsumer ()Lcom/davils/konfetti/core/consume/Consumer;
+	public fun getOrThrow ()Lcom/davils/konfetti/core/consume/Consumer;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/konfetti/core/consume/Consumption$Closed : com/davils/konfetti/core/consume/Consumption {
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getOrThrow ()Lcom/davils/konfetti/core/consume/Consumer;
+	public final fun getTopic-akLR7iU ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/konfetti/core/consume/Consumption$Duplicate : com/davils/konfetti/core/consume/Consumption {
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getName-lK7b4Nw ()Ljava/lang/String;
+	public fun getOrThrow ()Lcom/davils/konfetti/core/consume/Consumer;
+	public final fun getTopic-akLR7iU ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/konfetti/core/consume/Consumption$Invalid : com/davils/konfetti/core/consume/Consumption {
+	public fun getOrThrow ()Lcom/davils/konfetti/core/consume/Consumer;
+	public final fun getReport ()Lcom/davils/kore/core/validation/report/ValidationReport;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/konfetti/core/consume/Consumption$LimitReached : com/davils/konfetti/core/consume/Consumption {
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getLimit ()I
+	public fun getOrThrow ()Lcom/davils/konfetti/core/consume/Consumer;
+	public final fun getTopic-akLR7iU ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/konfetti/core/consume/OverflowPolicy : java/lang/Enum {
+	public static final field Backpressure Lcom/davils/konfetti/core/consume/OverflowPolicy;
+	public static final field DropLatest Lcom/davils/konfetti/core/consume/OverflowPolicy;
+	public static final field DropOldest Lcom/davils/konfetti/core/consume/OverflowPolicy;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/konfetti/core/consume/OverflowPolicy;
+	public static fun values ()[Lcom/davils/konfetti/core/consume/OverflowPolicy;
+}
+
+public final class com/davils/konfetti/core/consume/StartPosition : java/lang/Enum {
+	public static final field Latest Lcom/davils/konfetti/core/consume/StartPosition;
+	public static final field Retained Lcom/davils/konfetti/core/consume/StartPosition;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/konfetti/core/consume/StartPosition;
+	public static fun values ()[Lcom/davils/konfetti/core/consume/StartPosition;
+}
+
+public final class com/davils/konfetti/core/error/EventViolationCodes {
+	public static final field INSTANCE Lcom/davils/konfetti/core/error/EventViolationCodes;
+	public final fun getABOVE_HARD_LIMIT-J_S2PC0 ()Ljava/lang/String;
+	public final fun getDEAD_LETTER_LOOP-J_S2PC0 ()Ljava/lang/String;
+	public final fun getINVALID_BACKOFF-J_S2PC0 ()Ljava/lang/String;
+	public final fun getINVALID_BUFFER-J_S2PC0 ()Ljava/lang/String;
+	public final fun getINVALID_CONCURRENCY-J_S2PC0 ()Ljava/lang/String;
+	public final fun getINVALID_MAILBOX-J_S2PC0 ()Ljava/lang/String;
+	public final fun getINVALID_NAME-J_S2PC0 ()Ljava/lang/String;
+	public final fun getINVALID_PARTITIONS-J_S2PC0 ()Ljava/lang/String;
+	public final fun getINVALID_RETENTION-J_S2PC0 ()Ljava/lang/String;
+	public final fun getINVALID_RETRY-J_S2PC0 ()Ljava/lang/String;
+	public final fun getINVALID_STALL-J_S2PC0 ()Ljava/lang/String;
+	public final fun getINVALID_TIMEOUT-J_S2PC0 ()Ljava/lang/String;
+	public final fun getLATE_DEFAULT-J_S2PC0 ()Ljava/lang/String;
+	public final fun getMISSING_HANDLER-J_S2PC0 ()Ljava/lang/String;
+	public final fun getNOT_POSITIVE-J_S2PC0 ()Ljava/lang/String;
+	public final fun getRESERVED_NAME-J_S2PC0 ()Ljava/lang/String;
+	public final fun getTOO_MANY_TOPICS-J_S2PC0 ()Ljava/lang/String;
+	public final fun getUNORDERED_PARTITIONS-J_S2PC0 ()Ljava/lang/String;
+}
+
+public final class com/davils/konfetti/core/error/TopicNotDeclaredException : java/lang/IllegalArgumentException {
+	public final fun getDeclared ()Ljava/util/Set;
+	public final fun getTopic-akLR7iU ()Ljava/lang/String;
+}
+
+public final class com/davils/konfetti/core/error/TopicTypeMismatchException : java/lang/IllegalArgumentException {
+	public final fun getDeclared ()Lkotlin/reflect/KClass;
+	public final fun getRequested ()Lkotlin/reflect/KClass;
+	public final fun getTopic-akLR7iU ()Ljava/lang/String;
+}
+
+public abstract interface class com/davils/konfetti/core/failure/Backoff : com/davils/kore/core/validation/Validatable {
+}
+
+public final class com/davils/konfetti/core/failure/Backoff$Exponential : com/davils/konfetti/core/failure/Backoff {
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getFactor ()D
+	public final fun getHasJitter ()Z
+	public final fun getInitial-UwyO8pc ()J
+	public final fun getMax-UwyO8pc ()J
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+	public fun validate (Lcom/davils/kore/core/validation/ValidationScope;)V
+}
+
+public final class com/davils/konfetti/core/failure/Backoff$Fixed : com/davils/konfetti/core/failure/Backoff {
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getDelay-UwyO8pc ()J
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+	public fun validate (Lcom/davils/kore/core/validation/ValidationScope;)V
+}
+
+public final class com/davils/konfetti/core/failure/DeadLetter : com/davils/konfetti/core/Event {
+	public final fun getAttempts ()I
+	public final fun getCause ()Ljava/lang/Throwable;
+	public final fun getConsumer-lK7b4Nw ()Ljava/lang/String;
+	public final fun getOriginal ()Lcom/davils/konfetti/core/Envelope;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/konfetti/core/failure/FailurePoliciesKt {
+	public static final fun exponential-O4J4VbY (JJDZ)Lcom/davils/konfetti/core/failure/Backoff$Exponential;
+	public static synthetic fun exponential-O4J4VbY$default (JJDZILjava/lang/Object;)Lcom/davils/konfetti/core/failure/Backoff$Exponential;
+	public static final fun fixed-LRDsOJo (J)Lcom/davils/konfetti/core/failure/Backoff$Fixed;
+	public static final fun retry (ILcom/davils/konfetti/core/failure/Backoff;Lcom/davils/konfetti/core/failure/FailurePolicy$Terminal;)Lcom/davils/konfetti/core/failure/FailurePolicy$Retry;
+	public static synthetic fun retry$default (ILcom/davils/konfetti/core/failure/Backoff;Lcom/davils/konfetti/core/failure/FailurePolicy$Terminal;ILjava/lang/Object;)Lcom/davils/konfetti/core/failure/FailurePolicy$Retry;
+}
+
+public abstract interface class com/davils/konfetti/core/failure/FailurePolicy {
+}
+
+public final class com/davils/konfetti/core/failure/FailurePolicy$DeadLetter : com/davils/konfetti/core/failure/FailurePolicy$Terminal {
+	public static final field INSTANCE Lcom/davils/konfetti/core/failure/FailurePolicy$DeadLetter;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/konfetti/core/failure/FailurePolicy$Retry : com/davils/konfetti/core/failure/FailurePolicy, com/davils/kore/core/validation/Validatable {
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAttempts ()I
+	public final fun getBackoff ()Lcom/davils/konfetti/core/failure/Backoff;
+	public final fun getThen ()Lcom/davils/konfetti/core/failure/FailurePolicy$Terminal;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+	public fun validate (Lcom/davils/kore/core/validation/ValidationScope;)V
+}
+
+public final class com/davils/konfetti/core/failure/FailurePolicy$Skip : com/davils/konfetti/core/failure/FailurePolicy$Terminal {
+	public static final field INSTANCE Lcom/davils/konfetti/core/failure/FailurePolicy$Skip;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/konfetti/core/failure/FailurePolicy$Stop : com/davils/konfetti/core/failure/FailurePolicy$Terminal {
+	public static final field INSTANCE Lcom/davils/konfetti/core/failure/FailurePolicy$Stop;
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class com/davils/konfetti/core/failure/FailurePolicy$Terminal : com/davils/konfetti/core/failure/FailurePolicy {
+}
+
+public final class com/davils/konfetti/core/failure/HandlingTimeoutException : java/lang/RuntimeException {
+	public final fun getConsumer-lK7b4Nw ()Ljava/lang/String;
+	public final fun getTimeout-UwyO8pc ()J
+}
+
+public final class com/davils/konfetti/core/header/EventHeaders {
+	public static final field Companion Lcom/davils/konfetti/core/header/EventHeaders$Companion;
+	public final fun contains (Lcom/davils/konfetti/core/header/HeaderKey;)Z
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun get (Lcom/davils/konfetti/core/header/HeaderKey;)Ljava/lang/Object;
+	public final fun getNames ()Ljava/util/List;
+	public final fun getSize ()I
+	public fun hashCode ()I
+	public final fun isEmpty ()Z
+	public final fun isSensitive-Ed0RLLI (Ljava/lang/String;)Z
+	public final fun plus (Lcom/davils/konfetti/core/header/EventHeaders;)Lcom/davils/konfetti/core/header/EventHeaders;
+	public final fun textOf-Ed0RLLI (Ljava/lang/String;)Ljava/lang/String;
+	public fun toString ()Ljava/lang/String;
+	public final fun with (Lcom/davils/konfetti/core/header/HeaderEntry;)Lcom/davils/konfetti/core/header/EventHeaders;
+	public final fun without (Lcom/davils/konfetti/core/header/HeaderKey;)Lcom/davils/konfetti/core/header/EventHeaders;
+}
+
+public final class com/davils/konfetti/core/header/EventHeaders$Companion {
+	public final fun getEMPTY ()Lcom/davils/konfetti/core/header/EventHeaders;
+}
+
+public abstract interface class com/davils/konfetti/core/header/HeaderCodec {
+	public abstract fun decode (Ljava/lang/String;)Ljava/lang/Object;
+	public abstract fun encode (Ljava/lang/Object;)Ljava/lang/String;
+}
+
+public final class com/davils/konfetti/core/header/HeaderEntry {
+	public final fun getKey ()Lcom/davils/konfetti/core/header/HeaderKey;
+	public final fun getValue ()Ljava/lang/Object;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/konfetti/core/header/HeaderKey {
+	public static final field Companion Lcom/davils/konfetti/core/header/HeaderKey$Companion;
+	public synthetic fun <init> (Ljava/lang/String;Lcom/davils/konfetti/core/header/HeaderCodec;ZILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (Ljava/lang/String;Lcom/davils/konfetti/core/header/HeaderCodec;ZLkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getCodec ()Lcom/davils/konfetti/core/header/HeaderCodec;
+	public final fun getName-T-6r6kY ()Ljava/lang/String;
+	public final fun invoke (Ljava/lang/Object;)Lcom/davils/konfetti/core/header/HeaderEntry;
+	public final fun isSensitive ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/konfetti/core/header/HeaderKey$Companion {
+	public final fun boolean (Ljava/lang/String;Z)Lcom/davils/konfetti/core/header/HeaderKey;
+	public static synthetic fun boolean$default (Lcom/davils/konfetti/core/header/HeaderKey$Companion;Ljava/lang/String;ZILjava/lang/Object;)Lcom/davils/konfetti/core/header/HeaderKey;
+	public final fun long (Ljava/lang/String;Z)Lcom/davils/konfetti/core/header/HeaderKey;
+	public static synthetic fun long$default (Lcom/davils/konfetti/core/header/HeaderKey$Companion;Ljava/lang/String;ZILjava/lang/Object;)Lcom/davils/konfetti/core/header/HeaderKey;
+	public final fun text (Ljava/lang/String;Z)Lcom/davils/konfetti/core/header/HeaderKey;
+	public static synthetic fun text$default (Lcom/davils/konfetti/core/header/HeaderKey$Companion;Ljava/lang/String;ZILjava/lang/Object;)Lcom/davils/konfetti/core/header/HeaderKey;
+	public final fun uuid (Ljava/lang/String;Z)Lcom/davils/konfetti/core/header/HeaderKey;
+	public static synthetic fun uuid$default (Lcom/davils/konfetti/core/header/HeaderKey$Companion;Ljava/lang/String;ZILjava/lang/Object;)Lcom/davils/konfetti/core/header/HeaderKey;
+}
+
+public final class com/davils/konfetti/core/header/HeaderName : java/lang/Comparable {
+	public static final field Companion Lcom/davils/konfetti/core/header/HeaderName$Companion;
+	public static final field MAX_LENGTH I
+	public static final synthetic fun box-impl (Ljava/lang/String;)Lcom/davils/konfetti/core/header/HeaderName;
+	public synthetic fun compareTo (Ljava/lang/Object;)I
+	public fun compareTo-Ed0RLLI (Ljava/lang/String;)I
+	public static fun compareTo-Ed0RLLI (Ljava/lang/String;Ljava/lang/String;)I
+	public static fun constructor-impl (Ljava/lang/String;)Ljava/lang/String;
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (Ljava/lang/String;Ljava/lang/Object;)Z
+	public static final fun equals-impl0 (Ljava/lang/String;Ljava/lang/String;)Z
+	public final fun getValue ()Ljava/lang/String;
+	public fun hashCode ()I
+	public static fun hashCode-impl (Ljava/lang/String;)I
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (Ljava/lang/String;)Ljava/lang/String;
+	public final synthetic fun unbox-impl ()Ljava/lang/String;
+}
+
+public final class com/davils/konfetti/core/header/HeaderName$Companion {
+	public final fun isValid (Ljava/lang/String;)Z
+}
+
+public final class com/davils/konfetti/core/header/HeadersKt {
+	public static final fun headersOf ([Lcom/davils/konfetti/core/header/HeaderEntry;)Lcom/davils/konfetti/core/header/EventHeaders;
+}
+
+public final class com/davils/konfetti/core/lifecycle/BusState : java/lang/Enum {
+	public static final field Closed Lcom/davils/konfetti/core/lifecycle/BusState;
+	public static final field Draining Lcom/davils/konfetti/core/lifecycle/BusState;
+	public static final field Running Lcom/davils/konfetti/core/lifecycle/BusState;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/konfetti/core/lifecycle/BusState;
+	public static fun values ()[Lcom/davils/konfetti/core/lifecycle/BusState;
+}
+
+public final class com/davils/konfetti/core/lifecycle/CloseReport {
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getDropped ()J
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class com/davils/konfetti/core/lifecycle/DrainResult {
+}
+
+public final class com/davils/konfetti/core/lifecycle/DrainResult$AlreadyClosed : com/davils/konfetti/core/lifecycle/DrainResult {
+	public static final field INSTANCE Lcom/davils/konfetti/core/lifecycle/DrainResult$AlreadyClosed;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/konfetti/core/lifecycle/DrainResult$Completed : com/davils/konfetti/core/lifecycle/DrainResult {
+	public static final field INSTANCE Lcom/davils/konfetti/core/lifecycle/DrainResult$Completed;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/konfetti/core/lifecycle/DrainResult$TimedOut : com/davils/konfetti/core/lifecycle/DrainResult {
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAbandoned ()J
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/konfetti/core/limit/BusLimits : com/davils/kore/core/validation/Validatable {
+	public static final field Companion Lcom/davils/konfetti/core/limit/BusLimits$Companion;
+	public static final field HARD_ATTEMPTS I
+	public static final field HARD_BUFFER_CAPACITY I
+	public static final field HARD_CONSUMERS I
+	public static final field HARD_HEADERS I
+	public static final field HARD_HEADER_VALUE_LENGTH I
+	public static final field HARD_MAILBOX_CAPACITY I
+	public static final field HARD_ORDERING_KEY_LENGTH I
+	public static final field HARD_PARTITIONS I
+	public static final field HARD_RETAIN I
+	public static final field HARD_TOPICS I
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getMaximumAttempts ()I
+	public final fun getMaximumBufferCapacity ()I
+	public final fun getMaximumConsumers ()I
+	public final fun getMaximumHandlingTimeout-UwyO8pc ()J
+	public final fun getMaximumHeaderValueLength ()I
+	public final fun getMaximumHeaders ()I
+	public final fun getMaximumMailboxCapacity ()I
+	public final fun getMaximumOrderingKeyLength ()I
+	public final fun getMaximumPartitions ()I
+	public final fun getMaximumRetain ()I
+	public final fun getMaximumRetryDelay-UwyO8pc ()J
+	public final fun getMaximumTopics ()I
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+	public fun validate (Lcom/davils/kore/core/validation/ValidationScope;)V
+}
+
+public final class com/davils/konfetti/core/limit/BusLimits$Companion {
+	public final fun getDefault ()Lcom/davils/konfetti/core/limit/BusLimits;
+	public final fun getHARD_HANDLING_TIMEOUT-UwyO8pc ()J
+	public final fun getHARD_RETRY_DELAY-UwyO8pc ()J
+}
+
+public final class com/davils/konfetti/core/limit/BusLimitsBuilder : com/davils/kore/core/dsl/ValidatingBuilder {
+	public synthetic fun assemble ()Lcom/davils/kore/core/validation/Validatable;
+	public final fun getMaximumAttempts ()I
+	public final fun getMaximumBufferCapacity ()I
+	public final fun getMaximumConsumers ()I
+	public final fun getMaximumHandlingTimeout-UwyO8pc ()J
+	public final fun getMaximumHeaderValueLength ()I
+	public final fun getMaximumHeaders ()I
+	public final fun getMaximumMailboxCapacity ()I
+	public final fun getMaximumOrderingKeyLength ()I
+	public final fun getMaximumPartitions ()I
+	public final fun getMaximumRetain ()I
+	public final fun getMaximumRetryDelay-UwyO8pc ()J
+	public final fun getMaximumTopics ()I
+	public final fun setMaximumAttempts (I)V
+	public final fun setMaximumBufferCapacity (I)V
+	public final fun setMaximumConsumers (I)V
+	public final fun setMaximumHandlingTimeout-LRDsOJo (J)V
+	public final fun setMaximumHeaderValueLength (I)V
+	public final fun setMaximumHeaders (I)V
+	public final fun setMaximumMailboxCapacity (I)V
+	public final fun setMaximumOrderingKeyLength (I)V
+	public final fun setMaximumPartitions (I)V
+	public final fun setMaximumRetain (I)V
+	public final fun setMaximumRetryDelay-LRDsOJo (J)V
+	public final fun setMaximumTopics (I)V
+}
+
+public final class com/davils/konfetti/core/limit/BusLimitsDslKt {
+	public static final fun busLimits (Lcom/davils/konfetti/core/limit/BusLimits;Lkotlin/jvm/functions/Function1;)Lcom/davils/konfetti/core/limit/BusLimits;
+	public static synthetic fun busLimits$default (Lcom/davils/konfetti/core/limit/BusLimits;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/davils/konfetti/core/limit/BusLimits;
+}
+
+public abstract interface class com/davils/konfetti/core/observe/BusObservation {
+}
+
+public final class com/davils/konfetti/core/observe/BusObservation$ConsumerAttached : com/davils/konfetti/core/observe/BusObservation {
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getConsumer-lK7b4Nw ()Ljava/lang/String;
+	public final fun getTopic-akLR7iU ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/konfetti/core/observe/BusObservation$ConsumerDetached : com/davils/konfetti/core/observe/BusObservation {
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getConsumer-lK7b4Nw ()Ljava/lang/String;
+	public final fun getTopic-akLR7iU ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/konfetti/core/observe/BusObservation$ConsumerStopped : com/davils/konfetti/core/observe/BusObservation {
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCause ()Ljava/lang/Throwable;
+	public final fun getConsumer-lK7b4Nw ()Ljava/lang/String;
+	public final fun getTopic-akLR7iU ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/konfetti/core/observe/BusObservation$DeadLettered : com/davils/konfetti/core/observe/BusObservation {
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAttempts ()I
+	public final fun getConsumer-lK7b4Nw ()Ljava/lang/String;
+	public final fun getEnvelope ()Lcom/davils/konfetti/core/Envelope;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/konfetti/core/observe/BusObservation$Delivered : com/davils/konfetti/core/observe/BusObservation {
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAttempt ()I
+	public final fun getConsumer-lK7b4Nw ()Ljava/lang/String;
+	public final fun getDuration-UwyO8pc ()J
+	public final fun getEnvelope ()Lcom/davils/konfetti/core/Envelope;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/konfetti/core/observe/BusObservation$Dropped : com/davils/konfetti/core/observe/BusObservation {
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getConsumer-5UIS5Hw ()Ljava/lang/String;
+	public final fun getEnvelope ()Lcom/davils/konfetti/core/Envelope;
+	public final fun getReason ()Lcom/davils/konfetti/core/observe/DropReason;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/konfetti/core/observe/BusObservation$Failed : com/davils/konfetti/core/observe/BusObservation {
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAttempt ()I
+	public final fun getCause ()Ljava/lang/Throwable;
+	public final fun getConsumer-lK7b4Nw ()Ljava/lang/String;
+	public final fun getEnvelope ()Lcom/davils/konfetti/core/Envelope;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/konfetti/core/observe/BusObservation$Filtered : com/davils/konfetti/core/observe/BusObservation {
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getConsumer-lK7b4Nw ()Ljava/lang/String;
+	public final fun getEnvelope ()Lcom/davils/konfetti/core/Envelope;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/konfetti/core/observe/BusObservation$Published : com/davils/konfetti/core/observe/BusObservation {
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getEnvelope ()Lcom/davils/konfetti/core/Envelope;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/konfetti/core/observe/BusObservation$Rejected : com/davils/konfetti/core/observe/BusObservation {
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getReason ()Lcom/davils/konfetti/core/publish/Rejection;
+	public final fun getTopic-akLR7iU ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/konfetti/core/observe/BusObservation$Retrying : com/davils/konfetti/core/observe/BusObservation {
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAttempt ()I
+	public final fun getConsumer-lK7b4Nw ()Ljava/lang/String;
+	public final fun getDelay-UwyO8pc ()J
+	public final fun getEnvelope ()Lcom/davils/konfetti/core/Envelope;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/konfetti/core/observe/BusObservation$Skipped : com/davils/konfetti/core/observe/BusObservation {
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAttempts ()I
+	public final fun getConsumer-lK7b4Nw ()Ljava/lang/String;
+	public final fun getEnvelope ()Lcom/davils/konfetti/core/Envelope;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/konfetti/core/observe/BusObservation$StateChanged : com/davils/konfetti/core/observe/BusObservation {
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getState ()Lcom/davils/konfetti/core/lifecycle/BusState;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/konfetti/core/observe/BusObservation$TopicDeclared : com/davils/konfetti/core/observe/BusObservation {
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getTopic-akLR7iU ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class com/davils/konfetti/core/observe/BusObserver {
+	public static final field None Lcom/davils/konfetti/core/observe/BusObserver$None;
+	public fun isObserving ()Z
+	public abstract fun observe (Lcom/davils/konfetti/core/observe/BusObservation;)V
+}
+
+public final class com/davils/konfetti/core/observe/BusObserver$None : com/davils/konfetti/core/observe/BusObserver {
+	public fun isObserving ()Z
+	public fun observe (Lcom/davils/konfetti/core/observe/BusObservation;)V
+}
+
+public final class com/davils/konfetti/core/observe/BusSnapshot {
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getInterceptorFailures ()J
+	public final fun getObserverFailures ()J
+	public final fun getState ()Lcom/davils/konfetti/core/lifecycle/BusState;
+	public final fun getTopics ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/konfetti/core/observe/ConsumerMetrics {
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getDeadLettered ()J
+	public final fun getDelivered ()J
+	public final fun getDropped ()J
+	public final fun getFailed ()J
+	public final fun getFiltered ()J
+	public final fun getInFlight ()J
+	public final fun getQueued ()J
+	public final fun getReceived ()J
+	public final fun getRetried ()J
+	public final fun getSettled ()J
+	public final fun getSkipped ()J
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/konfetti/core/observe/DropReason : java/lang/Enum {
+	public static final field Abandoned Lcom/davils/konfetti/core/observe/DropReason;
+	public static final field Closed Lcom/davils/konfetti/core/observe/DropReason;
+	public static final field DeadLetterOverflow Lcom/davils/konfetti/core/observe/DropReason;
+	public static final field Detached Lcom/davils/konfetti/core/observe/DropReason;
+	public static final field Overflow Lcom/davils/konfetti/core/observe/DropReason;
+	public static final field Stalled Lcom/davils/konfetti/core/observe/DropReason;
+	public static final field Stopped Lcom/davils/konfetti/core/observe/DropReason;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/konfetti/core/observe/DropReason;
+	public static fun values ()[Lcom/davils/konfetti/core/observe/DropReason;
+}
+
+public final class com/davils/konfetti/core/observe/ObservationStream : com/davils/konfetti/core/observe/BusObserver {
+	public static final field Companion Lcom/davils/konfetti/core/observe/ObservationStream$Companion;
+	public static final field DEFAULT_CAPACITY I
+	public static final field MAX_CAPACITY I
+	public fun <init> ()V
+	public fun <init> (I)V
+	public synthetic fun <init> (IILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getCapacity ()I
+	public fun isObserving ()Z
+	public final fun observations ()Lkotlinx/coroutines/flow/Flow;
+	public fun observe (Lcom/davils/konfetti/core/observe/BusObservation;)V
+	public final fun sequenced ()Lkotlinx/coroutines/flow/Flow;
+}
+
+public final class com/davils/konfetti/core/observe/ObservationStream$Companion {
+}
+
+public final class com/davils/konfetti/core/observe/SequencedObservation {
+	public final fun getMissed ()J
+	public final fun getObservation ()Lcom/davils/konfetti/core/observe/BusObservation;
+	public final fun getSequence ()J
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/konfetti/core/observe/TopicMetrics {
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getConsumers ()I
+	public final fun getDispatched ()J
+	public final fun getDropped ()J
+	public final fun getPublished ()J
+	public final fun getQueued ()J
+	public final fun getRejected ()J
+	public final fun getRetained ()I
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/konfetti/core/observe/TopicSnapshot {
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getConsumers ()Ljava/util/Map;
+	public final fun getMetrics ()Lcom/davils/konfetti/core/observe/TopicMetrics;
+	public final fun getName-akLR7iU ()Ljava/lang/String;
+	public final fun getPartitions ()I
+	public final fun getState ()Lcom/davils/konfetti/core/lifecycle/BusState;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class com/davils/konfetti/core/publish/Attribution {
+	public static final field Companion Lcom/davils/konfetti/core/publish/Attribution$Companion;
+}
+
+public final class com/davils/konfetti/core/publish/Attribution$Anonymous : com/davils/konfetti/core/publish/Attribution {
+	public static final field INSTANCE Lcom/davils/konfetti/core/publish/Attribution$Anonymous;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/konfetti/core/publish/Attribution$Companion {
+	public final fun forPrincipal (Lcom/davils/kore/core/principal/Principal;)Lcom/davils/konfetti/core/publish/Attribution;
+}
+
+public final class com/davils/konfetti/core/publish/Attribution$Explicit : com/davils/konfetti/core/publish/Attribution {
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getPrincipal ()Lcom/davils/kore/core/principal/Principal;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/konfetti/core/publish/Attribution$Inherited : com/davils/konfetti/core/publish/Attribution {
+	public static final field INSTANCE Lcom/davils/konfetti/core/publish/Attribution$Inherited;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/konfetti/core/publish/Publication {
+	public final fun getContext ()Lkotlin/coroutines/CoroutineContext;
+	public final fun getEvent ()Lcom/davils/konfetti/core/Event;
+	public final fun getHeaders ()Lcom/davils/konfetti/core/header/EventHeaders;
+	public final fun getTopic-akLR7iU ()Ljava/lang/String;
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class com/davils/konfetti/core/publish/PublishInterceptor {
+	public abstract fun enrich (Lcom/davils/konfetti/core/publish/Publication;)Lcom/davils/konfetti/core/header/EventHeaders;
+}
+
+public abstract interface class com/davils/konfetti/core/publish/PublishResult {
+}
+
+public final class com/davils/konfetti/core/publish/PublishResult$Published : com/davils/konfetti/core/publish/PublishResult {
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getEnvelope ()Lcom/davils/konfetti/core/Envelope;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/konfetti/core/publish/PublishResult$Rejected : com/davils/konfetti/core/publish/PublishResult {
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getReason ()Lcom/davils/konfetti/core/publish/Rejection;
+	public final fun getTopic-akLR7iU ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/konfetti/core/publish/Rejection : java/lang/Enum {
+	public static final field Closed Lcom/davils/konfetti/core/publish/Rejection;
+	public static final field InvalidOrderingKey Lcom/davils/konfetti/core/publish/Rejection;
+	public static final field Overflow Lcom/davils/konfetti/core/publish/Rejection;
+	public static final field OversizedHeaders Lcom/davils/konfetti/core/publish/Rejection;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/konfetti/core/publish/Rejection;
+	public static fun values ()[Lcom/davils/konfetti/core/publish/Rejection;
+}
+
+public abstract interface class com/davils/konfetti/core/topic/Declaration {
+	public abstract fun getOrThrow ()Lcom/davils/konfetti/core/Topic;
+}
+
+public final class com/davils/konfetti/core/topic/Declaration$AlreadyDeclared : com/davils/konfetti/core/topic/Declaration {
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getName-akLR7iU ()Ljava/lang/String;
+	public fun getOrThrow ()Lcom/davils/konfetti/core/Topic;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/konfetti/core/topic/Declaration$Closed : com/davils/konfetti/core/topic/Declaration {
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getName-akLR7iU ()Ljava/lang/String;
+	public fun getOrThrow ()Lcom/davils/konfetti/core/Topic;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/konfetti/core/topic/Declaration$Declared : com/davils/konfetti/core/topic/Declaration {
+	public fun getOrThrow ()Lcom/davils/konfetti/core/Topic;
+	public final fun getReport ()Lcom/davils/kore/core/validation/report/ValidationReport;
+	public final fun getTopic ()Lcom/davils/konfetti/core/Topic;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/konfetti/core/topic/Declaration$Invalid : com/davils/konfetti/core/topic/Declaration {
+	public fun getOrThrow ()Lcom/davils/konfetti/core/Topic;
+	public final fun getReport ()Lcom/davils/kore/core/validation/report/ValidationReport;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/konfetti/core/topic/Declaration$LimitReached : com/davils/konfetti/core/topic/Declaration {
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getLimit ()I
+	public final fun getName-akLR7iU ()Ljava/lang/String;
+	public fun getOrThrow ()Lcom/davils/konfetti/core/Topic;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/konfetti/core/topic/OrderingKey {
+	public static final synthetic fun box-impl (Ljava/lang/String;)Lcom/davils/konfetti/core/topic/OrderingKey;
+	public static fun constructor-impl (Ljava/lang/String;)Ljava/lang/String;
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (Ljava/lang/String;Ljava/lang/Object;)Z
+	public static final fun equals-impl0 (Ljava/lang/String;Ljava/lang/String;)Z
+	public final fun getValue ()Ljava/lang/String;
+	public fun hashCode ()I
+	public static fun hashCode-impl (Ljava/lang/String;)I
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (Ljava/lang/String;)Ljava/lang/String;
+	public final synthetic fun unbox-impl ()Ljava/lang/String;
+}
+
+public final class com/davils/konfetti/core/topic/TopicBuilder : com/davils/kore/core/dsl/ValidatingBuilder {
+	public synthetic fun assemble ()Lcom/davils/kore/core/validation/Validatable;
+	public final fun getBufferCapacity ()I
+	public final fun getPartitions ()I
+	public final fun getRetain ()I
+	public final fun orderBy (Lkotlin/jvm/functions/Function1;)V
+	public final fun setBufferCapacity (I)V
+	public final fun setPartitions (I)V
+	public final fun setRetain (I)V
+}
+
+public final class com/davils/konfetti/core/topic/TopicConfiguration : com/davils/kore/core/validation/Validatable {
+	public fun validate (Lcom/davils/kore/core/validation/ValidationScope;)V
+}
+
+public final class com/davils/konfetti/core/topic/TopicDefaults {
+	public final fun getBufferCapacity ()I
+	public final fun getPartitions ()I
+	public final fun getRetain ()I
+	public final fun setBufferCapacity (I)V
+	public final fun setPartitions (I)V
+	public final fun setRetain (I)V
+}
+
+public final class com/davils/konfetti/core/topic/TopicName : java/lang/Comparable {
+	public static final field Companion Lcom/davils/konfetti/core/topic/TopicName$Companion;
+	public static final field MAX_LENGTH I
+	public static final synthetic fun box-impl (Ljava/lang/String;)Lcom/davils/konfetti/core/topic/TopicName;
+	public synthetic fun compareTo (Ljava/lang/Object;)I
+	public fun compareTo-4c3bE20 (Ljava/lang/String;)I
+	public static fun compareTo-4c3bE20 (Ljava/lang/String;Ljava/lang/String;)I
+	public static fun constructor-impl (Ljava/lang/String;)Ljava/lang/String;
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (Ljava/lang/String;Ljava/lang/Object;)Z
+	public static final fun equals-impl0 (Ljava/lang/String;Ljava/lang/String;)Z
+	public final fun getValue ()Ljava/lang/String;
+	public fun hashCode ()I
+	public static fun hashCode-impl (Ljava/lang/String;)I
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (Ljava/lang/String;)Ljava/lang/String;
+	public final synthetic fun unbox-impl ()Ljava/lang/String;
+}
+
+public final class com/davils/konfetti/core/topic/TopicName$Companion {
+	public final fun getDEAD_LETTERS-akLR7iU ()Ljava/lang/String;
+	public final fun isValid (Ljava/lang/String;)Z
+}
+
