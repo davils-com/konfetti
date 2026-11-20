@@ -25,12 +25,30 @@ private const val PENDING: Int = 0
 private const val SENT: Int = 1
 private const val LOST: Int = 2
 private const val SETTLED: Int = 3
+private const val TAKEN: Int = 4
 
 @OptIn(ExperimentalAtomicApi::class)
 internal class PartitionHandoff<T : Event>(val envelope: Envelope<T>) {
     private val state = AtomicInt(PENDING)
 
-    fun accept(): Boolean = state.compareAndSet(expectedValue = PENDING, newValue = SENT)
+    fun accept(): Boolean {
+        if (state.compareAndSet(expectedValue = PENDING, newValue = SENT)) return true
+        return state.load() == TAKEN
+    }
+
+    fun take(): Boolean {
+        var current = state.load()
+        while (current == PENDING || current == SENT) {
+            if (state.compareAndSet(expectedValue = current, newValue = TAKEN)) return true
+            current = state.load()
+        }
+        return false
+    }
+
+    fun abandon(): Boolean {
+        if (state.compareAndSet(expectedValue = PENDING, newValue = LOST)) return true
+        return state.load() == LOST
+    }
 
     fun undeliver(): Boolean {
         if (state.compareAndSet(expectedValue = PENDING, newValue = LOST)) return false

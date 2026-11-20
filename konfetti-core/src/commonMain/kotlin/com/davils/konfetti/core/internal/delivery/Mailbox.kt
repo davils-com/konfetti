@@ -19,6 +19,7 @@ package com.davils.konfetti.core.internal.delivery
 import com.davils.konfetti.core.Envelope
 import com.davils.konfetti.core.Event
 import com.davils.konfetti.core.consume.OverflowPolicy
+import com.davils.konfetti.core.internal.platform.guard
 import com.davils.konfetti.core.observe.DropReason
 import com.davils.kore.core.failure.attempted
 import kotlinx.coroutines.channels.Channel
@@ -34,12 +35,15 @@ internal class Mailbox<T : Event>(
     private val lost: (Envelope<T>, DropReason) -> Unit,
     private val reason: () -> DropReason,
 ) {
+    private val guard = guard()
+    private val waiting = mutableSetOf<MailboxHandoff<T>>()
     private val channel = Channel<MailboxHandoff<T>>(capacity) { handoff ->
         if (!handoff.defer()) lose(handoff, reason())
     }
 
     suspend fun put(envelope: Envelope<T>) {
         val handoff = MailboxHandoff(envelope)
+        guard.locked { waiting += handoff }
         settle(handoff, placed(handoff))
     }
 
@@ -59,6 +63,7 @@ internal class Mailbox<T : Event>(
 
     suspend fun consume(block: suspend (Envelope<T>) -> Unit) {
         for (handoff in channel) {
+            guard.locked { waiting -= handoff }
             if (handoff.claim()) block(handoff.envelope)
         }
     }
@@ -69,6 +74,8 @@ internal class Mailbox<T : Event>(
 
     fun cancel() {
         channel.cancel()
+        val stranded = guard.locked { waiting.toList() }
+        stranded.forEach { handoff -> lose(handoff, reason()) }
     }
 
     private suspend fun place(handoff: MailboxHandoff<T>): DropReason? = when (overflow) {
@@ -79,8 +86,12 @@ internal class Mailbox<T : Event>(
 
     private suspend fun send(handoff: MailboxHandoff<T>): DropReason? {
         if (maximumStall.isInfinite()) return refusalOf(attempted { channel.send(handoff) })
-        val sent = withTimeoutOrNull(maximumStall) { attempted { channel.send(handoff) } }
-        return sent?.let(::refusalOf) ?: DropReason.Stalled.takeIf { sent == null }
+        return sendWithin(handoff)
+    }
+
+    private suspend fun sendWithin(handoff: MailboxHandoff<T>): DropReason? {
+        val sent = withTimeoutOrNull(maximumStall) { attempted { channel.send(handoff) } } ?: return DropReason.Stalled
+        return refusalOf(sent)
     }
 
     private fun dropLatest(handoff: MailboxHandoff<T>): DropReason? {
@@ -108,6 +119,7 @@ internal class Mailbox<T : Event>(
     }
 
     private fun lose(handoff: MailboxHandoff<T>, reason: DropReason) {
+        guard.locked { waiting -= handoff }
         if (handoff.claim()) lost(handoff.envelope, reason)
     }
 }

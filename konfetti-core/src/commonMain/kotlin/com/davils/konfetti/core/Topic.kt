@@ -114,7 +114,9 @@ public class Topic<T : Event> internal constructor(internal val runtime: TopicRu
      *
      * The publish interceptors of the bus enrich the headers first; the ordering key of the topic picks the partition.
      * A publication from inside a handler takes the envelope being handled as its cause unless [causedBy] names
-     * another.
+     * another. When the publishing coroutine is cancelled while it waits, the publication is refused, unless the
+     * topic had already taken the envelope: then it is accepted, counted and delivered although the cancelled caller
+     * never sees the result.
      *
      * @param event the event.
      * @param headers the headers of the envelope; none by default.

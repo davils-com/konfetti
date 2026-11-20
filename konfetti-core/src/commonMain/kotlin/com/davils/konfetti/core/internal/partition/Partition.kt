@@ -18,6 +18,7 @@ package com.davils.konfetti.core.internal.partition
 
 import com.davils.konfetti.core.Envelope
 import com.davils.konfetti.core.Event
+import com.davils.konfetti.core.internal.platform.guard
 import com.davils.konfetti.core.publish.Rejection
 import com.davils.kore.core.failure.attempted
 import kotlinx.coroutines.CoroutineScope
@@ -29,22 +30,30 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withTimeoutOrNull
 import kotlin.time.Duration
 
-internal class Partition<T : Event>(capacity: Int, lost: (Envelope<T>) -> Unit) {
-    private val channel = Channel<PartitionHandoff<T>>(capacity) { handoff ->
-        if (handoff.undeliver()) lost(handoff.envelope)
-    }
+internal class Partition<T : Event>(capacity: Int, private val lost: (Envelope<T>) -> Unit) {
+    private val guard = guard()
+    private val waiting = mutableSetOf<PartitionHandoff<T>>()
+    private val channel = Channel<PartitionHandoff<T>>(capacity) { handoff -> undeliver(handoff) }
 
     suspend fun send(handoff: PartitionHandoff<T>, stall: Duration): Rejection? {
-        if (stall.isInfinite()) return refusalOf(attempted { channel.send(handoff) })
-        val sent = withTimeoutOrNull(stall) { attempted { channel.send(handoff) } }
-        return sent?.let(::refusalOf) ?: Rejection.Overflow.takeIf { sent == null }
+        guard.locked { waiting += handoff }
+        if (stall.isInfinite()) return refusalOf(handoff, attempted { channel.send(handoff) })
+        return sendWithin(handoff, stall)
     }
 
-    fun trySend(handoff: PartitionHandoff<T>): ChannelResult<Unit> = channel.trySend(handoff)
+    fun trySend(handoff: PartitionHandoff<T>): ChannelResult<Unit> {
+        guard.locked { waiting += handoff }
+        val result = channel.trySend(handoff)
+        if (result.isFailure) forget(handoff)
+        return result
+    }
 
     fun start(scope: CoroutineScope, dispatch: suspend (Envelope<T>) -> Unit): Job =
         scope.launch(start = CoroutineStart.UNDISPATCHED) {
-            for (handoff in channel) dispatch(handoff.envelope)
+            for (handoff in channel) {
+                forget(handoff)
+                if (handoff.take()) dispatch(handoff.envelope)
+            }
         }
 
     fun close() {
@@ -53,7 +62,32 @@ internal class Partition<T : Event>(capacity: Int, lost: (Envelope<T>) -> Unit) 
 
     fun cancel() {
         channel.cancel()
+        val stranded = guard.locked { waiting.toList() }
+        stranded.forEach(::undeliver)
     }
 
-    private fun refusalOf(sent: Result<Unit>): Rejection? = Rejection.Closed.takeIf { sent.isFailure }
+    private suspend fun sendWithin(handoff: PartitionHandoff<T>, stall: Duration): Rejection? {
+        val sent = withTimeoutOrNull(stall) { attempted { channel.send(handoff) } }
+            ?: return refused(handoff, Rejection.Overflow)
+        return refusalOf(handoff, sent)
+    }
+
+    private fun refusalOf(handoff: PartitionHandoff<T>, sent: Result<Unit>): Rejection? {
+        if (sent.isSuccess) return null
+        return refused(handoff, Rejection.Closed)
+    }
+
+    private fun refused(handoff: PartitionHandoff<T>, rejection: Rejection): Rejection? {
+        forget(handoff)
+        return rejection.takeIf { handoff.abandon() }
+    }
+
+    private fun undeliver(handoff: PartitionHandoff<T>) {
+        forget(handoff)
+        if (handoff.undeliver()) lost(handoff.envelope)
+    }
+
+    private fun forget(handoff: PartitionHandoff<T>) {
+        guard.locked { waiting -= handoff }
+    }
 }

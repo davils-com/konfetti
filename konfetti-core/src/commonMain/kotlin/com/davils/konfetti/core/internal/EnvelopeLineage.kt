@@ -22,5 +22,7 @@ import com.davils.kore.core.identity.UuidV7
 
 internal data class EnvelopeLineage(val correlationId: UuidV7, val causationId: UuidV7?)
 
-internal fun lineage(id: UuidV7, cause: Envelope<Event>?): EnvelopeLineage =
-    EnvelopeLineage(correlationId = cause?.correlationId ?: id, causationId = cause?.id)
+internal fun lineage(id: UuidV7, cause: Envelope<Event>?): EnvelopeLineage {
+    if (cause == null) return EnvelopeLineage(correlationId = id, causationId = null)
+    return EnvelopeLineage(correlationId = cause.correlationId, causationId = cause.id)
+}

@@ -63,8 +63,17 @@ internal class Publisher<T : Event>(private val runtime: TopicRuntime<T>) {
     }
 
     private suspend fun sent(ready: Preparation.Ready<T>, stall: Duration): PublishResult<T> {
-        val refusal = ready.partition.send(ready.handoff, stall) ?: return accepted(ready.handoff)
+        val refusal = transmitted(ready, stall) ?: return accepted(ready.handoff)
         return rejected(refusal)
+    }
+
+    private suspend fun transmitted(ready: Preparation.Ready<T>, stall: Duration): Rejection? {
+        var isFinished = false
+        try {
+            return ready.partition.send(ready.handoff, stall).also { isFinished = true }
+        } finally {
+            if (!isFinished && !ready.handoff.abandon()) accepted(ready.handoff)
+        }
     }
 
     suspend fun tryPublish(
@@ -112,13 +121,12 @@ internal class Publisher<T : Event>(private val runtime: TopicRuntime<T>) {
         principal: Principal?,
     ): Preparation<T> {
         val enriched = enrich(event, headers, context)
-        val key = orderingKeyOf(event)
-        val refusal = refusalOf(key, enriched)
-        if (refusal != null) return Preparation.Refused(refusal)
+        val key = orderingKeyOf(event) ?: return Preparation.Refused(Rejection.InvalidOrderingKey)
+        if (enriched.exceeds(environment.limits)) return Preparation.Refused(Rejection.OversizedHeaders)
         val id = environment.identifiers.next()
         val envelope = Envelope(
             id = id,
-            route = EnvelopeRoute(topic = runtime.name, orderingKey = key?.value),
+            route = EnvelopeRoute(topic = runtime.name, orderingKey = key.value),
             lineage = lineage(id, cause),
             headers = enriched,
             payload = event,
@@ -145,11 +153,6 @@ internal class Publisher<T : Event>(private val runtime: TopicRuntime<T>) {
             val publication = Publication(topic = runtime.name, event = event, headers = current, context = context)
             environment.enrich(interceptor, publication)
         }
-
-    private fun refusalOf(key: KeyResult?, headers: EventHeaders): Rejection? {
-        if (key == null) return Rejection.InvalidOrderingKey
-        return Rejection.OversizedHeaders.takeIf { headers.exceeds(environment.limits) }
-    }
 
     private fun orderingKeyOf(event: T): KeyResult? {
         val by = runtime.configuration.orderBy ?: return KeyResult(null)
