@@ -27,7 +27,6 @@ import com.davils.konfetti.core.topic.TopicConfiguration
 import com.davils.konfetti.core.topic.TopicName
 import com.davils.kore.core.annotation.DavilsInternal
 import com.davils.kore.core.collection.OrderedMap
-import com.davils.kore.core.collection.immutableSet
 import com.davils.kore.core.validation.report.ValidationReport
 import kotlinx.coroutines.CoroutineScope
 import kotlin.concurrent.atomics.AtomicReference
@@ -64,7 +63,11 @@ internal class TopicDirectory(
 
     private val sink = DeadLetterSink { letter, cause -> deadLetters.store(letter, cause, environment.deadLetterStall) }
 
-    val names: Set<TopicName> get() = lock.locked { byName.keys.immutableSet() }
+    val names: Set<TopicName>
+        get() {
+            val topics = declared.load()
+            return buildSet { topics.forEach { topic -> add(topic.name) } }
+        }
 
     val count: Int get() = declared.load().size
 
@@ -81,7 +84,7 @@ internal class TopicDirectory(
             byName[configuration.name] = topic
             declared.store(declared.load() + topic)
         }
-        environment.observers.announce { BusObservation.TopicDeclared(configuration.name) }
+        environment.observers.observe { BusObservation.TopicDeclared(configuration.name) }
         return topic
     }
 

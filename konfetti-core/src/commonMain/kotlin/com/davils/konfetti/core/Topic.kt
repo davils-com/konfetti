@@ -210,8 +210,9 @@ public class Topic<T : Event> internal constructor(internal val runtime: TopicRu
      * Returns the envelopes of the topic as a flow.
      *
      * Each collection attaches its own consumer named `konfetti.flow-n`, which skips what its collector fails and is
-     * detached when the collection ends. The flow fails with an [IllegalStateException] if the consumer cannot be
-     * attached, such as when the topic is closed or holds its limit of consumers.
+     * detached when the collection ends. On a topic that no longer runs the flow ends at once; it fails with an
+     * [IllegalStateException] if the consumer cannot be attached otherwise, such as when the topic holds its limit of
+     * consumers.
      *
      * @param start where the flow starts; the envelopes published from now on by default.
      * @return a flow of envelopes that ends when the topic closes.
@@ -224,8 +225,7 @@ public class Topic<T : Event> internal constructor(internal val runtime: TopicRu
             onFailure = FailurePolicy.Skip
             handle { envelope -> send(envelope) }
         }
-        val consumer = consumption.getOrThrow()
-        awaitClose { consumer.detach() }
+        consumption.consumerOrNull()?.let { consumer -> awaitClose { consumer.detach() } }
     }
 
     /**
@@ -275,4 +275,9 @@ public class Topic<T : Event> internal constructor(internal val runtime: TopicRu
         consumer.watch(owner)
         return Consumption.Attached(Consumer(consumer))
     }
+}
+
+private fun Consumption.consumerOrNull(): Consumer? {
+    if (this is Consumption.Closed) return null
+    return getOrThrow()
 }

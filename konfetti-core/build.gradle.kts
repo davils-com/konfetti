@@ -29,3 +29,9 @@ kreate {
 dependencies {
     commonMainApi(libs.kore.core)
 }
+
+val testConfigurations: Set<String> = setOf("commonUnitTestImplementation", "wasmJsTestImplementation")
+
+configurations.matching { configuration -> configuration.name in testConfigurations }.configureEach {
+    dependencies.add(project.dependencies.project(":konfetti-testing"))
+}

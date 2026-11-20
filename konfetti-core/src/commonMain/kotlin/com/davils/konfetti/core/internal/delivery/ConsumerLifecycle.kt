@@ -75,6 +75,6 @@ internal class ConsumerLifecycle(
         mutableState.value = next
         owner.load()?.dispose()
         scope.cancel()
-        if (announcement != null) observers.announce { announcement }
+        if (announcement != null) observers.observe { announcement }
     }
 }

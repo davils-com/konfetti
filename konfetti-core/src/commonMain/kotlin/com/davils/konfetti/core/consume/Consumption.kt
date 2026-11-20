@@ -78,6 +78,23 @@ public sealed interface Consumption {
         override fun getOrThrow(): Consumer = error("Consumer '$name' is already attached to topic '$topic'")
 
         /**
+         * Tells whether [other] reports the same outcome.
+         *
+         * @param other the object to compare with.
+         * @return true if [other] is an equal outcome.
+         * @since 1.0.0
+         */
+        override fun equals(other: Any?): Boolean = other is Duplicate && topic == other.topic && name == other.name
+
+        /**
+         * Returns a hash consistent with [equals].
+         *
+         * @return the hash.
+         * @since 1.0.0
+         */
+        override fun hashCode(): Int = listOf(topic, name).hashCode()
+
+        /**
          * Shows the consumption.
          *
          * @return the consumption as text.
@@ -130,6 +147,23 @@ public sealed interface Consumption {
         )
 
         /**
+         * Tells whether [other] reports the same outcome.
+         *
+         * @param other the object to compare with.
+         * @return true if [other] is an equal outcome.
+         * @since 1.0.0
+         */
+        override fun equals(other: Any?): Boolean = other is Closed && topic == other.topic
+
+        /**
+         * Returns a hash consistent with [equals].
+         *
+         * @return the hash.
+         * @since 1.0.0
+         */
+        override fun hashCode(): Int = topic.hashCode()
+
+        /**
          * Shows the consumption.
          *
          * @return the consumption as text.
@@ -156,6 +190,24 @@ public sealed interface Consumption {
          */
         override fun getOrThrow(): Consumer =
             error("Topic '$topic' takes no new consumer because it has its limit of $limit consumers")
+
+        /**
+         * Tells whether [other] reports the same outcome.
+         *
+         * @param other the object to compare with.
+         * @return true if [other] is an equal outcome.
+         * @since 1.0.0
+         */
+        override fun equals(other: Any?): Boolean =
+            other is LimitReached && topic == other.topic && limit == other.limit
+
+        /**
+         * Returns a hash consistent with [equals].
+         *
+         * @return the hash.
+         * @since 1.0.0
+         */
+        override fun hashCode(): Int = listOf(topic, limit).hashCode()
 
         /**
          * Shows the consumption.

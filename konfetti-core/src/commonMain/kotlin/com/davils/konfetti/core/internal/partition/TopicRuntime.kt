@@ -32,8 +32,6 @@ import com.davils.konfetti.core.observe.TopicSnapshot
 import com.davils.konfetti.core.topic.OrderingKey
 import com.davils.konfetti.core.topic.TopicConfiguration
 import com.davils.konfetti.core.topic.TopicName
-import com.davils.kore.core.annotation.DavilsInternal
-import com.davils.kore.core.collection.immutableMap
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.CoroutineName
 import kotlinx.coroutines.CoroutineScope
@@ -48,7 +46,7 @@ import kotlin.concurrent.atomics.AtomicReference
 import kotlin.concurrent.atomics.ExperimentalAtomicApi
 import kotlin.concurrent.atomics.fetchAndIncrement
 
-@OptIn(ExperimentalAtomicApi::class, DavilsInternal::class)
+@OptIn(ExperimentalAtomicApi::class)
 internal class TopicRuntime<T : Event>(
     val configuration: TopicConfiguration<T>,
     val environment: BusEnvironment,
@@ -127,8 +125,9 @@ internal class TopicRuntime<T : Event>(
 
     fun snapshot(): TopicSnapshot {
         val consumers = registry.consumers.sortedBy { consumer -> consumer.name }
-        val metrics: Map<ConsumerName, ConsumerMetrics> =
-            consumers.associate { consumer -> consumer.name to consumer.metrics() }.immutableMap()
+        val metrics: Map<ConsumerName, ConsumerMetrics> = buildMap {
+            consumers.forEach { consumer -> put(consumer.name, consumer.metrics()) }
+        }
         return TopicSnapshot(
             name = name,
             state = state,

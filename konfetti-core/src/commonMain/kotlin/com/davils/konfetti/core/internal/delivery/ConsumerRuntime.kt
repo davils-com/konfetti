@@ -87,7 +87,7 @@ internal class ConsumerRuntime<T : Event>(
 
     fun start() {
         workers.start()
-        environment.observers.announce { BusObservation.ConsumerAttached(topic, name) }
+        environment.observers.observe { BusObservation.ConsumerAttached(topic, name) }
     }
 
     fun watch(owner: CoroutineScope?) {

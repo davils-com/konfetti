@@ -110,11 +110,11 @@ public class ConsumerConfiguration<T : Event> internal constructor(
     }
 
     private fun ValidationScope.validateRetry(policy: FailurePolicy.Retry) {
-        with(policy) { validate() }
         val limits = target.limits
         if (policy.attempts > limits.maximumAttempts && policy.attempts <= BusLimits.HARD_ATTEMPTS) {
             fail(policy::attempts, "must be at most ${limits.maximumAttempts}", EventViolationCodes.INVALID_RETRY)
         }
+        with(policy) { validate() }
         val longest = policy.backoff.longestDelay
         if (longest <= limits.maximumRetryDelay || longest > BusLimits.HARD_RETRY_DELAY) return
         fail(policy::backoff, "must wait at most ${limits.maximumRetryDelay}", EventViolationCodes.INVALID_BACKOFF)

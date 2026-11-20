@@ -85,6 +85,23 @@ public sealed interface Declaration<T : Event> {
         override fun getOrThrow(): Topic<T> = error("Topic '$name' is already declared on this bus")
 
         /**
+         * Tells whether [other] reports the same outcome.
+         *
+         * @param other the object to compare with.
+         * @return true if [other] is an equal outcome.
+         * @since 1.0.0
+         */
+        override fun equals(other: Any?): Boolean = other is AlreadyDeclared<*> && name == other.name
+
+        /**
+         * Returns a hash consistent with [equals].
+         *
+         * @return the hash.
+         * @since 1.0.0
+         */
+        override fun hashCode(): Int = name.hashCode()
+
+        /**
          * Shows the declaration.
          *
          * @return the declaration as text.
@@ -138,6 +155,23 @@ public sealed interface Declaration<T : Event> {
             error("Topic '$name' was not declared because the bus is no longer running")
 
         /**
+         * Tells whether [other] reports the same outcome.
+         *
+         * @param other the object to compare with.
+         * @return true if [other] is an equal outcome.
+         * @since 1.0.0
+         */
+        override fun equals(other: Any?): Boolean = other is Closed<*> && name == other.name
+
+        /**
+         * Returns a hash consistent with [equals].
+         *
+         * @return the hash.
+         * @since 1.0.0
+         */
+        override fun hashCode(): Int = name.hashCode()
+
+        /**
          * Shows the declaration.
          *
          * @return the declaration as text.
@@ -167,6 +201,24 @@ public sealed interface Declaration<T : Event> {
          */
         override fun getOrThrow(): Topic<T> =
             error("Topic '$name' was not declared because the bus holds its limit of $limit topics")
+
+        /**
+         * Tells whether [other] reports the same outcome.
+         *
+         * @param other the object to compare with.
+         * @return true if [other] is an equal outcome.
+         * @since 1.0.0
+         */
+        override fun equals(other: Any?): Boolean =
+            other is LimitReached<*> && name == other.name && limit == other.limit
+
+        /**
+         * Returns a hash consistent with [equals].
+         *
+         * @return the hash.
+         * @since 1.0.0
+         */
+        override fun hashCode(): Int = listOf(name, limit).hashCode()
 
         /**
          * Shows the declaration.

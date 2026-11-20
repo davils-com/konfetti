@@ -28,8 +28,8 @@ package com.davils.konfetti.core.observe
  */
 public fun interface BusObserver {
     /**
-     * Whether the observer wants the observations of single envelopes now; while no observer wants them, the bus does
-     * not build them. Changes of state and of topics and consumers are always observed.
+     * Whether the observer wants observations now; while it is false the bus does not call the observer, and while no
+     * observer wants observations the bus does not even build them. A property that throws counts as false.
      *
      * @since 1.0.0
      */

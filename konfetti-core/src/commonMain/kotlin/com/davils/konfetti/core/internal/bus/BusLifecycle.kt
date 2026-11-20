@@ -119,6 +119,6 @@ internal class BusLifecycle(
     }
 
     private fun announce(state: BusState) {
-        environment.observers.announce { BusObservation.StateChanged(state) }
+        environment.observers.observe { BusObservation.StateChanged(state) }
     }
 }

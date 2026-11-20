@@ -26,22 +26,18 @@ internal class Observers(private val observers: List<BusObserver>) {
 
     val failureCount: Long get() = failures.sum
 
-    val isObserving: Boolean
-        get() = observers.any { observer -> contained { observer.isObserving }.getOrDefault(false) }
+    val isObserving: Boolean get() = observers.any(::wants)
 
     inline fun observe(build: () -> BusObservation) {
         if (!isObserving) return
         notifyAll(build())
     }
 
-    inline fun announce(build: () -> BusObservation) {
-        if (observers.isEmpty()) return
-        notifyAll(build())
-    }
-
     fun notifyAll(observation: BusObservation) {
-        observers.forEach { observer ->
+        observers.filter(::wants).forEach { observer ->
             contained { observer.observe(observation) }.onFailure { failures.increment() }
         }
     }
+
+    private fun wants(observer: BusObserver): Boolean = contained { observer.isObserving }.getOrDefault(false)
 }
