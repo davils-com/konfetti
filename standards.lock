@@ -1,0 +1,39 @@
+{
+    "schemaVersion": 1,
+    "standards": [
+        {
+            "id": "rfc:9562",
+            "reviewedOn": "2026-11-20",
+            "note": "Envelope ids are UUIDv7 from the generator of Kore; konfetti reads only their time for occurredAt and implements nothing of RFC 9562 itself.",
+            "snapshot": {
+                "title": "Universally Unique IDentifiers (UUIDs)",
+                "status": "PROPOSED STANDARD",
+                "published": "May 2024",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [],
+                "errata": {
+                    "7929": "VERIFIED",
+                    "7931": "REPORTED",
+                    "7955": "VERIFIED",
+                    "7958": "VERIFIED",
+                    "8288": "VERIFIED",
+                    "8695": "VERIFIED"
+                }
+            }
+        },
+        {
+            "id": "unicode:ucd",
+            "reviewedOn": "2026-11-20",
+            "note": "konfetti escapes text it shows through SafeText of Kore, which follows the Unicode tables of the platform; names are ASCII grammars.",
+            "snapshot": {
+                "title": "Unicode Character Database",
+                "revision": "18.0.0",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [],
+                "errata": {}
+            }
+        }
+    ]
+}

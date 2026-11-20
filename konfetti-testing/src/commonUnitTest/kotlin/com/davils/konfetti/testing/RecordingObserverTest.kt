@@ -63,6 +63,7 @@ class RecordingObserverTest : FunSpec({
 
         test("refuses a capacity outside its bounds") {
             shouldThrow<IllegalArgumentException> { RecordingObserver(capacity = 0) }
+            shouldThrow<IllegalArgumentException> { RecordingObserver(capacity = EventRecorder.MAX_CAPACITY + 1) }
         }
     }
 })
