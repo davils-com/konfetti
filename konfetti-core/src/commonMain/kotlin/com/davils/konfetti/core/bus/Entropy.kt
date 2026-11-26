@@ -16,6 +16,8 @@
 
 package com.davils.konfetti.core.bus
 
+import com.davils.kore.core.random.Entropy as KoreEntropy
+
 /**
  * The source of the randomness of a bus: the jitter of exponential backoffs and the secret key of the hash that maps
  * ordering keys to partitions.
@@ -27,14 +29,17 @@ package com.davils.konfetti.core.bus
  * A bus calls the source under a lock, so the source needs no synchronization of its own. A source that throws is
  * contained: the bus then uses no jitter, or the secure default for the key.
  *
+ * Since 1.1.0 every source of a bus is an [Entropy of Kore][KoreEntropy] as well, so it offers the bounded numbers,
+ * bytes and fractions of Kore and can be handed to every Davils library that takes one.
+ *
  * @since 1.0.0
  */
-public fun interface Entropy {
+public fun interface Entropy : KoreEntropy {
     /**
      * Returns 64 random bits.
      *
      * @return the bits.
      * @since 1.0.0
      */
-    public fun nextLong(): Long
+    override fun nextLong(): Long
 }

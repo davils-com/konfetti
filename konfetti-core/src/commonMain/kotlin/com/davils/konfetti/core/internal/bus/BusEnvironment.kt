@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+@file:OptIn(DavilsInternal::class)
+
 package com.davils.konfetti.core.internal.bus
 
 import com.davils.konfetti.core.consume.ConsumeInterceptor
@@ -21,20 +23,19 @@ import com.davils.konfetti.core.header.EventHeaders
 import com.davils.konfetti.core.internal.delivery.ConsumerSettings
 import com.davils.konfetti.core.internal.partition.SipKey
 import com.davils.konfetti.core.internal.partition.TopicSettings
-import com.davils.konfetti.core.internal.platform.guard
 import com.davils.konfetti.core.internal.platform.stripedCounter
 import com.davils.konfetti.core.limit.BusLimits
 import com.davils.konfetti.core.observe.DropReason
 import com.davils.konfetti.core.publish.Publication
 import com.davils.konfetti.core.publish.PublishInterceptor
+import com.davils.kore.core.annotation.DavilsInternal
+import com.davils.kore.core.concurrency.guard
 import com.davils.kore.core.failure.contained
 import com.davils.kore.core.identity.UuidV7
 import com.davils.kore.core.identity.generator.UuidGenerator
+import com.davils.kore.core.random.nextFraction
 import kotlin.time.Duration
 import kotlin.time.TimeSource
-
-private const val FRACTION_SHIFT: Int = 11
-private const val FRACTION_SCALE: Double = 1.0 / (1L shl 53)
 
 internal class BusEnvironment(
     private val sources: BusSources,
@@ -68,8 +69,8 @@ internal class BusEnvironment(
     val interceptorFailureCount: Long get() = interceptorFailures.sum
 
     fun fraction(): Double {
-        val bits = entropy.locked { contained { sources.entropy.nextLong() } }
-        return bits.map { drawn -> (drawn ushr FRACTION_SHIFT) * FRACTION_SCALE }.getOrDefault(1.0)
+        val drawn = entropy.locked { contained { sources.entropy.nextFraction() } }
+        return drawn.getOrDefault(1.0)
     }
 
     fun recordLoss(reason: DropReason) {

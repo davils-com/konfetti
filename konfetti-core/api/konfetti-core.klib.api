@@ -70,7 +70,7 @@ final enum class com.davils.konfetti.core.publish/Rejection : kotlin/Enum<com.da
     final fun values(): kotlin/Array<com.davils.konfetti.core.publish/Rejection> // com.davils.konfetti.core.publish/Rejection.values|values#static(){}[0]
 }
 
-abstract fun interface com.davils.konfetti.core.bus/Entropy { // com.davils.konfetti.core.bus/Entropy|null[0]
+abstract fun interface com.davils.konfetti.core.bus/Entropy : com.davils.kore.core.random/Entropy { // com.davils.konfetti.core.bus/Entropy|null[0]
     abstract fun nextLong(): kotlin/Long // com.davils.konfetti.core.bus/Entropy.nextLong|nextLong(){}[0]
 }
 
