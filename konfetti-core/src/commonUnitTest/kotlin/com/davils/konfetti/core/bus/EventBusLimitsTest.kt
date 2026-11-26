@@ -24,6 +24,7 @@ import com.davils.konfetti.core.fixture.INDEXER
 import com.davils.konfetti.core.fixture.Topics
 import com.davils.konfetti.core.fixture.bus
 import com.davils.konfetti.core.fixture.devices
+import com.davils.konfetti.core.limit.BusLimits
 import com.davils.kore.core.validation.report.ValidationException
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
@@ -50,6 +51,23 @@ class EventBusLimitsTest : FunSpec({
                 EventViolationCodes.INVALID_BUFFER,
                 EventViolationCodes.INVALID_RETENTION,
             )
+        }
+
+        test("report a topic beyond the hard limits once, not again against the limits of the bus") {
+            val failure = shouldThrow<ValidationException> {
+                bus {
+                    topic(Topics.devices) {
+                        partitions = BusLimits.HARD_PARTITIONS + 1
+                        bufferCapacity = BusLimits.HARD_BUFFER_CAPACITY + 1
+                        retain = BusLimits.HARD_RETAIN + 1
+                    }
+                }
+            }
+
+            val codes = failure.report.errors.map { violation -> violation.code }
+            codes.count { code -> code == EventViolationCodes.INVALID_PARTITIONS } shouldBe 1
+            codes.count { code -> code == EventViolationCodes.INVALID_BUFFER } shouldBe 1
+            codes.count { code -> code == EventViolationCodes.INVALID_RETENTION } shouldBe 1
         }
 
         test("refuse a mailbox, a retry and a growth factor beyond what a consumer can use") {

@@ -166,4 +166,12 @@ class EventHeadersTest : FunSpec({
             traceId.toString() shouldBe "HeaderKey(trace-id)"
         }
     }
+    context("removing a header") {
+        test("keeps the headers as they are when the header is not set") {
+            val tenant = HeaderKey.text("tenant")
+            val headers = headersOf(HeaderKey.text("trace-id")("t-1"))
+
+            headers.without(tenant) shouldBe headers
+        }
+    }
 })

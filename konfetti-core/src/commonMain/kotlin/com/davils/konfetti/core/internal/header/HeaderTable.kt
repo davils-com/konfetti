@@ -54,7 +54,6 @@ internal class HeaderTable private constructor(
 
     fun without(name: HeaderName): HeaderTable {
         val index = indexOf(name)
-        if (index < 0) return this
         val remaining = keys.indices.filter { position -> position != index }
         return HeaderTable(
             keys = Array(remaining.size) { position -> keys[remaining[position]] },
