@@ -5,6 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 1.1.0 - 2026-11-26
+
+### Added
+
+- **`Emitter`, the telemetry side of a library on a bus.** An emitter declares its topic once, builds an event only
+  while the topic has consumers, offers it without waiting and contains every failure: a builder that throws, a full
+  partition or a closed bus never reach the caller and are counted in `rejected`. kapi, Konnect, krypt and kontinuity
+  publish their events through it instead of a copy of their own.
+- **The entropy of a bus is an entropy of Kore.** `Entropy` extends `com.davils.kore.core.random.Entropy`, so a source
+  offers the bounded numbers, bytes and fractions of Kore and can be handed to every Davils library that takes one.
+  The change is binary compatible.
+
+### Changed
+
+- **The delays of backoffs and the guards of critical sections come from Kore 2.5.0.** The arithmetic of exponential
+  backoffs, their jitter and the random fractions are shared with kollect and kontinuity; the delays are unchanged.
+- **Built with Kreate 5.5.2 and Gradle 9.9.2 on Kore 2.5.0**, with the version floors of the build tools raised.
+
 ## 1.0.1 - 2026-11-26
 
 ### Changed
