@@ -14,11 +14,15 @@
  * limitations under the License.
  */
 
+@file:OptIn(DavilsInternal::class)
+
 package com.davils.konfetti.core.internal.delivery
 
 import com.davils.konfetti.core.failure.Backoff
 import com.davils.konfetti.core.failure.FailurePolicy
-import kotlin.math.pow
+import com.davils.kore.core.annotation.DavilsInternal
+import com.davils.kore.core.backoff.fullJitter
+import com.davils.kore.core.backoff.grownDelay
 import kotlin.time.Duration
 
 internal val FailurePolicy.terminal: FailurePolicy.Terminal
@@ -39,14 +43,12 @@ internal val Backoff.longestDelay: Duration
     }
 
 private fun grown(backoff: Backoff.Exponential, retry: Int, fraction: () -> Double): Duration {
-    val growth = backoff.factor.pow(retry - 1)
-    val capped = cappedDelay(backoff, growth)
+    val capped = grownDelay(
+        initial = backoff.initial,
+        multiplier = backoff.factor,
+        step = retry - 1,
+        maximum = backoff.max,
+    )
     if (!backoff.hasJitter) return capped
-    return capped * fraction().coerceIn(minimumValue = 0.0, maximumValue = 1.0)
-}
-
-private fun cappedDelay(backoff: Backoff.Exponential, growth: Double): Duration {
-    if (!growth.isFinite()) return backoff.max
-    val grown = backoff.initial * growth
-    return minOf(a = grown, b = backoff.max)
+    return fullJitter(delay = capped, fraction = fraction())
 }
