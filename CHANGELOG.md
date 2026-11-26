@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 1.0.1 - 2026-11-26
+
+### Changed
+
+- **The default entropy of the bus comes from `SecureEntropy` of Kore.** The jitter of backoffs and the key of the
+  partition hash draw from the public secure random source of Kore 2.4.1 instead of the random bits of version 4 UUIDs;
+  the behaviour and the public API are unchanged.
+- **Built on Kore 2.4.1.**
+
 ## 1.0.0 - 2026-11-20
 
 The first version of konfetti: the event library of Davils as an open source library under the Apache License 2.0,

@@ -35,8 +35,8 @@ dependencyResolutionManagement {
 ```kotlin
 // build.gradle.kts
 dependencies {
-    implementation("com.davils:konfetti-core:1.0.0")
-    testImplementation("com.davils:konfetti-testing:1.0.0")
+    implementation("com.davils:konfetti-core:1.0.1")
+    testImplementation("com.davils:konfetti-testing:1.0.1")
 }
 ```
 
