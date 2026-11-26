@@ -558,6 +558,23 @@ final class <#A: com.davils.konfetti.core/Event> com.davils.konfetti.core.consum
     final fun (com.davils.kore.core.validation/ValidationScope).validate() // com.davils.konfetti.core.consume/ConsumerConfiguration.validate|validate@com.davils.kore.core.validation.ValidationScope(){}[0]
 }
 
+final class <#A: com.davils.konfetti.core/Event> com.davils.konfetti.core.publish/Emitter { // com.davils.konfetti.core.publish/Emitter|null[0]
+    constructor <init>(com.davils.konfetti.core/EventBus?, com.davils.konfetti.core/TopicKey<#A>, kotlin/Function1<com.davils.konfetti.core.topic/TopicBuilder<#A>, kotlin/Unit> = ...) // com.davils.konfetti.core.publish/Emitter.<init>|<init>(com.davils.konfetti.core.EventBus?;com.davils.konfetti.core.TopicKey<1:0>;kotlin.Function1<com.davils.konfetti.core.topic.TopicBuilder<1:0>,kotlin.Unit>){}[0]
+
+    final val hasConsumers // com.davils.konfetti.core.publish/Emitter.hasConsumers|{}hasConsumers[0]
+        final fun <get-hasConsumers>(): kotlin/Boolean // com.davils.konfetti.core.publish/Emitter.hasConsumers.<get-hasConsumers>|<get-hasConsumers>(){}[0]
+    final val isBound // com.davils.konfetti.core.publish/Emitter.isBound|{}isBound[0]
+        final fun <get-isBound>(): kotlin/Boolean // com.davils.konfetti.core.publish/Emitter.isBound.<get-isBound>|<get-isBound>(){}[0]
+    final val key // com.davils.konfetti.core.publish/Emitter.key|{}key[0]
+        final fun <get-key>(): com.davils.konfetti.core/TopicKey<#A> // com.davils.konfetti.core.publish/Emitter.key.<get-key>|<get-key>(){}[0]
+    final val rejected // com.davils.konfetti.core.publish/Emitter.rejected|{}rejected[0]
+        final fun <get-rejected>(): kotlin/Long // com.davils.konfetti.core.publish/Emitter.rejected.<get-rejected>|<get-rejected>(){}[0]
+
+    final fun emit(kotlin/Function0<#A>): kotlin/Boolean // com.davils.konfetti.core.publish/Emitter.emit|emit(kotlin.Function0<1:0>){}[0]
+    final fun send(#A): kotlin/Boolean // com.davils.konfetti.core.publish/Emitter.send|send(1:0){}[0]
+    final fun toString(): kotlin/String // com.davils.konfetti.core.publish/Emitter.toString|toString(){}[0]
+}
+
 final class <#A: com.davils.konfetti.core/Event> com.davils.konfetti.core.topic/TopicBuilder : com.davils.kore.core.dsl/ValidatingBuilder<com.davils.konfetti.core.topic/TopicConfiguration<#A>> { // com.davils.konfetti.core.topic/TopicBuilder|null[0]
     final var bufferCapacity // com.davils.konfetti.core.topic/TopicBuilder.bufferCapacity|{}bufferCapacity[0]
         final fun <get-bufferCapacity>(): kotlin/Int // com.davils.konfetti.core.topic/TopicBuilder.bufferCapacity.<get-bufferCapacity>|<get-bufferCapacity>(){}[0]

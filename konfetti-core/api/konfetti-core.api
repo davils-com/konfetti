@@ -806,6 +806,18 @@ public final class com/davils/konfetti/core/publish/Attribution$Inherited : com/
 	public fun toString ()Ljava/lang/String;
 }
 
+public final class com/davils/konfetti/core/publish/Emitter {
+	public fun <init> (Lcom/davils/konfetti/core/EventBus;Lcom/davils/konfetti/core/TopicKey;Lkotlin/jvm/functions/Function1;)V
+	public synthetic fun <init> (Lcom/davils/konfetti/core/EventBus;Lcom/davils/konfetti/core/TopicKey;Lkotlin/jvm/functions/Function1;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun emit (Lkotlin/jvm/functions/Function0;)Z
+	public final fun getHasConsumers ()Z
+	public final fun getKey ()Lcom/davils/konfetti/core/TopicKey;
+	public final fun getRejected ()J
+	public final fun isBound ()Z
+	public final fun send (Lcom/davils/konfetti/core/Event;)Z
+	public fun toString ()Ljava/lang/String;
+}
+
 public final class com/davils/konfetti/core/publish/Publication {
 	public final fun getContext ()Lkotlin/coroutines/CoroutineContext;
 	public final fun getEvent ()Lcom/davils/konfetti/core/Event;
