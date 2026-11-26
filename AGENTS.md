@@ -176,7 +176,8 @@ caller fails closed.
 ## Kore internals
 
 konfetti opts into these `@DavilsInternal` declarations of Kore; Kore changes them only in a major version:
-`SafeText.text` and `SafeText.REDACTED`, `OrderedMap`. A new use is added here and to the table of Kore's
+`SafeText.text` and `SafeText.REDACTED`, `OrderedMap`, and since 1.1.0 `guard`, `grownDelay` and `fullJitter`.
+A new use is added here and to the table of Kore's
 `AGENTS.md`.
 
 ## Public API
