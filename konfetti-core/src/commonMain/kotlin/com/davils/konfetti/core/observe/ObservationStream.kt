@@ -14,9 +14,12 @@
  * limitations under the License.
  */
 
+@file:OptIn(DavilsInternal::class)
+
 package com.davils.konfetti.core.observe
 
-import com.davils.konfetti.core.internal.platform.guard
+import com.davils.kore.core.annotation.DavilsInternal
+import com.davils.kore.core.concurrency.guard
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow

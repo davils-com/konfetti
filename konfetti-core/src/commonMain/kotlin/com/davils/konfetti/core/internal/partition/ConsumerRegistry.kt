@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+@file:OptIn(DavilsInternal::class)
+
 package com.davils.konfetti.core.internal.partition
 
 import com.davils.konfetti.core.Envelope
@@ -21,8 +23,9 @@ import com.davils.konfetti.core.Event
 import com.davils.konfetti.core.consume.Consumption
 import com.davils.konfetti.core.consume.StartPosition
 import com.davils.konfetti.core.internal.delivery.ConsumerRuntime
-import com.davils.konfetti.core.internal.platform.guard
 import com.davils.konfetti.core.topic.TopicName
+import com.davils.kore.core.annotation.DavilsInternal
+import com.davils.kore.core.concurrency.guard
 import kotlin.concurrent.atomics.AtomicReference
 import kotlin.concurrent.atomics.ExperimentalAtomicApi
 

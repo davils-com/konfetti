@@ -20,7 +20,6 @@ import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
 
 private const val INCREMENTS: Int = 5
-private const val ANSWER: Int = 42
 
 class PlatformParityTest : FunSpec({
     context("a striped counter") {
@@ -31,22 +30,6 @@ class PlatformParityTest : FunSpec({
             counter.decrement()
 
             counter.sum shouldBe INCREMENTS - 1L
-        }
-    }
-
-    context("a guard") {
-        test("returns what its block returns and may be entered again by its holder") {
-            val guard = guard()
-
-            guard.locked { guard.locked { ANSWER } } shouldBe ANSWER
-        }
-
-        test("releases itself when its block throws") {
-            val guard = guard()
-
-            runCatching { guard.locked { error("thrown") } }
-
-            guard.locked { "free" } shouldBe "free"
         }
     }
 })

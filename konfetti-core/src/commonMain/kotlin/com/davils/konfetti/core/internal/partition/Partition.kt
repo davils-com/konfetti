@@ -14,12 +14,15 @@
  * limitations under the License.
  */
 
+@file:OptIn(DavilsInternal::class)
+
 package com.davils.konfetti.core.internal.partition
 
 import com.davils.konfetti.core.Envelope
 import com.davils.konfetti.core.Event
-import com.davils.konfetti.core.internal.platform.guard
 import com.davils.konfetti.core.publish.Rejection
+import com.davils.kore.core.annotation.DavilsInternal
+import com.davils.kore.core.concurrency.guard
 import com.davils.kore.core.failure.attempted
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.CoroutineStart

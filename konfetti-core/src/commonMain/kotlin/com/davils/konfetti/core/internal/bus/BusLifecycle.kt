@@ -14,14 +14,17 @@
  * limitations under the License.
  */
 
+@file:OptIn(DavilsInternal::class)
+
 package com.davils.konfetti.core.internal.bus
 
-import com.davils.konfetti.core.internal.platform.guard
 import com.davils.konfetti.core.lifecycle.BusState
 import com.davils.konfetti.core.lifecycle.CloseReport
 import com.davils.konfetti.core.lifecycle.DrainResult
 import com.davils.konfetti.core.observe.BusObservation
 import com.davils.konfetti.core.observe.DropReason
+import com.davils.kore.core.annotation.DavilsInternal
+import com.davils.kore.core.concurrency.guard
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.DisposableHandle

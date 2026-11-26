@@ -14,19 +14,21 @@
  * limitations under the License.
  */
 
+@file:OptIn(DavilsInternal::class)
+
 package com.davils.konfetti.core.internal.bus
 
 import com.davils.konfetti.core.Event
 import com.davils.konfetti.core.Topic
 import com.davils.konfetti.core.failure.DeadLetter
 import com.davils.konfetti.core.internal.partition.TopicRuntime
-import com.davils.konfetti.core.internal.platform.guard
 import com.davils.konfetti.core.observe.BusObservation
 import com.davils.konfetti.core.topic.Declaration
 import com.davils.konfetti.core.topic.TopicConfiguration
 import com.davils.konfetti.core.topic.TopicName
 import com.davils.kore.core.annotation.DavilsInternal
 import com.davils.kore.core.collection.OrderedMap
+import com.davils.kore.core.concurrency.guard
 import com.davils.kore.core.validation.report.ValidationReport
 import kotlinx.coroutines.CoroutineScope
 import kotlin.concurrent.atomics.AtomicReference
