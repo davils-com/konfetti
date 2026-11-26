@@ -20,7 +20,7 @@ package com.davils.konfetti.core.bus
  * The source of the randomness of a bus: the jitter of exponential backoffs and the secret key of the hash that maps
  * ordering keys to partitions.
  *
- * The default draws from the secure random generator of the platform through the version 4 UUIDs of Kore. A test may
+ * The default draws from `SecureEntropy` of Kore, the secure random generator of the platform. A test may
  * set a predictable source to make jitter and partitions repeatable; production code keeps the default, because a
  * predictable key lets an attacker choose ordering keys that crowd one partition.
  *

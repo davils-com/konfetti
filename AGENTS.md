@@ -114,7 +114,7 @@ caller fails closed.
   never by message.
 - **Secrets never leak.** A sensitive header value is replaced by `REDACTED` wherever headers are shown.
 - **Randomness is secure by default.** The jitter of backoffs and the key of the partition hash come from the
-  `Entropy` of the bus, which defaults to the SecureRandom-backed UUIDs of Kore. `SeededEntropy` exists for tests only.
+  `Entropy` of the bus, which defaults to `SecureEntropy` of Kore. `SeededEntropy` exists for tests only.
 - **Hide what Java must not reach.** The runtime lives in `internal` packages that `module-info.java` never exports.
 - **Every sink has an injection test** with text built from `HostileFragments` of `kore-testing`, and every limit has a
   test at the limit and one past it.

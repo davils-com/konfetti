@@ -17,15 +17,8 @@
 package com.davils.konfetti.core.internal.bus
 
 import com.davils.konfetti.core.bus.Entropy
-import com.davils.kore.core.identity.generator.UuidV4Generator
-
-private const val RANDOM_LOW_BITS: Long = 0x3FFF_FFFF_FFFF_FFFF
-private const val HIGH_SHIFT: Int = 62
+import com.davils.kore.core.random.SecureEntropy as PlatformEntropy
 
 internal object SecureEntropy : Entropy {
-    override fun nextLong(): Long {
-        val uuid = UuidV4Generator.next()
-        val high = uuid.mostSignificantBits ushr HIGH_SHIFT shl HIGH_SHIFT
-        return high or (uuid.leastSignificantBits and RANDOM_LOW_BITS)
-    }
+    override fun nextLong(): Long = PlatformEntropy.nextLong()
 }
