@@ -72,8 +72,12 @@ internal class Publisher<T : Event>(private val runtime: TopicRuntime<T>) {
         try {
             return ready.partition.send(ready.handoff, stall).also { isFinished = true }
         } finally {
-            if (!isFinished && !ready.handoff.abandon()) accepted(ready.handoff)
+            acceptUnfinished(ready.handoff, isFinished)
         }
+    }
+
+    private fun acceptUnfinished(handoff: PartitionHandoff<T>, isFinished: Boolean) {
+        if (!isFinished && !handoff.abandon()) accepted(handoff)
     }
 
     suspend fun tryPublish(

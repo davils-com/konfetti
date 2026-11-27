@@ -57,8 +57,12 @@ internal class Delivery<T : Event>(
             return outcome
         } finally {
             counters.ended()
-            if (outcome == null) lost(envelope, reason())
+            loseUnsettled(envelope, outcome, reason)
         }
+    }
+
+    private fun loseUnsettled(envelope: Envelope<T>, outcome: DeliveryOutcome?, reason: () -> DropReason) {
+        if (outcome == null) lost(envelope, reason())
     }
 
     private suspend fun settle(envelope: Envelope<T>): DeliveryOutcome {

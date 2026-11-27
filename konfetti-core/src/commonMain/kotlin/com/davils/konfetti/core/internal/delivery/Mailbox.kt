@@ -55,8 +55,12 @@ internal class Mailbox<T : Event>(
         try {
             return place(handoff).also { isFinished = true }
         } finally {
-            if (!isFinished) lose(handoff, reason())
+            loseUnfinished(handoff, isFinished)
         }
+    }
+
+    private fun loseUnfinished(handoff: MailboxHandoff<T>, isFinished: Boolean) {
+        if (!isFinished) lose(handoff, reason())
     }
 
     private fun settle(handoff: MailboxHandoff<T>, refusal: DropReason?) {
