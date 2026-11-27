@@ -37,12 +37,8 @@ internal class PartitionHandoff<T : Event>(val envelope: Envelope<T>) {
     }
 
     fun take(): Boolean {
-        var current = state.load()
-        while (current == PENDING || current == SENT) {
-            if (state.compareAndSet(expectedValue = current, newValue = TAKEN)) return true
-            current = state.load()
-        }
-        return false
+        if (state.compareAndSet(expectedValue = PENDING, newValue = TAKEN)) return true
+        return state.compareAndSet(expectedValue = SENT, newValue = TAKEN)
     }
 
     fun abandon(): Boolean {

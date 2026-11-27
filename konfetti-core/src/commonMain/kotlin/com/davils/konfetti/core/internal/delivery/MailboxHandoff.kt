@@ -37,12 +37,5 @@ internal class MailboxHandoff<T : Event>(val envelope: Envelope<T>) {
 
     fun defer(): Boolean = state.compareAndSet(expectedValue = PENDING, newValue = DEFERRED)
 
-    fun claim(): Boolean {
-        var current = state.load()
-        while (current != SETTLED) {
-            if (state.compareAndSet(expectedValue = current, newValue = SETTLED)) return true
-            current = state.load()
-        }
-        return false
-    }
+    fun claim(): Boolean = state.exchange(SETTLED) != SETTLED
 }

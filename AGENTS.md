@@ -85,8 +85,8 @@ baseline, for main and test sources alike. Build scripts and `build-logic` follo
   stress tests in `src/jvmUnitTest` stay green when run many times in a row.
 - **Every handoff has an owner.** A channel does not reliably hand every buffered element to its undelivered callback
   when it is cancelled while a receiver takes one, so partitions and mailboxes track what they hold and settle what is
-  left after a cancel themselves. Handoffs move through atomic states with compare-and-set loops; a state is never
-  read and written in two separate steps.
+  left after a cancel themselves. Handoffs move through atomic states with compare-and-set and exchange; a state is
+  never read and written in two separate steps.
 - **Foreign code is contained.** Handlers, predicates, interceptors, observers, `isObserving`, codecs, `orderBy` and
   the entropy run inside `contained` or `attempted` of Kore. A failure of a callback never escapes into a publisher, a
   worker or the lifecycle; it becomes a failed attempt, a rejection, a counted failure or a fallback.
