@@ -25,6 +25,7 @@ import io.kotest.core.spec.style.FunSpec
 import io.kotest.engine.coroutines.backgroundScope
 import io.kotest.engine.coroutines.testScheduler
 import io.kotest.matchers.shouldBe
+import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.cancelAndJoin
@@ -90,6 +91,31 @@ class MailboxTest : FunSpec({
             mailbox.cancel()
 
             lost shouldBe listOf(DropReason.Detached, DropReason.Detached)
+        }
+
+        test("skips an envelope whose put was cancelled after it already found room") {
+            val lost = mutableListOf<DropReason>()
+            val mailbox = recordingMailbox(OverflowPolicy.Backpressure, lost)
+            val first = audit(FIRST)
+            mailbox.put(first)
+            val waiting = backgroundScope.launch(start = CoroutineStart.UNDISPATCHED) { mailbox.put(audit(SECOND)) }
+            val handled = mutableListOf<Envelope<AuditEvent>>()
+            val gate = CompletableDeferred<Unit>()
+            backgroundScope.launch(start = CoroutineStart.UNDISPATCHED) {
+                mailbox.consume { delivered ->
+                    handled += delivered
+                    gate.await()
+                }
+            }
+
+            waiting.cancel()
+            testScheduler.runCurrent()
+            gate.complete(Unit)
+            mailbox.close()
+            testScheduler.runCurrent()
+
+            handled shouldBe listOf(first)
+            lost shouldBe listOf(DropReason.Detached)
         }
 
         test("counts a put that arrives after the cancel exactly once") {

@@ -30,6 +30,7 @@ import com.davils.konfetti.core.fixture.codes
 import com.davils.konfetti.core.fixture.devices
 import com.davils.konfetti.core.header.HeaderKey
 import com.davils.konfetti.core.header.headersOf
+import com.davils.konfetti.core.limit.BusLimits
 import com.davils.konfetti.core.limit.busLimits
 import com.davils.konfetti.core.publish.PublishResult
 import com.davils.konfetti.core.publish.Rejection
@@ -78,6 +79,31 @@ class RuntimeLimitsTest : FunSpec({
                         partitions = 4
                         bufferCapacity = 8
                         retain = 8
+                        orderBy { event -> event.id }
+                    }
+                    deadLetterRetention = 0
+                    limits = busLimits {
+                        maximumPartitions = 2
+                        maximumBufferCapacity = 4
+                        maximumRetain = 4
+                    }
+                }
+            }
+
+            failure.report.errors.map { violation -> violation.code } shouldContainExactly listOf(
+                EventViolationCodes.INVALID_PARTITIONS,
+                EventViolationCodes.INVALID_BUFFER,
+                EventViolationCodes.INVALID_RETENTION,
+            )
+        }
+
+        test("report a value beyond the hard ceiling once, even on a bus with tighter limits") {
+            val failure = shouldThrow<ValidationException> {
+                bus {
+                    topic(Topics.devices) {
+                        partitions = BusLimits.HARD_PARTITIONS + 1
+                        bufferCapacity = BusLimits.HARD_BUFFER_CAPACITY + 1
+                        retain = BusLimits.HARD_RETAIN + 1
                         orderBy { event -> event.id }
                     }
                     deadLetterRetention = 0

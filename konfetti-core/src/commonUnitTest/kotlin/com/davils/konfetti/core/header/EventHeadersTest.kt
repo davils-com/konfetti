@@ -16,6 +16,7 @@
 
 package com.davils.konfetti.core.header
 
+import com.davils.konfetti.core.internal.header.HeaderTable
 import com.davils.kore.core.identity.Uuid
 import com.davils.kore.testing.SequentialUuidV7Generator
 import io.kotest.assertions.throwables.shouldThrow
@@ -133,6 +134,11 @@ class EventHeadersTest : FunSpec({
             headersOf(traceId("t-1")) shouldNotBe headersOf(traceId("t-2"))
             headersOf(HeaderKey.text(API_TOKEN)("x")) shouldNotBe headersOf(token("x"))
             headersOf(traceId("t-1")).equals("t-1") shouldBe false
+        }
+
+        test("never takes another type for the table of headers") {
+            HeaderTable.EMPTY.equals(EventHeaders.EMPTY) shouldBe false
+            HeaderTable.EMPTY shouldBe HeaderTable.EMPTY
         }
     }
 
