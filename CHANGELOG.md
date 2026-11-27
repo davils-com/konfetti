@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 1.1.1 - 2026-11-27
+
+### Changed
+
+- **The handoffs of partitions and mailboxes settle in one atomic step.** Taking and claiming an envelope no longer
+  loops on a failed compare-and-set; the states and the account of every envelope are unchanged.
+- **The branch coverage of the build no longer depends on timing.** The cleanup of an unfinished publication, put or
+  delivery is decided outside its `finally` block, and the races of a send that runs out of its stall while the pump
+  takes it and of a put that is cancelled after it found room are tested on virtual time, so the coverage gate holds
+  on every run.
+
 ## 1.1.0 - 2026-11-26
 
 ### Added
